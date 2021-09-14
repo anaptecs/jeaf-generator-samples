@@ -1,4 +1,4 @@
-# Welcome to JEAF Generator Samples #
+# JEAF Generator Samples Readme #
 
 This repository contains sample projects for JEAF Generator. The projects show the artifacts that are produced by JEAF Generator. Starting point for all of that is the UML model that is used as input for the generator.
 
