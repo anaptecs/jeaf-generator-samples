@@ -4,7 +4,7 @@ This repository contains sample projects for JEAF Generator. The projects show t
 
 
 ## Links ##
-For further information please refe to our documentation
+For further information please refer to our documentation
 
 * [JEAF Generator](https://anaptecs.atlassian.net/l/c/N7r5x11X)
 * [JEAF Modelling Guide](https://anaptecs.atlassian.net/l/c/1B2ci31g)
