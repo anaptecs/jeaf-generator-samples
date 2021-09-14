@@ -1,0 +1,12 @@
+Class ID;Business Object
+		1102;com.anaptecs.jeaf.accounting.impl.domain.BookingBO
+		1103;com.anaptecs.jeaf.accounting.impl.domain.BankBO
+		1104;com.anaptecs.jeaf.accounting.impl.domain.CustomerBO
+		1105;com.anaptecs.jeaf.accounting.impl.domain.IndividualBO
+		1106;com.anaptecs.jeaf.accounting.impl.domain.CompanyBO
+		1107;com.anaptecs.jeaf.accounting.impl.domain.MyPersonBO
+		1108;com.anaptecs.jeaf.accounting.impl.domain.EmployeeBO
+		1109;com.anaptecs.jeaf.accounting.impl.domain.ResponsibilityTypeBO
+		1110;com.anaptecs.jeaf.accounting.impl.domain.MyAddressBO
+		1111;com.anaptecs.jeaf.accounting.impl.domain.AccountBO
+		1120;com.anaptecs.jeaf.accounting.impl.swift.impl.domain.SwiftTransactionLogBO
