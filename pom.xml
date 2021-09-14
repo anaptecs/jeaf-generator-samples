@@ -22,7 +22,7 @@
 	<scm>
 		<connection>scm:git:https://bitbucket.org/anaptecs/jeaf-generator-samples.git</connection>
 		<developerConnection>scm:git:https://bitbucket.org/anaptecs/jeaf-generator-samples.git</developerConnection>
-		<url>https://bitbucket.org/anaptecs/jeaf-generator-samples/src/master/</url>
+		<url>https://bitbucket.org/anaptecs/jeaf-generator-samples</url>
 	</scm>
 	
 	<distributionManagement>
