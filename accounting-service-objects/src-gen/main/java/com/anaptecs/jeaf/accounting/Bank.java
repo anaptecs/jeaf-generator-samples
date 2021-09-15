@@ -5,7 +5,7 @@
  */
 package com.anaptecs.jeaf.accounting;
 
-import com.anaptecs.jeaf.accounting.validation.CustomEnum;
+import com.anaptecs.jeaf.accounting.validation.MyEnum;
 import com.anaptecs.jeaf.accounting.validation.MyGeneratedCustomConstraint;
 import com.anaptecs.jeaf.core.api.AbstractObjectID;
 import com.anaptecs.jeaf.core.api.Identifiable;
@@ -21,7 +21,7 @@ import com.anaptecs.jeaf.xfun.api.checks.Check;
  * @author JEAF Generator
  * @version JEAF Release 1.6.x
  */
-@MyGeneratedCustomConstraint(anEnum = { CustomEnum.STAY_HERE }, message = "4711", payload = Warning.class)
+@MyGeneratedCustomConstraint(myEnum = MyEnum.WORLD, message = "4711", payload = Warning.class)
 public class Bank implements ServiceObject, Identifiable<ServiceObjectID> {
   /**
    * Default serial version uid.

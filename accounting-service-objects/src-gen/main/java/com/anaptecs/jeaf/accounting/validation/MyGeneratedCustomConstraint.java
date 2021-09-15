@@ -17,7 +17,7 @@ import javax.validation.Payload;
 @Retention(RUNTIME)
 @Constraint(validatedBy = { MyCustomConstraintValidator.class, BankConstraintValidator.class })
 public @interface MyGeneratedCustomConstraint {
-  CustomEnum[] anEnum();
+  MyEnum myEnum();
 
   String message() default "{com.anaptecs.jeaf.accounting.validation.MyGeneratedCustomConstraint.message}";
 
