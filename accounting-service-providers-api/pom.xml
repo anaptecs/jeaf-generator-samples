@@ -18,6 +18,10 @@
 			<version>${jeaf.core.api.version}</version>
 		</dependency>
 
+		<!-- 
+			Dependency to packaged model artifact is required for code generation only. It will not have any impact on 
+			runtime behavior as the artifact just contains XMI files but no code or resource files. 
+		-->
 		<dependency>
 			<groupId>com.anaptecs.jeaf.generator.sample</groupId>
 			<artifactId>accounting-model</artifactId>
@@ -42,22 +46,38 @@
 					</execution>
 				</executions>
 				<configuration>
-					<!-- Define input files and directories where output should be write to. -->
+					<!-- 
+						Define where JEAF Generator will find XMI files as input. In this case here we take them from 
+						the defined Maven artifact. 
+						However it is also possible to directly read the files from some location on your disk. For 
+						further information please refer to: https://anaptecs.atlassian.net/l/c/Wwoxa8kg 
+					-->
 					<modelArtifactGroupID>com.anaptecs.jeaf.generator.sample</modelArtifactGroupID>
 					<modelArtifactArtifactID>accounting-model</modelArtifactArtifactID>
 					<modelArtifactXMIPath>xmi</modelArtifactXMIPath>
-
 					<umlModelFile>JEAF_Accounting_Sample.uml</umlModelFile>
+
+					<!-- 
+						Define directories where output should be written to. In this case here we will write all output 
+						to src-gen / res-gen. This will ensure that also code / resources that actually are only 
+						generated once are always up-to-date. 
+						
+						However in real life this is not a good setup as manual code will be overwritten every time JEAF 
+						Generator will be executed.
+					-->
 					<sourceDirectory>${project.basedir}/src-gen/main/java</sourceDirectory>
 					<sourceGenDirectory>${project.basedir}/src-gen/main/java</sourceGenDirectory>
 					<resourceDirectory>${project.basedir}/src-gen/main/resources</resourceDirectory>
 					<resourceGenDirectory>${project.basedir}/src-gen/main/resources</resourceGenDirectory>
 
-					<!-- Configure behavior concerning existing files in src-gen and res-gen directory. It is strongly recommended to clean directories before generating new files. -->
+					<!-- 
+						Configure behavior concerning existing files in src-gen and res-gen directory. It is strongly 
+						recommended to clean directories before generating new files. 
+					-->
 					<cleanSourceGen>true</cleanSourceGen>
 					<cleanResourceGen>true</cleanResourceGen>
 
-					<!-- Define whitelist of package in UML model generator should take care when generating code. -->
+					<!-- Define whitelist of packages in UML model generator should take care when generating code. -->
 					<packages>
 						<package>com.anaptecs.jeaf.accounting</package>
 						<package>TestProfile</package>
@@ -73,7 +93,7 @@
 					<fileHeaderVersion>JEAF Release 1.6.x</fileHeaderVersion>
 
 					<!-- Define code formatting style -->
-					<!-- <conventionFile>anaptecs_code_guideline.xml</conventionFile> -->
+					<conventionFile>anaptecs_code_guideline.xml</conventionFile>
 				</configuration>
 			</plugin>
 		</plugins>
