@@ -8,8 +8,9 @@ package com.anaptecs.jeaf.accounting;
 import com.anaptecs.jeaf.core.api.LoadStrategy;
 
 /**
-	 * 
-	 */
+ * @author JEAF Generator
+ * @version JEAF Release 1.6.x
+ */
 public final class CustomerLoadStrategy implements LoadStrategy {
   /**
    * Default serial version uid.
@@ -27,14 +28,6 @@ public final class CustomerLoadStrategy implements LoadStrategy {
   public static final CustomerLoadStrategy LOAD_NONE = new CustomerLoadStrategy(false, false);
 
   /**
-   * Initialize object.
-   */
-  public CustomerLoadStrategy( boolean pLoadAccount, boolean pLoadBookings ) {
-    loadAccount = pLoadAccount;
-    loadBookings = pLoadBookings;
-  }
-
-  /**
    * 
    */
   private final boolean loadAccount;
@@ -43,6 +36,14 @@ public final class CustomerLoadStrategy implements LoadStrategy {
    * 
    */
   private final boolean loadBookings;
+
+  /**
+   * Initialize object.
+   */
+  public CustomerLoadStrategy( boolean pLoadAccount, boolean pLoadBookings ) {
+    loadAccount = pLoadAccount;
+    loadBookings = pLoadBookings;
+  }
 
   /**
    * 

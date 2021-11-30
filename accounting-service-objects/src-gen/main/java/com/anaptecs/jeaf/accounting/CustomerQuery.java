@@ -10,13 +10,34 @@ import com.anaptecs.jeaf.core.api.QueryObject;
 import com.anaptecs.jeaf.xfun.api.XFun;
 
 /**
-	 * 
-	 */
+ * @author JEAF Generator
+ * @version JEAF Release 1.6.x
+ */
 public class CustomerQuery extends QueryObject {
   /**
    * Default serial version uid.
    */
   private static final long serialVersionUID = 1L;
+
+  /**
+   * Constant for the name of attribute "name".
+   */
+  public static final String NAME = "name";
+
+  /**
+   * Constant for the name of attribute "firstName".
+   */
+  public static final String FIRSTNAME = "firstName";
+
+  /**
+   * Constant for the name of attribute "companyName".
+   */
+  public static final String COMPANYNAME = "companyName";
+
+  /**
+   * Constant for the name of attribute "city".
+   */
+  public static final String CITY = "city";
 
   /**
    * 
