@@ -44,18 +44,18 @@
 		<maven.version>3.6.0</maven.version>
 		<jdk.version>1.8.0</jdk.version>
 
-		<jeaf.x-fun.api.version>1.6.2</jeaf.x-fun.api.version>
-		<jeaf.x-fun.impl.version>1.6.4</jeaf.x-fun.impl.version>
-		<jeaf.tools.api.version>1.6.4</jeaf.tools.api.version>
-		<jeaf.core.api.version>1.6.3</jeaf.core.api.version>
+		<jeaf.x-fun.api.version>1.6.4</jeaf.x-fun.api.version>
+		<jeaf.x-fun.impl.version>1.6.7</jeaf.x-fun.impl.version>
+		<jeaf.tools.api.version>1.6.6</jeaf.tools.api.version>
+		<jeaf.core.api.version>1.6.4</jeaf.core.api.version>
 		<jeaf.core.impl.version>1.6.4</jeaf.core.impl.version>
 		<jeaf.persistence.api.version>1.6.1</jeaf.persistence.api.version>
 		<jeaf.junit.extensions.version>1.6.1</jeaf.junit.extensions.version>
-		<jeaf.workload.api.version>1.6.3</jeaf.workload.api.version>
+		<jeaf.workload.api.version>1.6.4</jeaf.workload.api.version>
 		
 		<javaee-api.version>8.0</javaee-api.version>
 		
-		<maven.jeaf-generator-plugin.version>1.6.12</maven.jeaf-generator-plugin.version>
+		<maven.jeaf-generator-plugin.version>1.6.13</maven.jeaf-generator-plugin.version>
 		
 		<maven.compiler.version>3.8.0</maven.compiler.version>
 		<maven.build.helper.version>3.0.0</maven.build.helper.version>
