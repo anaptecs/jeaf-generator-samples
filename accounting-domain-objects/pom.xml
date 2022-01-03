@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.anaptecs.jeaf.generator.sample</groupId>
 		<artifactId>jeaf-generator-sample-project</artifactId>
-		<version>1.6.3</version>
+		<version>1.6.4-SNAPSHOT</version>
 	</parent>
 
 	<name>Accounting Domain Objects</name>
