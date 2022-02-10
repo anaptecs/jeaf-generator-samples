@@ -90,7 +90,7 @@ public class Booking implements ServiceObject {
   /**
    * 
    */
-  private Account account;
+  private transient Account account;
 
   /**
    * Default constructor is only intended to be used for deserialization as many frameworks required that. For "normal"
