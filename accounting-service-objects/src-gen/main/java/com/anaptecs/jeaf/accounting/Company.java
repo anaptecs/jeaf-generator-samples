@@ -5,10 +5,10 @@
  */
 package com.anaptecs.jeaf.accounting;
 
-import com.anaptecs.jeaf.core.api.AbstractObjectID;
-import com.anaptecs.jeaf.core.api.MessageConstants;
 import com.anaptecs.jeaf.tools.api.Tools;
 import com.anaptecs.jeaf.xfun.api.XFun;
+import com.anaptecs.jeaf.xfun.api.XFunMessages;
+import com.anaptecs.jeaf.xfun.api.common.ObjectIdentity;
 
 /**
  * @author JEAF Generator
@@ -84,7 +84,7 @@ public class Company extends Customer {
   }
 
   /**
-   * Class implements builder to create a new instance of class Company. As the class has readonly attributes or
+   * Class implements builder to create a new instance of class Company. As the class has read only attributes or
    * associations instances can not be created directly. Instead this builder class has to be used.
    */
   public static class Builder extends Customer.Builder {
@@ -154,7 +154,7 @@ public class Company extends Customer {
      * mandatory.
      */
     @Override
-    public Builder setID( AbstractObjectID<?> pObjectID ) {
+    public Builder setID( ObjectIdentity<?> pObjectID ) {
       super.setID(pObjectID);
       return this;
     }
@@ -379,16 +379,14 @@ public class Company extends Customer {
    */
   protected StringBuilder toStringBuilder( ) {
     StringBuilder lBuilder = super.toStringBuilder();
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "name", "" + name));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "name", "" + name));
     lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "registrationNumber",
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "registrationNumber",
         "" + registrationNumber));
     lBuilder.append('\n');
-    lBuilder
-        .append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "taxNumber", "" + taxNumber));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "taxNumber", "" + taxNumber));
     lBuilder.append('\n');
-    lBuilder
-        .append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "attendant", "" + attendant));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "attendant", "" + attendant));
     lBuilder.append('\n');
     return lBuilder;
   }

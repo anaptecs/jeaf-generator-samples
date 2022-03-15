@@ -9,13 +9,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
-import com.anaptecs.jeaf.core.api.AbstractObjectID;
-import com.anaptecs.jeaf.core.api.Identifiable;
-import com.anaptecs.jeaf.core.api.MessageConstants;
 import com.anaptecs.jeaf.core.api.ServiceObject;
 import com.anaptecs.jeaf.core.api.ServiceObjectID;
 import com.anaptecs.jeaf.xfun.api.XFun;
+import com.anaptecs.jeaf.xfun.api.XFunMessages;
 import com.anaptecs.jeaf.xfun.api.checks.Check;
+import com.anaptecs.jeaf.xfun.api.common.Identifiable;
+import com.anaptecs.jeaf.xfun.api.common.ObjectIdentity;
 
 /**
  * @author JEAF Generator
@@ -103,7 +103,7 @@ public abstract class Customer implements ServiceObject, Identifiable<ServiceObj
     // Ensure that builder is not null.
     Check.checkInvalidParameterNull(pBuilder, "pBuilder");
     // Read object ID.
-    AbstractObjectID<?> lObjectID = pBuilder.objectID;
+    ObjectIdentity<?> lObjectID = pBuilder.objectID;
     if (lObjectID != null) {
       objectID = new ServiceObjectID(pBuilder.objectID);
     }
@@ -119,14 +119,14 @@ public abstract class Customer implements ServiceObject, Identifiable<ServiceObj
   }
 
   /**
-   * Class implements builder to create a new instance of class Customer. As the class has readonly attributes or
+   * Class implements builder to create a new instance of class Customer. As the class has read only attributes or
    * associations instances can not be created directly. Instead this builder class has to be used.
    */
   public static abstract class Builder {
     /**
      * Reference to the identifier of this object. The reference may be null since an id is not mandatory.
      */
-    private AbstractObjectID<?> objectID;
+    private ObjectIdentity<?> objectID;
 
     /**
      * 
@@ -182,7 +182,7 @@ public abstract class Customer implements ServiceObject, Identifiable<ServiceObj
      * Method sets the identifier for the object created using the builder. The reference may be null since an id is not
      * mandatory.
      */
-    public Builder setID( AbstractObjectID<?> pObjectID ) {
+    public Builder setID( ObjectIdentity<?> pObjectID ) {
       objectID = pObjectID;
       return this;
     }
@@ -385,19 +385,19 @@ public abstract class Customer implements ServiceObject, Identifiable<ServiceObj
    */
   protected StringBuilder toStringBuilder( ) {
     StringBuilder lBuilder = new StringBuilder(256);
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_INFO, this.getClass().getName()));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_INFO, this.getClass().getName()));
     lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTES_SECTION));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTES_SECTION));
     lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "active", "" + active));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "active", "" + active));
     lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "street", "" + street));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "street", "" + street));
     lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "zipCode", "" + zipCode));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "zipCode", "" + zipCode));
     lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "city", "" + city));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "city", "" + city));
     lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "country", "" + country));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "country", "" + country));
     lBuilder.append('\n');
     return lBuilder;
   }

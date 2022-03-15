@@ -19,15 +19,15 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.anaptecs.jeaf.core.api.AbstractObjectID;
-import com.anaptecs.jeaf.core.api.Identifiable;
-import com.anaptecs.jeaf.core.api.MessageConstants;
 import com.anaptecs.jeaf.core.api.ServiceObject;
 import com.anaptecs.jeaf.core.api.ServiceObjectID;
 import com.anaptecs.jeaf.tools.api.Tools;
 import com.anaptecs.jeaf.tools.api.validation.Severity.Error;
 import com.anaptecs.jeaf.xfun.api.XFun;
+import com.anaptecs.jeaf.xfun.api.XFunMessages;
 import com.anaptecs.jeaf.xfun.api.checks.Check;
+import com.anaptecs.jeaf.xfun.api.common.Identifiable;
+import com.anaptecs.jeaf.xfun.api.common.ObjectIdentity;
 
 /**
  * @author JEAF Generator
@@ -117,7 +117,7 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
     // Ensure that builder is not null.
     Check.checkInvalidParameterNull(pBuilder, "pBuilder");
     // Read object ID.
-    AbstractObjectID<?> lObjectID = pBuilder.objectID;
+    ObjectIdentity<?> lObjectID = pBuilder.objectID;
     if (lObjectID != null) {
       objectID = new ServiceObjectID(pBuilder.objectID);
     }
@@ -137,14 +137,14 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   }
 
   /**
-   * Class implements builder to create a new instance of class Account. As the class has readonly attributes or
+   * Class implements builder to create a new instance of class Account. As the class has read only attributes or
    * associations instances can not be created directly. Instead this builder class has to be used.
    */
   public static abstract class BuilderBase {
     /**
      * Reference to the identifier of this object. The reference may be null since an id is not mandatory.
      */
-    private AbstractObjectID<?> objectID;
+    private ObjectIdentity<?> objectID;
 
     /**
      * 
@@ -199,7 +199,7 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
      * Method sets the identifier for the object created using the builder. The reference may be null since an id is not
      * mandatory.
      */
-    public BuilderBase setID( AbstractObjectID<?> pObjectID ) {
+    public BuilderBase setID( ObjectIdentity<?> pObjectID ) {
       objectID = pObjectID;
       return this;
     }
@@ -594,15 +594,15 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
    */
   protected StringBuilder toStringBuilder( ) {
     StringBuilder lBuilder = new StringBuilder(256);
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_INFO, this.getClass().getName()));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_INFO, this.getClass().getName()));
     lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTES_SECTION));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTES_SECTION));
     lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "iban", "" + iban));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "iban", "" + iban));
     lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "balance", "" + balance));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "balance", "" + balance));
     lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "bankID", "" + bankID));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "bankID", "" + bankID));
     lBuilder.append('\n');
     return lBuilder;
   }

@@ -5,14 +5,14 @@
  */
 package com.anaptecs.jeaf.accounting;
 
-import com.anaptecs.jeaf.core.api.AbstractObjectID;
-import com.anaptecs.jeaf.core.api.Identifiable;
-import com.anaptecs.jeaf.core.api.MessageConstants;
 import com.anaptecs.jeaf.core.api.ServiceObject;
 import com.anaptecs.jeaf.core.api.ServiceObjectID;
 import com.anaptecs.jeaf.tools.api.Tools;
 import com.anaptecs.jeaf.xfun.api.XFun;
+import com.anaptecs.jeaf.xfun.api.XFunMessages;
 import com.anaptecs.jeaf.xfun.api.checks.Check;
+import com.anaptecs.jeaf.xfun.api.common.Identifiable;
+import com.anaptecs.jeaf.xfun.api.common.ObjectIdentity;
 
 /**
  * @author JEAF Generator
@@ -76,7 +76,7 @@ public class ResponsibilityType implements ServiceObject, Identifiable<ServiceOb
     // Ensure that builder is not null.
     Check.checkInvalidParameterNull(pBuilder, "pBuilder");
     // Read object ID.
-    AbstractObjectID<?> lObjectID = pBuilder.objectID;
+    ObjectIdentity<?> lObjectID = pBuilder.objectID;
     if (lObjectID != null) {
       objectID = new ServiceObjectID(pBuilder.objectID);
     }
@@ -90,14 +90,14 @@ public class ResponsibilityType implements ServiceObject, Identifiable<ServiceOb
   }
 
   /**
-   * Class implements builder to create a new instance of class ResponsibilityType. As the class has readonly attributes
-   * or associations instances can not be created directly. Instead this builder class has to be used.
+   * Class implements builder to create a new instance of class ResponsibilityType. As the class has read only
+   * attributes or associations instances can not be created directly. Instead this builder class has to be used.
    */
   public static class Builder {
     /**
      * Reference to the identifier of this object. The reference may be null since an id is not mandatory.
      */
-    private AbstractObjectID<?> objectID;
+    private ObjectIdentity<?> objectID;
 
     /**
      * 
@@ -157,7 +157,7 @@ public class ResponsibilityType implements ServiceObject, Identifiable<ServiceOb
      * Method sets the identifier for the object created using the builder. The reference may be null since an id is not
      * mandatory.
      */
-    public Builder setID( AbstractObjectID<?> pObjectID ) {
+    public Builder setID( ObjectIdentity<?> pObjectID ) {
       objectID = pObjectID;
       return this;
     }
@@ -321,17 +321,15 @@ public class ResponsibilityType implements ServiceObject, Identifiable<ServiceOb
    */
   protected StringBuilder toStringBuilder( ) {
     StringBuilder lBuilder = new StringBuilder(256);
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_INFO, this.getClass().getName()));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_INFO, this.getClass().getName()));
     lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTES_SECTION));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTES_SECTION));
     lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "type", "" + type));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "type", "" + type));
     lBuilder.append('\n');
-    lBuilder
-        .append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "typeChar", "" + typeChar));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "typeChar", "" + typeChar));
     lBuilder.append('\n');
-    lBuilder
-        .append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "sortorder", "" + sortorder));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "sortorder", "" + sortorder));
     lBuilder.append('\n');
     return lBuilder;
   }

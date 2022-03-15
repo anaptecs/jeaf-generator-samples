@@ -5,8 +5,8 @@
  */
 package com.anaptecs.jeaf.accounting;
 
-import com.anaptecs.jeaf.core.api.AbstractObjectID;
 import com.anaptecs.jeaf.tools.api.Tools;
+import com.anaptecs.jeaf.xfun.api.common.ObjectIdentity;
 
 /**
  * @author JEAF Generator
@@ -49,7 +49,7 @@ public class Individual extends Customer {
   }
 
   /**
-   * Class implements builder to create a new instance of class Individual. As the class has readonly attributes or
+   * Class implements builder to create a new instance of class Individual. As the class has read only attributes or
    * associations instances can not be created directly. Instead this builder class has to be used.
    */
   public static class Builder extends Customer.Builder {
@@ -101,7 +101,7 @@ public class Individual extends Customer {
      * mandatory.
      */
     @Override
-    public Builder setID( AbstractObjectID<?> pObjectID ) {
+    public Builder setID( ObjectIdentity<?> pObjectID ) {
       super.setID(pObjectID);
       return this;
     }

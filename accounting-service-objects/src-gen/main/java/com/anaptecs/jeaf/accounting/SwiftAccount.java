@@ -10,11 +10,11 @@ import java.util.Set;
 
 import javax.validation.constraints.Pattern;
 
-import com.anaptecs.jeaf.core.api.AbstractObjectID;
-import com.anaptecs.jeaf.core.api.MessageConstants;
 import com.anaptecs.jeaf.core.api.ServiceObjectID;
 import com.anaptecs.jeaf.tools.api.Tools;
 import com.anaptecs.jeaf.xfun.api.XFun;
+import com.anaptecs.jeaf.xfun.api.XFunMessages;
+import com.anaptecs.jeaf.xfun.api.common.ObjectIdentity;
 
 /**
  * @author JEAF Generator
@@ -58,7 +58,7 @@ public class SwiftAccount extends Account {
   }
 
   /**
-   * Class implements builder to create a new instance of class SwiftAccount. As the class has readonly attributes or
+   * Class implements builder to create a new instance of class SwiftAccount. As the class has read only attributes or
    * associations instances can not be created directly. Instead this builder class has to be used.
    */
   public static class Builder extends Account.Builder {
@@ -111,7 +111,7 @@ public class SwiftAccount extends Account {
      * mandatory.
      */
     @Override
-    public Builder setID( AbstractObjectID<?> pObjectID ) {
+    public Builder setID( ObjectIdentity<?> pObjectID ) {
       super.setID(pObjectID);
       return this;
     }
@@ -242,7 +242,7 @@ public class SwiftAccount extends Account {
    */
   protected StringBuilder toStringBuilder( ) {
     StringBuilder lBuilder = super.toStringBuilder();
-    lBuilder.append(XFun.getMessageRepository().getMessage(MessageConstants.OBJECT_ATTRIBUTE, "bic", "" + bic));
+    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "bic", "" + bic));
     lBuilder.append('\n');
     return lBuilder;
   }
