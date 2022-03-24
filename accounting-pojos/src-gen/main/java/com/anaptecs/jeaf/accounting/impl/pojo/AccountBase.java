@@ -13,6 +13,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.validation.ConstraintViolationException;
+
 import com.anaptecs.jeaf.tools.api.Tools;
 import com.anaptecs.jeaf.xfun.api.XFun;
 import com.anaptecs.jeaf.xfun.api.XFunMessages;
@@ -39,6 +41,11 @@ public abstract class AccountBase {
   public static final String CURRENCY = "currency";
 
   /**
+   * Constant for the name of attribute "allBookings".
+   */
+  public static final String ALLBOOKINGS = "allBookings";
+
+  /**
    * 
    */
   private int iban;
@@ -57,6 +64,14 @@ public abstract class AccountBase {
    * 
    */
   private Set<Booking> allBookings = new HashSet<Booking>();
+
+  /**
+   * Default constructor is only intended to be used for deserialization as many frameworks required that. For "normal"
+   * object creation builder should be used instead.
+   */
+  protected AccountBase( ) {
+    // Nothing to do.
+  }
 
   /**
    * Initialize object using the passed builder.
@@ -177,16 +192,15 @@ public abstract class AccountBase {
     }
 
     /**
-     * Method creates a new instance of class Account. The object will be initialized with the values of the builder.
+     * Method creates a new validated instance of class Account. The object will be initialized with the values of the
+     * builder and validated afterwards.
      * 
-     * @param pValidate Parameter defines if the created POJO should be validated using Java Validation.
-     * @return Account Created object. The method never returns null.
+     * @return Account Created and validated object. The method never returns null.
+     * @throws ConstraintViolationException in case that one or more validations for the created object failed.
      */
-    public Account build( boolean pValidate ) {
+    public Account buildValidated( ) throws ConstraintViolationException {
       Account lPOJO = this.build();
-      if (pValidate == true) {
-        Tools.getValidationTools().validateObject(lPOJO);
-      }
+      Tools.getValidationTools().enforceObjectValidation(lPOJO);
       return lPOJO;
     }
   }

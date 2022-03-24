@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -40,6 +41,11 @@ public abstract class CustomerBase {
   public static final String EMAIL = "email";
 
   /**
+   * Constant for the name of attribute "accounts".
+   */
+  public static final String ACCOUNTS = "accounts";
+
+  /**
    * 
    */
   @NotBlank()
@@ -61,6 +67,14 @@ public abstract class CustomerBase {
    * 
    */
   private Set<Account> accounts = new HashSet<Account>();
+
+  /**
+   * Default constructor is only intended to be used for deserialization as many frameworks required that. For "normal"
+   * object creation builder should be used instead.
+   */
+  protected CustomerBase( ) {
+    // Nothing to do.
+  }
 
   /**
    * Initialize object using the passed builder.
@@ -185,16 +199,15 @@ public abstract class CustomerBase {
     }
 
     /**
-     * Method creates a new instance of class Customer. The object will be initialized with the values of the builder.
+     * Method creates a new validated instance of class Customer. The object will be initialized with the values of the
+     * builder and validated afterwards.
      * 
-     * @param pValidate Parameter defines if the created POJO should be validated using Java Validation.
-     * @return Customer Created object. The method never returns null.
+     * @return Customer Created and validated object. The method never returns null.
+     * @throws ConstraintViolationException in case that one or more validations for the created object failed.
      */
-    public Customer build( boolean pValidate ) {
+    public Customer buildValidated( ) throws ConstraintViolationException {
       Customer lPOJO = this.build();
-      if (pValidate == true) {
-        Tools.getValidationTools().validateObject(lPOJO);
-      }
+      Tools.getValidationTools().enforceObjectValidation(lPOJO);
       return lPOJO;
     }
   }
