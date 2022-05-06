@@ -34,7 +34,7 @@ import com.anaptecs.jeaf.xfun.api.common.ObjectIdentity;
  * @author JEAF Generator
  * @version JEAF Release 1.6.x
  */
-@Valid()
+@Valid
 public abstract class AccountBase implements ServiceObject, Identifiable<ServiceObjectID> {
   /**
    * Default serial version uid.
@@ -97,7 +97,7 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   /**
    * 
    */
-  @Valid()
+  @Valid
   @Size(min = 0, max = 100)
   private Set<Booking> bookings = new HashSet<Booking>();
 
@@ -617,7 +617,7 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
    * 
    * @return {@link Double}
    */
-  @NotNull()
+  @NotNull
   public abstract Double calclulateBalance( );
 
   /**
@@ -627,7 +627,7 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
    * @return {@link StringBuilder} StringBuilder representing this object. The method never returns null.
    */
   protected StringBuilder toStringBuilder( ) {
-    StringBuilder lBuilder = new StringBuilder(256);
+    StringBuilder lBuilder = new StringBuilder();
     lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_INFO, this.getClass().getName()));
     lBuilder.append('\n');
     lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTES_SECTION));

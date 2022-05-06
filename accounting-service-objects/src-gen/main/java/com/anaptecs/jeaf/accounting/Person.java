@@ -80,19 +80,19 @@ public class Person implements ServiceObject, Identifiable<ServiceObjectID> {
   /**
    * 
    */
-  @NotBlank()
+  @NotBlank
   private String name;
 
   /**
    * 
    */
-  @NotBlank()
+  @NotBlank
   private String firstName;
 
   /**
    * 
    */
-  @PastOrPresent()
+  @PastOrPresent
   private Calendar dateOfBirth;
 
   /**
@@ -103,19 +103,19 @@ public class Person implements ServiceObject, Identifiable<ServiceObjectID> {
   /**
    * 
    */
-  @Valid()
+  @Valid
   private Individual customer;
 
   /**
    * 
    */
-  @PositiveOrZero()
+  @PositiveOrZero
   private Integer age;
 
   /**
    * 
    */
-  @NotBlank()
+  @NotBlank
   private String displayName;
 
   /**
@@ -167,19 +167,19 @@ public class Person implements ServiceObject, Identifiable<ServiceObjectID> {
     /**
      * 
      */
-    @NotBlank()
+    @NotBlank
     private String name;
 
     /**
      * 
      */
-    @NotBlank()
+    @NotBlank
     private String firstName;
 
     /**
      * 
      */
-    @PastOrPresent()
+    @PastOrPresent
     private Calendar dateOfBirth;
 
     /**
@@ -195,13 +195,13 @@ public class Person implements ServiceObject, Identifiable<ServiceObjectID> {
     /**
      * 
      */
-    @PositiveOrZero()
+    @PositiveOrZero
     private Integer age;
 
     /**
      * 
      */
-    @NotBlank()
+    @NotBlank
     private String displayName;
 
     /**
@@ -637,7 +637,7 @@ public class Person implements ServiceObject, Identifiable<ServiceObjectID> {
    * @return {@link StringBuilder} StringBuilder representing this object. The method never returns null.
    */
   protected StringBuilder toStringBuilder( ) {
-    StringBuilder lBuilder = new StringBuilder(256);
+    StringBuilder lBuilder = new StringBuilder();
     lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_INFO, this.getClass().getName()));
     lBuilder.append('\n');
     lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTES_SECTION));
