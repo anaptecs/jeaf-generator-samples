@@ -39,7 +39,7 @@ public class AccountingServiceResource {
   @Path("/accounts")
   @PUT
   public Response createAccount( Customer pCustomer, Person pAuthorizedPerson ) {
-    AccountingService lService = JEAF.getService(AccountingService.class);
+    AccountingService lService = this.getAccountingService();
     Account lResult = lService.createAccount(pCustomer, pAuthorizedPerson);
     return Response.status(Response.Status.OK).entity(lResult).build();
   }
@@ -56,14 +56,14 @@ public class AccountingServiceResource {
     // Prepare meta information about the request.
     String lEndpointURL = pRequest.getServletPath() + pRequest.getPathInfo();
     RESTRequestType lRequestInfo = new RESTRequestType(lEndpointURL, pRequest.getMethod());
+    // Lookup service that will be called later during async processing of the request
+    AccountingService lService = this.getAccountingService();
     // Hand over current request to workload manager. Depending on its strategy and the current workload the request
     // will be either be directly executed, first queued or rejected.
     lWorkloadManager.execute(lRequestInfo, new RESTWorkloadErrorHandler(pAsyncResponse), new Runnable() {
       @Override
       public void run( ) {
         try {
-          // As soon as the request is executed the service call will be performed.
-          AccountingService lService = JEAF.getService(AccountingService.class);
           lService.performBooking(pBooking, pSecurityToken);
           Response lResponseObject = Response.ok().status(Response.Status.OK).build();
           // Due to the asynchronous processing of the requests, the response can not be returned as return value.
@@ -77,5 +77,14 @@ public class AccountingServiceResource {
         }
       }
     });
+  }
+
+  /**
+   * Method returns reference to service to which all REST requests will be delegated.
+   *
+   * @return AccountingService Service instance to which all requests will be delegated.
+   */
+  private AccountingService getAccountingService( ) {
+    return JEAF.getService(AccountingService.class);
   }
 }
