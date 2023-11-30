@@ -67,7 +67,7 @@
 		<maven.nexus-staging.version>1.6.8</maven.nexus-staging.version>
 		<maven.release.version>2.5.3</maven.release.version>
 		<maven.enforcer.version>3.0.0-M2</maven.enforcer.version>
-		<maven.jacoco.version>0.8.6</maven.jacoco.version>
+		<maven.jacoco.version>0.8.11</maven.jacoco.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.source.version>1.8</java.source.version>
