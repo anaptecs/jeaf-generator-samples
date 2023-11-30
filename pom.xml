@@ -54,7 +54,7 @@
 		<jeaf.junit.extensions.version>1.6.13</jeaf.junit.extensions.version>
 		<jeaf.workload.api.version>1.6.17</jeaf.workload.api.version>
 
-		<javaee-api.version>8.0</javaee-api.version>
+		<javaee-api.version>8.0.1</javaee-api.version>
 		
 		<maven.jeaf-generator-plugin.version>1.6.55</maven.jeaf-generator-plugin.version>
 		
