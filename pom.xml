@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.anaptecs.jeaf.generator.sample</groupId>
+	<artifactId>jeaf-generator-sample-project</artifactId>
+	<version>1.6.31-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>JEAF Generator Sample Project</name>
+	<description>JEAF Generator can be used to generate different kinds of classes from UML Models and thus speed up and professionalize software development. This sample project shows how to use it.</description>
+	<url>https://www.anaptecs.de/jeaf</url>
+
+	<developers>
+		<developer>
+			<name>JEAF Development Team</name>
+			<email>jeaf@anaptecs.de</email>
+			<organization>anaptecs GmbH</organization>
+			<organizationUrl>http://www.anaptecs.de</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:https://bitbucket.org/anaptecs/jeaf-generator-samples.git</connection>
+		<developerConnection>scm:git:https://bitbucket.org/anaptecs/jeaf-generator-samples.git</developerConnection>
+		<url>https://bitbucket.org/anaptecs/jeaf-generator-samples</url>
+		<tag>HEAD</tag>
+	</scm>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<properties>
+		<!-- Common settings for JEAF Generator -->
+		<umlFileName>JEAF_Test.uml</umlFileName>
+		
+		<company>anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany</company>
+		<author>JEAF Generator</author>
+		<copyright>Copyright 2024. All rights reserved.</copyright>
+		<versionInfo>JEAF Release 1.6.x</versionInfo>
+
+		<!-- Required versions -->
+		<maven.version>3.6.0</maven.version>
+		<jdk.version>17</jdk.version>
+
+		<jeaf.x-fun.api.version>1.6.17</jeaf.x-fun.api.version>
+		<jeaf.x-fun.impl.version>1.6.23</jeaf.x-fun.impl.version>
+		<jeaf.tools.api.version>1.6.20</jeaf.tools.api.version>
+		<jeaf.core.api.version>1.6.19</jeaf.core.api.version>
+		<jeaf.core.impl.version>1.6.20</jeaf.core.impl.version>
+		<jeaf.persistence.api.version>1.6.13</jeaf.persistence.api.version>
+		<jeaf.junit.extensions.version>1.6.13</jeaf.junit.extensions.version>
+		<jeaf.workload.api.version>1.6.17</jeaf.workload.api.version>
+
+		<javaee-api.version>8.0</javaee-api.version>
+		
+		<maven.jeaf-generator-plugin.version>1.15.0</maven.jeaf-generator-plugin.version>
+		
+		<maven.compiler.version>3.8.0</maven.compiler.version>
+		<maven.build.helper.version>3.0.0</maven.build.helper.version>
+		<maven.surefire.version>3.0.0-M3</maven.surefire.version>
+		<maven.gpg.version>1.6</maven.gpg.version>
+		<maven.javadoc.version>3.0.1</maven.javadoc.version>
+		<maven.source.version>3.0.1</maven.source.version>
+		<maven.nexus-staging.version>1.6.8</maven.nexus-staging.version>
+		<maven.release.version>2.5.3</maven.release.version>
+		<maven.enforcer.version>3.0.0-M2</maven.enforcer.version>
+		<maven.jacoco.version>0.8.6</maven.jacoco.version>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.source.version>1.8</java.source.version>
+		<java.target.version>1.8</java.target.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss.SSS</maven.build.timestamp.format>
+		<dest.dir>../target</dest.dir>
+	</properties>
+
+	<modules>
+		<!-- The following modules are required to test JEAF Generator output -->
+		<module>accounting-model</module>
+		<module>accounting-service-objects</module>
+		<module>accounting-pojos</module>
+		<module>accounting-services-api</module>
+		<module>accounting-rest</module>
+		<module>accounting-services-api-runtime</module>
+		<module>accounting-activities-api</module>
+		<module>accounting-activities-impl</module>
+		<module>accounting-service-providers-api</module>
+		<module>accounting-service-providers-impl</module>
+		<module>accounting-domain-objects</module>
+		<module>accounting-persistent-objects</module>
+		<module>accounting-object-mappers</module>
+		<module>accounting-services-impl</module>
+		<module>accounting-services-impl-runtime</module>
+		<module>accounting-junit-testcases</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.version}</version>
+				<configuration>
+					<source>${java.source.version}</source>
+					<target>${java.target.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.surefire.version}</version>
+			</plugin>
+
+			<!-- 
+			  Build helper plugin adds directories with generated sources / resources to build: 
+			    - src-gen/main/java 
+			    - src-gen/test/java 
+			    - src-gen/main/resources 
+			    - src-gen/test/resources 
+			     
+			  In addition to directories with generated code also default directories have to be set here when directory 
+			  layout is customized. 
+			-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>${maven.build.helper.version}</version>
+				<executions>
+					<execution>
+						<id>sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${basedir}/src/main/java</source>
+								<source>${basedir}/src-gen/main/java</source>
+							</sources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>test-sources</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${basedir}/src/test/java</source>
+								<source>${basedir}/src-gen/test/java</source>
+							</sources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>resources</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>add-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/resources</directory>
+								</resource>
+								<resource>
+									<directory>${basedir}/src-gen/main/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>test-resources</id>
+						<phase>generate-test-resources</phase>
+						<goals>
+							<goal>add-test-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/test/resources</directory>
+								</resource>
+								<resource>
+									<directory>${basedir}/src-gen/test/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Plugin is needed to pack the whole sample project together -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<inherited>false</inherited>
+				<configuration>
+					<appendAssemblyId>false</appendAssemblyId>
+					<descriptors>
+						<descriptor>${basedir}/assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Enforce plugin is used to ensure that right Maven and Java versions are used. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>${maven.enforcer.version}</version>
+				<executions>
+					<execution>
+						<id>enforce-versions</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>${maven.version}</version>
+								</requireMavenVersion>
+								<requireJavaVersion>
+									<version>${jdk.version}</version>
+								</requireJavaVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<!-- Profile with all settings for releasing to central maven repo -->
+		<profile>
+			<id>Release</id>
+			<build>
+				<plugins>
+					<!-- PGP Plugin is needed to sign jars -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven.gpg.version}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${maven.javadoc.version}</version>
+						<configuration>
+							<aggregate>true</aggregate>
+							<failOnError>false</failOnError>
+						</configuration>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>${maven.source.version}</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>${maven.nexus-staging.version}</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>${maven.release.version}</version>
+						<configuration>
+							<autoVersionSubmodules>true</autoVersionSubmodules>
+							<useReleaseProfile>false</useReleaseProfile>
+							<releaseProfiles>release</releaseProfiles>
+							<goals>deploy</goals>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>${maven.jacoco.version}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>report</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>report</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
