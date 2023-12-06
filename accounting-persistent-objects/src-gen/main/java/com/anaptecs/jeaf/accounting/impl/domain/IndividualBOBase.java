@@ -5,10 +5,6 @@ import java.util.List;
 import com.anaptecs.jeaf.spi.persistence.ClassID;
 import com.anaptecs.jeaf.spi.persistence.PersistentObject;
 
-/**
- * @author JEAF Generator
- * @version JEAF Release 1.6.x
- */
 public abstract class IndividualBOBase extends CustomerBO {
   /**
    * The class id is a unique id within the domain model of an application for every business object class.
@@ -20,9 +16,6 @@ public abstract class IndividualBOBase extends CustomerBO {
    */
   public static final String PERSON_ROLE = "person";
 
-  /**
-   * 
-   */
   private MyPersonBO person;
 
   /**
@@ -30,12 +23,11 @@ public abstract class IndividualBOBase extends CustomerBO {
    * objects not through JEAFs persistence service provider.
    */
   protected IndividualBOBase( ) {
-    // Nothing to do.
   }
 
   /**
    * Method returns all instance of this class including potential subclasses.
-   * 
+   *
    * @return {@link List} List with all objects of this class. The method never returns null.
    */
   public static List<IndividualBO> findAllIndividualBOs( ) {
@@ -43,10 +35,9 @@ public abstract class IndividualBOBase extends CustomerBO {
   }
 
   /**
-   * Method returns the association "person".
-   * 
+   * Method returns association {@link #person}.<br/>
    *
-   * @return MyPersonBO MyPersonBO to which the association "person" is set.
+   * @return {@link MyPersonBO} Value to which {@link #person} is set.
    */
   public MyPersonBO getPerson( ) {
     person = this.unproxy(person);
@@ -54,10 +45,9 @@ public abstract class IndividualBOBase extends CustomerBO {
   }
 
   /**
-   * Method sets the association "person".
-   * 
-   * 
-   * @param pPerson MyPersonBO to which the association "person" should be set.
+   * Method sets association {@link #person}.<br/>
+   *
+   * @param pPerson Value to which {@link #person} should be set.
    */
   public void setPerson( MyPersonBO pPerson ) {
     // Release already referenced object before setting a new association.
@@ -73,8 +63,7 @@ public abstract class IndividualBOBase extends CustomerBO {
   }
 
   /**
-   * Method unsets the association "person".
-   * 
+   * Method unsets {@link #person}.
    */
   public final void unsetPerson( ) {
     // The association is set in both directions because within the UML model it is defined to be bidirectional.
@@ -88,7 +77,7 @@ public abstract class IndividualBOBase extends CustomerBO {
 
   /**
    * Method returns the class id of this business object class.
-   * 
+   *
    * @return {@link ClassID} Class ID of this business object. The method never returns null.
    */
   public ClassID getClassID( ) {

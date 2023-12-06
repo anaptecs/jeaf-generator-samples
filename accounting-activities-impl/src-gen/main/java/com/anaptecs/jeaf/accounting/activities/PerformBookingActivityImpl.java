@@ -1,7 +1,7 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting.activities;
 
@@ -23,7 +23,7 @@ public class PerformBookingActivityImpl implements PerformBookingActivity {
 
   /**
    * Activity is responsible to perform a booking from one account to another.
-   * 
+   *
    * @param pBooking
    * @param pSecurityToken
    * @return void

@@ -1,7 +1,7 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting.impl.schufa.impl;
 
@@ -48,10 +48,10 @@ abstract class SchufaServiceImplBase implements SchufaService, ServiceImplementa
 
   /**
    * Method returns the class object of the service that is implemented by this service instance.
-   * 
+   *
    * @return Class Class object of the service interface that is implemented by the service instance. The method never
    * returns null.
-   * 
+   *
    * @see ServiceImplementation#getServiceType()
    */
   public final Class<? extends Service> getServiceType( ) {
@@ -60,7 +60,7 @@ abstract class SchufaServiceImplBase implements SchufaService, ServiceImplementa
 
   /**
    * Method returns the service invocation context for the current service call.
-   * 
+   *
    * @return ServiceInvocationContext Service invocation context for the current call. The method never returns null as
    * long as it is called from within a service call.
    */

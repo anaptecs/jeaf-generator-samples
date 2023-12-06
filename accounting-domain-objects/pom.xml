@@ -56,7 +56,7 @@
 					<modelArtifactGroupID>com.anaptecs.jeaf.generator.sample</modelArtifactGroupID>
 					<modelArtifactArtifactID>accounting-model</modelArtifactArtifactID>
 					<modelArtifactXMIPath>xmi</modelArtifactXMIPath>
-					<umlModelFile>JEAF_Accounting_Sample.uml</umlModelFile>
+					<umlModelFile>${umlFileName}</umlModelFile>
 
 					<!-- 
 						Define directories where output should be written to. In this case here we will write all output 
@@ -88,10 +88,10 @@
 					<generateDomainObjects>true</generateDomainObjects>
 
 					<!-- Define information that are written to file headers -->
-					<fileHeaderCompany>anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany</fileHeaderCompany>
-					<fileHeaderAuthor>JEAF Generator</fileHeaderAuthor>
-					<fileHeaderCopyright>Copyright 2021. All rights reserved.</fileHeaderCopyright>
-					<fileHeaderVersion>JEAF Release 1.6.x</fileHeaderVersion>
+					<fileHeaderCompany>${company}</fileHeaderCompany>
+					<fileHeaderAuthor>${author}</fileHeaderAuthor>
+					<fileHeaderCopyright>${copyright}</fileHeaderCopyright>
+					<fileHeaderVersion>${versionInfo}</fileHeaderVersion>
 
 					<!-- Define code formatting style -->
 					<conventionFile>anaptecs_code_guideline.xml</conventionFile>

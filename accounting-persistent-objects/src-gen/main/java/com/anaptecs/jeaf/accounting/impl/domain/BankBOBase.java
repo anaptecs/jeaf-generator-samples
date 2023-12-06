@@ -11,10 +11,6 @@ import com.anaptecs.jeaf.spi.persistence.ClassID;
 import com.anaptecs.jeaf.spi.persistence.PersistentObject;
 import com.anaptecs.jeaf.xfun.api.checks.Check;
 
-/**
- * @author JEAF Generator
- * @version JEAF Release 1.6.x
- */
 public abstract class BankBOBase extends PersistentObject {
   /**
    * The class id is a unique id within the domain model of an application for every business object class.
@@ -78,29 +74,14 @@ public abstract class BankBOBase extends PersistentObject {
    */
   public static short PRIVATE_BANK = 2;
 
-  /**
-   * 
-   */
-  private Set<EmployeeBO> employees = new HashSet<EmployeeBO>();
+  private Set<EmployeeBO> employees;
 
-  /**
-   * 
-   */
-  private Set<AccountBO> accounts = new HashSet<AccountBO>();
+  private Set<AccountBO> accounts;
 
-  /**
-   * 
-   */
   private String name;
 
-  /**
-   * 
-   */
   private Long code;
 
-  /**
-   * 
-   */
   private Short type;
 
   /**
@@ -108,12 +89,13 @@ public abstract class BankBOBase extends PersistentObject {
    * objects not through JEAFs persistence service provider.
    */
   protected BankBOBase( ) {
-    // Nothing to do.
+    employees = new HashSet<EmployeeBO>();
+    accounts = new HashSet<AccountBO>();
   }
 
   /**
    * Method returns all instance of this class including potential subclasses.
-   * 
+   *
    * @return {@link List} List with all objects of this class. The method never returns null.
    */
   public static List<BankBO> findAllBankBOs( ) {
@@ -121,11 +103,10 @@ public abstract class BankBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the association "employees".
-   * 
+   * Method returns association {@link #employees}.<br/>
    *
-   * @return Collection All EmployeeBO objects that belong to the association "employees". The method never returns null
-   * and the returned collection is unmodifiable.
+   * @return {@link Set<EmployeeBO>} Value to which {@link #employees} is set. The method never returns null and the
+   * returned collection is unmodifiable.
    */
   public Set<EmployeeBO> getEmployees( ) {
     // Return all EmployeeBO objects as unmodifiable collection.
@@ -133,27 +114,9 @@ public abstract class BankBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the association "employees" to the passed collection. All objects that formerly were part of the
-   * association will be removed from it.
-   * 
-   * 
-   * @param pEmployees Collection with objects to which the association should be set. The parameter must not be null.
-   */
-  void setEmployees( Set<EmployeeBO> pEmployees ) {
-    // Check of parameter is not required.
-    // Remove all objects from association "employees".
-    this.clearEmployees();
-    // If the association is null, removing all entries is sufficient.
-    if (pEmployees != null) {
-      employees = new HashSet<EmployeeBO>(pEmployees);
-    }
-  }
-
-  /**
-   * Method adds the passed EmployeeBO object to the association "employees".
-   * 
-   * 
-   * @param pEmployees Object that should be added to the association "employees". The parameter must not be null.
+   * Method adds the passed object to {@link #employees}.
+   *
+   * @param pEmployees Object that should be added to {@link #employees}. The parameter must not be null.
    */
   public void addToEmployees( EmployeeBO pEmployees ) {
     // Check parameter "pEmployees" for invalid value null.
@@ -171,11 +134,10 @@ public abstract class BankBOBase extends PersistentObject {
   }
 
   /**
-   * Method adds all passed objects to the association "employees".
-   * 
-   * 
-   * @param pEmployees Collection with all objects that should be added to the association "employees". The parameter
-   * must not be null.
+   * Method adds all passed objects to {@link #employees}.
+   *
+   * @param pEmployees Collection with all objects that should be added to {@link #employees}. The parameter must not be
+   * null.
    */
   public void addToEmployees( Collection<EmployeeBO> pEmployees ) {
     // Check parameter "pEmployees" for invalid value null.
@@ -187,10 +149,9 @@ public abstract class BankBOBase extends PersistentObject {
   }
 
   /**
-   * Method removes the passed EmployeeBO object from the association "employees".
-   * 
-   * 
-   * @param pEmployees Object that should be removed from the association "employees". The parameter must not be null.
+   * Method removes the passed object from {@link #employees}.<br/>
+   *
+   * @param pEmployees Object that should be removed from {@link #employees}. The parameter must not be null.
    */
   public void removeFromEmployees( EmployeeBO pEmployees ) {
     // Check parameter for invalid value null.
@@ -205,24 +166,23 @@ public abstract class BankBOBase extends PersistentObject {
   }
 
   /**
-   * Method removes all objects from the association "employees".
-   * 
+   * Method removes all objects from {@link #employees}.
    */
   public void clearEmployees( ) {
     // Remove all objects from association "employees".
     Collection<EmployeeBO> lEmployees = new HashSet<EmployeeBO>(employees);
     Iterator<EmployeeBO> lIterator = lEmployees.iterator();
     while (lIterator.hasNext()) {
+      // As association is bidirectional we have to clear it in both directions.
       this.removeFromEmployees(lIterator.next());
     }
   }
 
   /**
-   * Method returns the association "accounts".
-   * 
+   * Method returns association {@link #accounts}.<br/>
    *
-   * @return Collection All AccountBO objects that belong to the association "accounts". The method never returns null
-   * and the returned collection is unmodifiable.
+   * @return {@link Set<AccountBO>} Value to which {@link #accounts} is set. The method never returns null and the
+   * returned collection is unmodifiable.
    */
   public Set<AccountBO> getAccounts( ) {
     // Return all AccountBO objects as unmodifiable collection.
@@ -230,27 +190,9 @@ public abstract class BankBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the association "accounts" to the passed collection. All objects that formerly were part of the
-   * association will be removed from it.
-   * 
-   * 
-   * @param pAccounts Collection with objects to which the association should be set. The parameter must not be null.
-   */
-  void setAccounts( Set<AccountBO> pAccounts ) {
-    // Check of parameter is not required.
-    // Remove all objects from association "accounts".
-    this.clearAccounts();
-    // If the association is null, removing all entries is sufficient.
-    if (pAccounts != null) {
-      accounts = new HashSet<AccountBO>(pAccounts);
-    }
-  }
-
-  /**
-   * Method adds the passed AccountBO object to the association "accounts".
-   * 
-   * 
-   * @param pAccounts Object that should be added to the association "accounts". The parameter must not be null.
+   * Method adds the passed object to {@link #accounts}.
+   *
+   * @param pAccounts Object that should be added to {@link #accounts}. The parameter must not be null.
    */
   public void addToAccounts( AccountBO pAccounts ) {
     // Check parameter "pAccounts" for invalid value null.
@@ -268,11 +210,10 @@ public abstract class BankBOBase extends PersistentObject {
   }
 
   /**
-   * Method adds all passed objects to the association "accounts".
-   * 
-   * 
-   * @param pAccounts Collection with all objects that should be added to the association "accounts". The parameter must
-   * not be null.
+   * Method adds all passed objects to {@link #accounts}.
+   *
+   * @param pAccounts Collection with all objects that should be added to {@link #accounts}. The parameter must not be
+   * null.
    */
   public void addToAccounts( Collection<AccountBO> pAccounts ) {
     // Check parameter "pAccounts" for invalid value null.
@@ -284,10 +225,9 @@ public abstract class BankBOBase extends PersistentObject {
   }
 
   /**
-   * Method removes the passed AccountBO object from the association "accounts".
-   * 
-   * 
-   * @param pAccounts Object that should be removed from the association "accounts". The parameter must not be null.
+   * Method removes the passed object from {@link #accounts}.<br/>
+   *
+   * @param pAccounts Object that should be removed from {@link #accounts}. The parameter must not be null.
    */
   public void removeFromAccounts( AccountBO pAccounts ) {
     // Check parameter for invalid value null.
@@ -302,33 +242,31 @@ public abstract class BankBOBase extends PersistentObject {
   }
 
   /**
-   * Method removes all objects from the association "accounts".
-   * 
+   * Method removes all objects from {@link #accounts}.
    */
   public void clearAccounts( ) {
     // Remove all objects from association "accounts".
     Collection<AccountBO> lAccounts = new HashSet<AccountBO>(accounts);
     Iterator<AccountBO> lIterator = lAccounts.iterator();
     while (lIterator.hasNext()) {
+      // As association is bidirectional we have to clear it in both directions.
       this.removeFromAccounts(lIterator.next());
     }
   }
 
   /**
-   * Method returns the attribute "name".
-   * 
-   * 
-   * @return String Value to which the attribute "name" is set.
+   * Method returns attribute {@link #name}.<br/>
+   *
+   * @return {@link String} Value to which {@link #name} is set.
    */
   public String getName( ) {
     return name;
   }
 
   /**
-   * Method sets the attribute "name".
-   * 
-   * 
-   * @param pName Value to which the attribute "name" should be set.
+   * Method sets attribute {@link #name}.<br/>
+   *
+   * @param pName Value to which {@link #name} should be set.
    */
   public void setName( String pName ) {
     // Assign value to attribute
@@ -336,20 +274,18 @@ public abstract class BankBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the attribute "code".
-   * 
-   * 
-   * @return Long Value to which the attribute "code" is set.
+   * Method returns attribute {@link #code}.<br/>
+   *
+   * @return {@link Long} Value to which {@link #code} is set.
    */
   public Long getCode( ) {
     return code;
   }
 
   /**
-   * Method sets the attribute "code".
-   * 
-   * 
-   * @param pCode Value to which the attribute "code" should be set.
+   * Method sets attribute {@link #code}.<br/>
+   *
+   * @param pCode Value to which {@link #code} should be set.
    */
   public void setCode( Long pCode ) {
     // Assign value to attribute
@@ -357,20 +293,18 @@ public abstract class BankBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the attribute "type".
-   * 
-   * 
-   * @return Short Value to which the attribute "type" is set.
+   * Method returns attribute {@link #type}.<br/>
+   *
+   * @return {@link Short} Value to which {@link #type} is set.
    */
   public Short getType( ) {
     return type;
   }
 
   /**
-   * Method sets the attribute "type".
-   * 
-   * 
-   * @param pType Value to which the attribute "type" should be set.
+   * Method sets attribute {@link #type}.<br/>
+   *
+   * @param pType Value to which {@link #type} should be set.
    */
   public void setType( Short pType ) {
     // Assign value to attribute
@@ -379,7 +313,7 @@ public abstract class BankBOBase extends PersistentObject {
 
   /**
    * Method returns the class id of this business object class.
-   * 
+   *
    * @return {@link ClassID} Class ID of this business object. The method never returns null.
    */
   public ClassID getClassID( ) {

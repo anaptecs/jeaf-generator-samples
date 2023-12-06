@@ -1,7 +1,7 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting.messaging.impl;
 
@@ -11,9 +11,6 @@ import com.anaptecs.jeaf.xfun.api.XFun;
 import com.anaptecs.jeaf.xfun.api.common.ComponentID;
 import com.anaptecs.jeaf.xfun.api.config.Configuration;
 
-/**
- * 
- */
 abstract class MessagingServiceProviderImplBase implements ServiceProviderImplementation, MessagingServiceProvider {
   /**
    * Reference to the object that identifies this component. The reference is never null.
@@ -44,7 +41,7 @@ abstract class MessagingServiceProviderImplBase implements ServiceProviderImplem
 
   /**
    * Method returns the value of the property "connectURL".
-   * 
+   *
    * @return {@link String} Value of the property "connectURL". The method returns null if no value for the property is
    * defined.
    */

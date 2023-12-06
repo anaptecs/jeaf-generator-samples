@@ -1,7 +1,7 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting.impl;
 
@@ -10,9 +10,7 @@ import com.anaptecs.jeaf.xfun.api.common.ComponentID;
 import com.anaptecs.jeaf.xfun.api.config.Configuration;
 
 /**
- * Class represents the Accounting component.
- *
- * This component contains all accounting functions offered by the accounting service.
+ * Class represents the configuration for component {@link com.anaptecs.jeaf.accounting.impl.AccountingComponent}.
  */
 public final class AccountingComponentConfiguration {
   /**
@@ -30,7 +28,7 @@ public final class AccountingComponentConfiguration {
 
   /**
    * Method returns the value of the property "defaultInterrestRate".
-   * 
+   *
    * @return {@link Float} Value of the property "defaultInterrestRate". The method returns null if no value for the
    * property is defined.
    */

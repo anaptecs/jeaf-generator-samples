@@ -1,7 +1,7 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting;
 
@@ -10,16 +10,10 @@ import javax.validation.ConstraintViolationException;
 import com.anaptecs.jeaf.core.api.ServiceObject;
 import com.anaptecs.jeaf.core.api.ServiceObjectID;
 import com.anaptecs.jeaf.tools.api.validation.ValidationTools;
-import com.anaptecs.jeaf.xfun.api.XFun;
-import com.anaptecs.jeaf.xfun.api.XFunMessages;
 import com.anaptecs.jeaf.xfun.api.checks.Check;
 import com.anaptecs.jeaf.xfun.api.common.Identifiable;
 import com.anaptecs.jeaf.xfun.api.common.ObjectIdentity;
 
-/**
- * @author JEAF Generator
- * @version JEAF Release 1.6.x
- */
 public abstract class AccountInfoBase implements ServiceObject, Identifiable<ServiceObjectID> {
   /**
    * Default serial version uid.
@@ -46,23 +40,14 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
    */
   private final ServiceObjectID objectID;
 
-  /**
-   * 
-   */
   private Long iban;
 
-  /**
-   * 
-   */
   private Double balance;
 
-  /**
-   * 
-   */
   private ServiceObjectID bankID;
 
   /**
-   * Default constructor is only intended to be used for deserialization as many frameworks required that. For "normal"
+   * Default constructor is only intended to be used for deserialization by tools like Jackson for JSON. For "normal"
    * object creation builder should be used instead.
    */
   protected AccountInfoBase( ) {
@@ -71,7 +56,7 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
 
   /**
    * Initialize object using the passed builder.
-   * 
+   *
    * @param pBuilder Builder that should be used to initialize this object. The parameter must not be null.
    */
   protected AccountInfoBase( BuilderBase pBuilder ) {
@@ -101,29 +86,20 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
      */
     private ObjectIdentity<?> objectID;
 
-    /**
-     * 
-     */
     private Long iban;
 
-    /**
-     * 
-     */
     private Double balance;
 
-    /**
-     * 
-     */
     private ServiceObjectID bankID;
 
     /**
-     * Use {@link AccountInfo.Builder#newBuilder()} instead of protected constructor to create new builder.
+     * Use {@link AccountInfo.builder()} instead of protected constructor to create new builder.
      */
     protected BuilderBase( ) {
     }
 
     /**
-     * Use {@link AccountInfo.Builder#newBuilder(AccountInfo)} instead of protected constructor to create new builder.
+     * Use {@link AccountInfo.builder(AccountInfo)} instead of protected constructor to create new builder.
      */
     protected BuilderBase( AccountInfoBase pObject ) {
       if (pObject != null) {
@@ -145,9 +121,10 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
     }
 
     /**
-     * Method sets the attribute "iban".
-     * 
-     * @param pIban Value to which the attribute "iban" should be set.
+     * Method sets attribute {@link #iban}.<br/>
+     *
+     * @param pIban Value to which {@link #iban} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setIban( Long pIban ) {
       // Assign value to attribute
@@ -156,9 +133,10 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
     }
 
     /**
-     * Method sets the attribute "balance".
-     * 
-     * @param pBalance Value to which the attribute "balance" should be set.
+     * Method sets attribute {@link #balance}.<br/>
+     *
+     * @param pBalance Value to which {@link #balance} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setBalance( Double pBalance ) {
       // Assign value to attribute
@@ -167,9 +145,10 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
     }
 
     /**
-     * Method sets the attribute "bankID".
-     * 
-     * @param pBankID Value to which the attribute "bankID" should be set.
+     * Method sets attribute {@link #bankID}.<br/>
+     *
+     * @param pBankID Value to which {@link #bankID} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setBankID( ServiceObjectID pBankID ) {
       // Assign value to attribute
@@ -180,7 +159,7 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
     /**
      * Method creates a new instance of class AccountInfo. The object will be initialized with the values of the
      * builder.
-     * 
+     *
      * @return AccountInfo Created object. The method never returns null.
      */
     public AccountInfo build( ) {
@@ -190,7 +169,7 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
     /**
      * Method creates a new validated instance of class AccountInfo. The object will be initialized with the values of
      * the builder and validated afterwards.
-     * 
+     *
      * @return AccountInfo Created and validated object. The method never returns null.
      * @throws ConstraintViolationException in case that one or more validations for the created object failed.
      */
@@ -203,7 +182,7 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
 
   /**
    * Method returns the id of this object.
-   * 
+   *
    * @return {@link ServiceObjectID} ID of this object. Since an object must not have an id the method may also return
    * null.
    */
@@ -214,7 +193,7 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
 
   /**
    * Method returns the unversioned object id of this object.
-   * 
+   *
    * @return {@link ServiceObjectID} ID of this object. Since an object must not have an id the method may also return
    * null.
    */
@@ -231,20 +210,18 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
   }
 
   /**
-   * Method returns the attribute "iban".
-   * 
-   * 
-   * @return Long Value to which the attribute "iban" is set.
+   * Method returns attribute {@link #iban}.<br/>
+   *
+   * @return {@link Long} Value to which {@link #iban} is set.
    */
   public Long getIban( ) {
     return iban;
   }
 
   /**
-   * Method sets the attribute "iban".
-   * 
-   * 
-   * @param pIban Value to which the attribute "iban" should be set.
+   * Method sets attribute {@link #iban}.<br/>
+   *
+   * @param pIban Value to which {@link #iban} should be set.
    */
   public void setIban( Long pIban ) {
     // Assign value to attribute
@@ -252,20 +229,18 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
   }
 
   /**
-   * Method returns the attribute "balance".
-   * 
-   * 
-   * @return Double Value to which the attribute "balance" is set.
+   * Method returns attribute {@link #balance}.<br/>
+   *
+   * @return {@link Double} Value to which {@link #balance} is set.
    */
   public Double getBalance( ) {
     return balance;
   }
 
   /**
-   * Method sets the attribute "balance".
-   * 
-   * 
-   * @param pBalance Value to which the attribute "balance" should be set.
+   * Method sets attribute {@link #balance}.<br/>
+   *
+   * @param pBalance Value to which {@link #balance} should be set.
    */
   public void setBalance( Double pBalance ) {
     // Assign value to attribute
@@ -273,20 +248,18 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
   }
 
   /**
-   * Method returns the attribute "bankID".
-   * 
-   * 
-   * @return ServiceObjectID Value to which the attribute "bankID" is set.
+   * Method returns attribute {@link #bankID}.<br/>
+   *
+   * @return {@link ServiceObjectID} Value to which {@link #bankID} is set.
    */
   public ServiceObjectID getBankID( ) {
     return bankID;
   }
 
   /**
-   * Method sets the attribute "bankID".
-   * 
-   * 
-   * @param pBankID Value to which the attribute "bankID" should be set.
+   * Method sets attribute {@link #bankID}.<br/>
+   *
+   * @param pBankID Value to which {@link #bankID} should be set.
    */
   public void setBankID( ServiceObjectID pBankID ) {
     // Assign value to attribute
@@ -294,40 +267,54 @@ public abstract class AccountInfoBase implements ServiceObject, Identifiable<Ser
   }
 
   /**
-   * 
    * @return {@link Double}
    */
   public abstract Double calclulateBalance( );
 
   /**
-   * Method returns a StringBuilder that can be used to create a String representation of this object. the returned
+   * Method returns a StringBuilder that can be used to create a String representation of this object. The returned
    * StringBuilder also takes care about attributes of super classes.
    *
    * @return {@link StringBuilder} StringBuilder representing this object. The method never returns null.
    */
-  protected StringBuilder toStringBuilder( ) {
+  public StringBuilder toStringBuilder( String pIndent ) {
     StringBuilder lBuilder = new StringBuilder();
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_INFO, this.getClass().getName()));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTES_SECTION));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "iban", "" + iban));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "balance", "" + balance));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "bankID", "" + bankID));
-    lBuilder.append('\n');
+    lBuilder.append(pIndent);
+    lBuilder.append(this.getClass().getName());
+    lBuilder.append(System.lineSeparator());
+    lBuilder.append(pIndent);
+    lBuilder.append("iban: ");
+    lBuilder.append(iban);
+    lBuilder.append(System.lineSeparator());
+    lBuilder.append(pIndent);
+    lBuilder.append("balance: ");
+    lBuilder.append(balance);
+    lBuilder.append(System.lineSeparator());
+    lBuilder.append(pIndent);
+    lBuilder.append("bankID: ");
+    lBuilder.append(bankID);
+    lBuilder.append(System.lineSeparator());
     return lBuilder;
   }
 
   /**
    * Method creates a new String with the values of all attributes of this class. All references to other objects will
    * be ignored.
-   * 
+   *
    * @return {@link String} String representation of this object. The method never returns null.
    */
   @Override
   public String toString( ) {
-    return this.toStringBuilder().toString();
+    return this.toStringBuilder("").toString();
+  }
+
+  /**
+   * Method creates a new builder and initializes it with the data of this object.
+   *
+   * @return {@link Builder} New builder that can be used to create new AccountInfo objects. The method never returns
+   * null.
+   */
+  public AccountInfo.Builder toBuilder( ) {
+    return new AccountInfo.Builder((AccountInfo) this);
   }
 }

@@ -11,10 +11,6 @@ import com.anaptecs.jeaf.spi.persistence.ClassID;
 import com.anaptecs.jeaf.spi.persistence.PersistentObject;
 import com.anaptecs.jeaf.xfun.api.checks.Check;
 
-/**
- * @author JEAF Generator
- * @version JEAF Release 1.6.x
- */
 public abstract class EmployeeBOBase extends PersistentObject {
   /**
    * The class id is a unique id within the domain model of an application for every business object class.
@@ -56,34 +52,16 @@ public abstract class EmployeeBOBase extends PersistentObject {
    */
   public static final String RESPONSIBILITY_ROLE = "responsibility";
 
-  /**
-   * 
-   */
   private BankBO bank;
 
-  /**
-   * 
-   */
   private MyPersonBO person;
 
-  /**
-   * 
-   */
-  private Set<CustomerBO> attendedCustomers = new HashSet<CustomerBO>();
+  private Set<CustomerBO> attendedCustomers;
 
-  /**
-   * 
-   */
   private EmployeeBO superior;
 
-  /**
-   * 
-   */
-  private Set<EmployeeBO> employees = new HashSet<EmployeeBO>();
+  private Set<EmployeeBO> employees;
 
-  /**
-   * 
-   */
   private ResponsibilityTypeBO responsibility;
 
   /**
@@ -91,12 +69,13 @@ public abstract class EmployeeBOBase extends PersistentObject {
    * objects not through JEAFs persistence service provider.
    */
   protected EmployeeBOBase( ) {
-    // Nothing to do.
+    attendedCustomers = new HashSet<CustomerBO>();
+    employees = new HashSet<EmployeeBO>();
   }
 
   /**
    * Method returns all instance of this class including potential subclasses.
-   * 
+   *
    * @return {@link List} List with all objects of this class. The method never returns null.
    */
   public static List<EmployeeBO> findAllEmployeeBOs( ) {
@@ -104,10 +83,9 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the association "bank".
-   * 
+   * Method returns association {@link #bank}.<br/>
    *
-   * @return BankBO BankBO to which the association "bank" is set.
+   * @return {@link BankBO} Value to which {@link #bank} is set.
    */
   public BankBO getBank( ) {
     bank = this.unproxy(bank);
@@ -115,10 +93,9 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the association "bank".
-   * 
-   * 
-   * @param pBank BankBO to which the association "bank" should be set.
+   * Method sets association {@link #bank}.<br/>
+   *
+   * @param pBank Value to which {@link #bank} should be set.
    */
   public void setBank( BankBO pBank ) {
     // Release already referenced object before setting a new association.
@@ -134,8 +111,7 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method unsets the association "bank".
-   * 
+   * Method unsets {@link #bank}.
    */
   public final void unsetBank( ) {
     // The association is set in both directions because within the UML model it is defined to be bidirectional.
@@ -148,10 +124,9 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the association "person".
-   * 
+   * Method returns association {@link #person}.<br/>
    *
-   * @return MyPersonBO MyPersonBO to which the association "person" is set.
+   * @return {@link MyPersonBO} Value to which {@link #person} is set.
    */
   public MyPersonBO getPerson( ) {
     person = this.unproxy(person);
@@ -159,10 +134,9 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the association "person".
-   * 
-   * 
-   * @param pPerson MyPersonBO to which the association "person" should be set.
+   * Method sets association {@link #person}.<br/>
+   *
+   * @param pPerson Value to which {@link #person} should be set.
    */
   public void setPerson( MyPersonBO pPerson ) {
     // Release already referenced object before setting a new association.
@@ -178,8 +152,7 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method unsets the association "person".
-   * 
+   * Method unsets {@link #person}.
    */
   public final void unsetPerson( ) {
     // The association is set in both directions because within the UML model it is defined to be bidirectional.
@@ -192,11 +165,10 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the association "attendedCustomers".
-   * 
+   * Method returns association {@link #attendedCustomers}.<br/>
    *
-   * @return Collection All CustomerBO objects that belong to the association "attendedCustomers". The method never
-   * returns null and the returned collection is unmodifiable.
+   * @return {@link Set<CustomerBO>} Value to which {@link #attendedCustomers} is set. The method never returns null and
+   * the returned collection is unmodifiable.
    */
   public Set<CustomerBO> getAttendedCustomers( ) {
     // Return all CustomerBO objects as unmodifiable collection.
@@ -204,29 +176,10 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the association "attendedCustomers" to the passed collection. All objects that formerly were part of
-   * the association will be removed from it.
-   * 
-   * 
-   * @param pAttendedCustomers Collection with objects to which the association should be set. The parameter must not be
+   * Method adds the passed object to {@link #attendedCustomers}.
+   *
+   * @param pAttendedCustomers Object that should be added to {@link #attendedCustomers}. The parameter must not be
    * null.
-   */
-  void setAttendedCustomers( Set<CustomerBO> pAttendedCustomers ) {
-    // Check of parameter is not required.
-    // Remove all objects from association "attendedCustomers".
-    this.clearAttendedCustomers();
-    // If the association is null, removing all entries is sufficient.
-    if (pAttendedCustomers != null) {
-      attendedCustomers = new HashSet<CustomerBO>(pAttendedCustomers);
-    }
-  }
-
-  /**
-   * Method adds the passed CustomerBO object to the association "attendedCustomers".
-   * 
-   * 
-   * @param pAttendedCustomers Object that should be added to the association "attendedCustomers". The parameter must
-   * not be null.
    */
   public void addToAttendedCustomers( CustomerBO pAttendedCustomers ) {
     // Check parameter "pAttendedCustomers" for invalid value null.
@@ -241,11 +194,10 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method adds all passed objects to the association "attendedCustomers".
-   * 
-   * 
-   * @param pAttendedCustomers Collection with all objects that should be added to the association "attendedCustomers".
-   * The parameter must not be null.
+   * Method adds all passed objects to {@link #attendedCustomers}.
+   *
+   * @param pAttendedCustomers Collection with all objects that should be added to {@link #attendedCustomers}. The
+   * parameter must not be null.
    */
   public void addToAttendedCustomers( Collection<CustomerBO> pAttendedCustomers ) {
     // Check parameter "pAttendedCustomers" for invalid value null.
@@ -257,11 +209,10 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method removes the passed CustomerBO object from the association "attendedCustomers".
-   * 
-   * 
-   * @param pAttendedCustomers Object that should be removed from the association "attendedCustomers". The parameter
-   * must not be null.
+   * Method removes the passed object from {@link #attendedCustomers}.<br/>
+   *
+   * @param pAttendedCustomers Object that should be removed from {@link #attendedCustomers}. The parameter must not be
+   * null.
    */
   public void removeFromAttendedCustomers( CustomerBO pAttendedCustomers ) {
     // Check parameter for invalid value null.
@@ -276,23 +227,22 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method removes all objects from the association "attendedCustomers".
-   * 
+   * Method removes all objects from {@link #attendedCustomers}.
    */
   public void clearAttendedCustomers( ) {
     // Remove all objects from association "attendedCustomers".
     Collection<CustomerBO> lAttendedCustomers = new HashSet<CustomerBO>(attendedCustomers);
     Iterator<CustomerBO> lIterator = lAttendedCustomers.iterator();
     while (lIterator.hasNext()) {
+      // As association is bidirectional we have to clear it in both directions.
       this.removeFromAttendedCustomers(lIterator.next());
     }
   }
 
   /**
-   * Method returns the association "superior".
-   * 
+   * Method returns association {@link #superior}.<br/>
    *
-   * @return EmployeeBO EmployeeBO to which the association "superior" is set.
+   * @return {@link EmployeeBO} Value to which {@link #superior} is set.
    */
   public EmployeeBO getSuperior( ) {
     superior = this.unproxy(superior);
@@ -300,10 +250,9 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the association "superior".
-   * 
-   * 
-   * @param pSuperior EmployeeBO to which the association "superior" should be set.
+   * Method sets association {@link #superior}.<br/>
+   *
+   * @param pSuperior Value to which {@link #superior} should be set.
    */
   public void setSuperior( EmployeeBO pSuperior ) {
     // Release already referenced object before setting a new association.
@@ -319,8 +268,7 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method unsets the association "superior".
-   * 
+   * Method unsets {@link #superior}.
    */
   public final void unsetSuperior( ) {
     // The association is set in both directions because within the UML model it is defined to be bidirectional.
@@ -333,11 +281,10 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the association "employees".
-   * 
+   * Method returns association {@link #employees}.<br/>
    *
-   * @return Collection All EmployeeBO objects that belong to the association "employees". The method never returns null
-   * and the returned collection is unmodifiable.
+   * @return {@link Set<EmployeeBO>} Value to which {@link #employees} is set. The method never returns null and the
+   * returned collection is unmodifiable.
    */
   public Set<EmployeeBO> getEmployees( ) {
     // Return all EmployeeBO objects as unmodifiable collection.
@@ -345,27 +292,9 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the association "employees" to the passed collection. All objects that formerly were part of the
-   * association will be removed from it.
-   * 
-   * 
-   * @param pEmployees Collection with objects to which the association should be set. The parameter must not be null.
-   */
-  void setEmployees( Set<EmployeeBO> pEmployees ) {
-    // Check of parameter is not required.
-    // Remove all objects from association "employees".
-    this.clearEmployees();
-    // If the association is null, removing all entries is sufficient.
-    if (pEmployees != null) {
-      employees = new HashSet<EmployeeBO>(pEmployees);
-    }
-  }
-
-  /**
-   * Method adds the passed EmployeeBO object to the association "employees".
-   * 
-   * 
-   * @param pEmployees Object that should be added to the association "employees". The parameter must not be null.
+   * Method adds the passed object to {@link #employees}.
+   *
+   * @param pEmployees Object that should be added to {@link #employees}. The parameter must not be null.
    */
   public void addToEmployees( EmployeeBO pEmployees ) {
     // Check parameter "pEmployees" for invalid value null.
@@ -383,11 +312,10 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method adds all passed objects to the association "employees".
-   * 
-   * 
-   * @param pEmployees Collection with all objects that should be added to the association "employees". The parameter
-   * must not be null.
+   * Method adds all passed objects to {@link #employees}.
+   *
+   * @param pEmployees Collection with all objects that should be added to {@link #employees}. The parameter must not be
+   * null.
    */
   public void addToEmployees( Collection<EmployeeBO> pEmployees ) {
     // Check parameter "pEmployees" for invalid value null.
@@ -399,10 +327,9 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method removes the passed EmployeeBO object from the association "employees".
-   * 
-   * 
-   * @param pEmployees Object that should be removed from the association "employees". The parameter must not be null.
+   * Method removes the passed object from {@link #employees}.<br/>
+   *
+   * @param pEmployees Object that should be removed from {@link #employees}. The parameter must not be null.
    */
   public void removeFromEmployees( EmployeeBO pEmployees ) {
     // Check parameter for invalid value null.
@@ -417,23 +344,22 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method removes all objects from the association "employees".
-   * 
+   * Method removes all objects from {@link #employees}.
    */
   public void clearEmployees( ) {
     // Remove all objects from association "employees".
     Collection<EmployeeBO> lEmployees = new HashSet<EmployeeBO>(employees);
     Iterator<EmployeeBO> lIterator = lEmployees.iterator();
     while (lIterator.hasNext()) {
+      // As association is bidirectional we have to clear it in both directions.
       this.removeFromEmployees(lIterator.next());
     }
   }
 
   /**
-   * Method returns the association "responsibility".
-   * 
+   * Method returns association {@link #responsibility}.<br/>
    *
-   * @return ResponsibilityTypeBO ResponsibilityTypeBO to which the association "responsibility" is set.
+   * @return {@link ResponsibilityTypeBO} Value to which {@link #responsibility} is set.
    */
   public ResponsibilityTypeBO getResponsibility( ) {
     responsibility = this.unproxy(responsibility);
@@ -441,18 +367,16 @@ public abstract class EmployeeBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the association "responsibility".
-   * 
-   * 
-   * @param pResponsibility ResponsibilityTypeBO to which the association "responsibility" should be set.
+   * Method sets association {@link #responsibility}.<br/>
+   *
+   * @param pResponsibility Value to which {@link #responsibility} should be set.
    */
   public void setResponsibility( ResponsibilityTypeBO pResponsibility ) {
     responsibility = pResponsibility;
   }
 
   /**
-   * Method unsets the association "responsibility".
-   * 
+   * Method unsets {@link #responsibility}.
    */
   public final void unsetResponsibility( ) {
     responsibility = null;
@@ -460,7 +384,7 @@ public abstract class EmployeeBOBase extends PersistentObject {
 
   /**
    * Method returns the class id of this business object class.
-   * 
+   *
    * @return {@link ClassID} Class ID of this business object. The method never returns null.
    */
   public ClassID getClassID( ) {

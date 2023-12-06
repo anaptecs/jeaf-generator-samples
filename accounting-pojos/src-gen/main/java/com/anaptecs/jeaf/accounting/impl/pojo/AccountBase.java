@@ -1,29 +1,23 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting.impl.pojo;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Currency;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import javax.validation.ConstraintViolationException;
 
 import com.anaptecs.jeaf.tools.api.validation.ValidationTools;
-import com.anaptecs.jeaf.xfun.api.XFun;
-import com.anaptecs.jeaf.xfun.api.XFunMessages;
 import com.anaptecs.jeaf.xfun.api.checks.Check;
 
-/**
- * @author JEAF Generator
- * @version JEAF Release 1.6.x
- */
 public abstract class AccountBase {
   /**
    * Constant for the name of attribute "iban".
@@ -45,37 +39,25 @@ public abstract class AccountBase {
    */
   public static final String ALLBOOKINGS = "allBookings";
 
-  /**
-   * 
-   */
   private int iban;
 
-  /**
-   * 
-   */
   private Customer owner;
 
-  /**
-   * 
-   */
   private Currency currency;
 
-  /**
-   * 
-   */
-  private Set<Booking> allBookings = new HashSet<Booking>();
+  private Set<Booking> allBookings;
 
   /**
-   * Default constructor is only intended to be used for deserialization as many frameworks required that. For "normal"
+   * Default constructor is only intended to be used for deserialization by tools like Jackson for JSON. For "normal"
    * object creation builder should be used instead.
    */
   protected AccountBase( ) {
-    // Nothing to do.
+    allBookings = new HashSet<Booking>();
   }
 
   /**
    * Initialize object using the passed builder.
-   * 
+   *
    * @param pBuilder Builder that should be used to initialize this object. The parameter must not be null.
    */
   protected AccountBase( BuilderBase pBuilder ) {
@@ -86,7 +68,10 @@ public abstract class AccountBase {
     owner = pBuilder.owner;
     currency = pBuilder.currency;
     if (pBuilder.allBookings != null) {
-      allBookings.addAll(pBuilder.allBookings);
+      allBookings = pBuilder.allBookings;
+    }
+    else {
+      allBookings = new HashSet<Booking>();
     }
   }
 
@@ -95,34 +80,22 @@ public abstract class AccountBase {
    * associations instances can not be created directly. Instead this builder class has to be used.
    */
   public static abstract class BuilderBase {
-    /**
-     * 
-     */
     private int iban;
 
-    /**
-     * 
-     */
     private Customer owner;
 
-    /**
-     * 
-     */
     private Currency currency;
 
-    /**
-     * 
-     */
     private Set<Booking> allBookings;
 
     /**
-     * Use {@link Account.Builder#newBuilder()} instead of protected constructor to create new builder.
+     * Use {@link Account.builder()} instead of protected constructor to create new builder.
      */
     protected BuilderBase( ) {
     }
 
     /**
-     * Use {@link Account.Builder#newBuilder(Account)} instead of protected constructor to create new builder.
+     * Use {@link Account.builder(Account)} instead of protected constructor to create new builder.
      */
     protected BuilderBase( AccountBase pObject ) {
       if (pObject != null) {
@@ -135,9 +108,10 @@ public abstract class AccountBase {
     }
 
     /**
-     * Method sets the attribute "iban".
-     * 
-     * @param pIban Value to which the attribute "iban" should be set.
+     * Method sets attribute {@link #iban}.<br/>
+     *
+     * @param pIban Value to which {@link #iban} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setIban( int pIban ) {
       // Assign value to attribute
@@ -146,9 +120,10 @@ public abstract class AccountBase {
     }
 
     /**
-     * Method sets the association "owner".
-     * 
-     * @param pOwner Customer to which the association "owner" should be set.
+     * Method sets association {@link #owner}.<br/>
+     *
+     * @param pOwner Value to which {@link #owner} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setOwner( Customer pOwner ) {
       owner = pOwner;
@@ -156,9 +131,10 @@ public abstract class AccountBase {
     }
 
     /**
-     * Method sets the attribute "currency".
-     * 
-     * @param pCurrency Value to which the attribute "currency" should be set.
+     * Method sets attribute {@link #currency}.<br/>
+     *
+     * @param pCurrency Value to which {@link #currency} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setCurrency( Currency pCurrency ) {
       // Assign value to attribute
@@ -167,9 +143,10 @@ public abstract class AccountBase {
     }
 
     /**
-     * Method sets the association "allBookings".
-     * 
-     * @param pAllBookings Collection with objects to which the association should be set.
+     * Method sets association {@link #allBookings}.<br/>
+     *
+     * @param pAllBookings Collection to which {@link #allBookings} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setAllBookings( Set<Booking> pAllBookings ) {
       // To ensure immutability we have to copy the content of the passed collection.
@@ -183,8 +160,24 @@ public abstract class AccountBase {
     }
 
     /**
+     * Method adds the passed objects to association {@link #allBookings}.<br/>
+     *
+     * @param pAllBookings Array of objects that should be added to {@link #allBookings}. The parameter may be null.
+     * @return {@link BuilderBase} Instance of this builder to support chaining. Method never returns null.
+     */
+    public BuilderBase addToAllBookings( Booking... pAllBookings ) {
+      if (pAllBookings != null) {
+        if (allBookings == null) {
+          allBookings = new HashSet<Booking>();
+        }
+        allBookings.addAll(Arrays.asList(pAllBookings));
+      }
+      return this;
+    }
+
+    /**
      * Method creates a new instance of class Account. The object will be initialized with the values of the builder.
-     * 
+     *
      * @return Account Created object. The method never returns null.
      */
     public Account build( ) {
@@ -194,7 +187,7 @@ public abstract class AccountBase {
     /**
      * Method creates a new validated instance of class Account. The object will be initialized with the values of the
      * builder and validated afterwards.
-     * 
+     *
      * @return Account Created and validated object. The method never returns null.
      * @throws ConstraintViolationException in case that one or more validations for the created object failed.
      */
@@ -206,20 +199,18 @@ public abstract class AccountBase {
   }
 
   /**
-   * Method returns the attribute "iban".
-   * 
-   * 
-   * @return int Value to which the attribute "iban" is set.
+   * Method returns attribute {@link #iban}.<br/>
+   *
+   * @return int Value to which {@link #iban} is set.
    */
   public int getIban( ) {
     return iban;
   }
 
   /**
-   * Method sets the attribute "iban".
-   * 
-   * 
-   * @param pIban Value to which the attribute "iban" should be set.
+   * Method sets attribute {@link #iban}.<br/>
+   *
+   * @param pIban Value to which {@link #iban} should be set.
    */
   public void setIban( int pIban ) {
     // Assign value to attribute
@@ -227,20 +218,18 @@ public abstract class AccountBase {
   }
 
   /**
-   * Method returns the association "owner".
-   * 
+   * Method returns association {@link #owner}.<br/>
    *
-   * @return Customer Customer to which the association "owner" is set.
+   * @return {@link Customer} Value to which {@link #owner} is set.
    */
   public Customer getOwner( ) {
     return owner;
   }
 
   /**
-   * Method sets the association "owner".
-   * 
-   * 
-   * @param pOwner Customer to which the association "owner" should be set.
+   * Method sets association {@link #owner}.<br/>
+   *
+   * @param pOwner Value to which {@link #owner} should be set.
    */
   public void setOwner( Customer pOwner ) {
     // Release already referenced object before setting a new association.
@@ -256,8 +245,7 @@ public abstract class AccountBase {
   }
 
   /**
-   * Method unsets the association "owner".
-   * 
+   * Method unsets {@link #owner}.
    */
   public final void unsetOwner( ) {
     // The association is set in both directions because within the UML model it is defined to be bidirectional.
@@ -270,20 +258,18 @@ public abstract class AccountBase {
   }
 
   /**
-   * Method returns the attribute "currency".
-   * 
-   * 
-   * @return Currency Value to which the attribute "currency" is set.
+   * Method returns attribute {@link #currency}.<br/>
+   *
+   * @return {@link Currency} Value to which {@link #currency} is set.
    */
   public Currency getCurrency( ) {
     return currency;
   }
 
   /**
-   * Method sets the attribute "currency".
-   * 
-   * 
-   * @param pCurrency Value to which the attribute "currency" should be set.
+   * Method sets attribute {@link #currency}.<br/>
+   *
+   * @param pCurrency Value to which {@link #currency} should be set.
    */
   public void setCurrency( Currency pCurrency ) {
     // Assign value to attribute
@@ -291,11 +277,10 @@ public abstract class AccountBase {
   }
 
   /**
-   * Method returns the association "allBookings".
-   * 
+   * Method returns association {@link #allBookings}.<br/>
    *
-   * @return Collection All Booking objects that belong to the association "allBookings". The method never returns null
-   * and the returned collection is unmodifiable.
+   * @return {@link Set<Booking>} Value to which {@link #allBookings} is set. The method never returns null and the
+   * returned collection is unmodifiable.
    */
   public Set<Booking> getAllBookings( ) {
     // Return all Booking objects as unmodifiable collection.
@@ -303,27 +288,9 @@ public abstract class AccountBase {
   }
 
   /**
-   * Method sets the association "allBookings" to the passed collection. All objects that formerly were part of the
-   * association will be removed from it.
-   * 
-   * 
-   * @param pAllBookings Collection with objects to which the association should be set. The parameter must not be null.
-   */
-  void setAllBookings( Set<Booking> pAllBookings ) {
-    // Check of parameter is not required.
-    // Remove all objects from association "allBookings".
-    this.clearAllBookings();
-    // If the association is null, removing all entries is sufficient.
-    if (pAllBookings != null) {
-      allBookings = new HashSet<Booking>(pAllBookings);
-    }
-  }
-
-  /**
-   * Method adds the passed Booking object to the association "allBookings".
-   * 
-   * 
-   * @param pAllBookings Object that should be added to the association "allBookings". The parameter must not be null.
+   * Method adds the passed object to {@link #allBookings}.
+   *
+   * @param pAllBookings Object that should be added to {@link #allBookings}. The parameter must not be null.
    */
   public void addToAllBookings( Booking pAllBookings ) {
     // Check parameter "pAllBookings" for invalid value null.
@@ -333,11 +300,10 @@ public abstract class AccountBase {
   }
 
   /**
-   * Method adds all passed objects to the association "allBookings".
-   * 
-   * 
-   * @param pAllBookings Collection with all objects that should be added to the association "allBookings". The
-   * parameter must not be null.
+   * Method adds all passed objects to {@link #allBookings}.
+   *
+   * @param pAllBookings Collection with all objects that should be added to {@link #allBookings}. The parameter must
+   * not be null.
    */
   public void addToAllBookings( Collection<Booking> pAllBookings ) {
     // Check parameter "pAllBookings" for invalid value null.
@@ -349,11 +315,9 @@ public abstract class AccountBase {
   }
 
   /**
-   * Method removes the passed Booking object from the association "allBookings".
-   * 
-   * 
-   * @param pAllBookings Object that should be removed from the association "allBookings". The parameter must not be
-   * null.
+   * Method removes the passed object from {@link #allBookings}.<br/>
+   *
+   * @param pAllBookings Object that should be removed from {@link #allBookings}. The parameter must not be null.
    */
   public void removeFromAllBookings( Booking pAllBookings ) {
     // Check parameter for invalid value null.
@@ -363,51 +327,57 @@ public abstract class AccountBase {
   }
 
   /**
-   * Method removes all objects from the association "allBookings".
-   * 
+   * Method removes all objects from {@link #allBookings}.
    */
   public void clearAllBookings( ) {
     // Remove all objects from association "allBookings".
-    Collection<Booking> lAllBookings = new HashSet<Booking>(allBookings);
-    Iterator<Booking> lIterator = lAllBookings.iterator();
-    while (lIterator.hasNext()) {
-      this.removeFromAllBookings(lIterator.next());
-    }
+    allBookings.clear();
   }
 
   /**
-   * 
    * @return {@link BigDecimal}
    */
   public abstract BigDecimal calcuateBalance( );
 
   /**
-   * Method returns a StringBuilder that can be used to create a String representation of this object. the returned
+   * Method returns a StringBuilder that can be used to create a String representation of this object. The returned
    * StringBuilder also takes care about attributes of super classes.
    *
    * @return {@link StringBuilder} StringBuilder representing this object. The method never returns null.
    */
-  protected StringBuilder toStringBuilder( ) {
+  public StringBuilder toStringBuilder( String pIndent ) {
     StringBuilder lBuilder = new StringBuilder();
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_INFO, this.getClass().getName()));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTES_SECTION));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "iban", "" + iban));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "currency", "" + currency));
-    lBuilder.append('\n');
+    lBuilder.append(pIndent);
+    lBuilder.append(this.getClass().getName());
+    lBuilder.append(System.lineSeparator());
+    lBuilder.append(pIndent);
+    lBuilder.append("iban: ");
+    lBuilder.append(iban);
+    lBuilder.append(System.lineSeparator());
+    lBuilder.append(pIndent);
+    lBuilder.append("currency: ");
+    lBuilder.append(currency);
+    lBuilder.append(System.lineSeparator());
     return lBuilder;
   }
 
   /**
    * Method creates a new String with the values of all attributes of this class. All references to other objects will
    * be ignored.
-   * 
+   *
    * @return {@link String} String representation of this object. The method never returns null.
    */
   @Override
   public String toString( ) {
-    return this.toStringBuilder().toString();
+    return this.toStringBuilder("").toString();
+  }
+
+  /**
+   * Method creates a new builder and initializes it with the data of this object.
+   *
+   * @return {@link Builder} New builder that can be used to create new Account objects. The method never returns null.
+   */
+  public Account.Builder toBuilder( ) {
+    return new Account.Builder((Account) this);
   }
 }

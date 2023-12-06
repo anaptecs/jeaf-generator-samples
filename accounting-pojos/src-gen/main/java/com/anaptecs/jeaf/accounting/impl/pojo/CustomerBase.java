@@ -1,10 +1,11 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting.impl.pojo;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -16,15 +17,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import com.anaptecs.jeaf.tools.api.validation.ValidationTools;
-import com.anaptecs.jeaf.xfun.api.XFun;
-import com.anaptecs.jeaf.xfun.api.XFunMessages;
 import com.anaptecs.jeaf.xfun.api.checks.Check;
 
-/**
- * @author JEAF Generator
- * @version JEAF Release 1.6.x
- */
-public abstract class CustomerBase {
+public abstract class CustomerBase extends Partner {
   /**
    * Constant for the name of attribute "name".
    */
@@ -45,51 +40,42 @@ public abstract class CustomerBase {
    */
   public static final String ACCOUNTS = "accounts";
 
-  /**
-   * 
-   */
   @NotBlank
   private String name;
 
-  /**
-   * 
-   */
   @NotBlank
   private String firstName;
 
-  /**
-   * 
-   */
   @Email()
   private String email;
 
-  /**
-   * 
-   */
-  private Set<Account> accounts = new HashSet<Account>();
+  private Set<Account> accounts;
 
   /**
-   * Default constructor is only intended to be used for deserialization as many frameworks required that. For "normal"
+   * Default constructor is only intended to be used for deserialization by tools like Jackson for JSON. For "normal"
    * object creation builder should be used instead.
    */
   protected CustomerBase( ) {
-    // Nothing to do.
+    accounts = new HashSet<Account>();
   }
 
   /**
    * Initialize object using the passed builder.
-   * 
+   *
    * @param pBuilder Builder that should be used to initialize this object. The parameter must not be null.
    */
   protected CustomerBase( BuilderBase pBuilder ) {
-    // Ensure that builder is not null.
-    Check.checkInvalidParameterNull(pBuilder, "pBuilder");
+    // Call constructor of super class.
+    super(pBuilder);
     // Read attribute values from builder.
     name = pBuilder.name;
     firstName = pBuilder.firstName;
     email = pBuilder.email;
     if (pBuilder.accounts != null) {
-      accounts.addAll(pBuilder.accounts);
+      accounts = pBuilder.accounts;
+    }
+    else {
+      accounts = new HashSet<Account>();
     }
   }
 
@@ -97,38 +83,26 @@ public abstract class CustomerBase {
    * Class implements builder to create a new instance of class Customer. As the class has read only attributes or
    * associations instances can not be created directly. Instead this builder class has to be used.
    */
-  public static abstract class BuilderBase {
-    /**
-     * 
-     */
+  public static abstract class BuilderBase extends Partner.Builder {
     @NotBlank
     private String name;
 
-    /**
-     * 
-     */
     @NotBlank
     private String firstName;
 
-    /**
-     * 
-     */
     @Email()
     private String email;
 
-    /**
-     * 
-     */
     private Set<Account> accounts;
 
     /**
-     * Use {@link Customer.Builder#newBuilder()} instead of protected constructor to create new builder.
+     * Use {@link Customer.builder()} instead of protected constructor to create new builder.
      */
     protected BuilderBase( ) {
     }
 
     /**
-     * Use {@link Customer.Builder#newBuilder(Customer)} instead of protected constructor to create new builder.
+     * Use {@link Customer.builder(Customer)} instead of protected constructor to create new builder.
      */
     protected BuilderBase( CustomerBase pObject ) {
       if (pObject != null) {
@@ -141,9 +115,10 @@ public abstract class CustomerBase {
     }
 
     /**
-     * Method sets the attribute "name".
-     * 
-     * @param pName Value to which the attribute "name" should be set.
+     * Method sets attribute {@link #name}.<br/>
+     *
+     * @param pName Value to which {@link #name} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setName( String pName ) {
       // Assign value to attribute
@@ -152,9 +127,10 @@ public abstract class CustomerBase {
     }
 
     /**
-     * Method sets the attribute "firstName".
-     * 
-     * @param pFirstName Value to which the attribute "firstName" should be set.
+     * Method sets attribute {@link #firstName}.<br/>
+     *
+     * @param pFirstName Value to which {@link #firstName} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setFirstName( String pFirstName ) {
       // Assign value to attribute
@@ -163,9 +139,10 @@ public abstract class CustomerBase {
     }
 
     /**
-     * Method sets the attribute "email".
-     * 
-     * @param pEmail Value to which the attribute "email" should be set.
+     * Method sets attribute {@link #email}.<br/>
+     *
+     * @param pEmail Value to which {@link #email} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setEmail( String pEmail ) {
       // Assign value to attribute
@@ -174,9 +151,10 @@ public abstract class CustomerBase {
     }
 
     /**
-     * Method sets the association "accounts".
-     * 
-     * @param pAccounts Collection with objects to which the association should be set.
+     * Method sets association {@link #accounts}.<br/>
+     *
+     * @param pAccounts Collection to which {@link #accounts} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setAccounts( Set<Account> pAccounts ) {
       // To ensure immutability we have to copy the content of the passed collection.
@@ -190,8 +168,24 @@ public abstract class CustomerBase {
     }
 
     /**
+     * Method adds the passed objects to association {@link #accounts}.<br/>
+     *
+     * @param pAccounts Array of objects that should be added to {@link #accounts}. The parameter may be null.
+     * @return {@link BuilderBase} Instance of this builder to support chaining. Method never returns null.
+     */
+    public BuilderBase addToAccounts( Account... pAccounts ) {
+      if (pAccounts != null) {
+        if (accounts == null) {
+          accounts = new HashSet<Account>();
+        }
+        accounts.addAll(Arrays.asList(pAccounts));
+      }
+      return this;
+    }
+
+    /**
      * Method creates a new instance of class Customer. The object will be initialized with the values of the builder.
-     * 
+     *
      * @return Customer Created object. The method never returns null.
      */
     public Customer build( ) {
@@ -201,7 +195,7 @@ public abstract class CustomerBase {
     /**
      * Method creates a new validated instance of class Customer. The object will be initialized with the values of the
      * builder and validated afterwards.
-     * 
+     *
      * @return Customer Created and validated object. The method never returns null.
      * @throws ConstraintViolationException in case that one or more validations for the created object failed.
      */
@@ -213,20 +207,18 @@ public abstract class CustomerBase {
   }
 
   /**
-   * Method returns the attribute "name".
-   * 
-   * 
-   * @return String Value to which the attribute "name" is set.
+   * Method returns attribute {@link #name}.<br/>
+   *
+   * @return {@link String} Value to which {@link #name} is set.
    */
   public String getName( ) {
     return name;
   }
 
   /**
-   * Method sets the attribute "name".
-   * 
-   * 
-   * @param pName Value to which the attribute "name" should be set.
+   * Method sets attribute {@link #name}.<br/>
+   *
+   * @param pName Value to which {@link #name} should be set.
    */
   public void setName( String pName ) {
     // Assign value to attribute
@@ -234,20 +226,18 @@ public abstract class CustomerBase {
   }
 
   /**
-   * Method returns the attribute "firstName".
-   * 
-   * 
-   * @return String Value to which the attribute "firstName" is set.
+   * Method returns attribute {@link #firstName}.<br/>
+   *
+   * @return {@link String} Value to which {@link #firstName} is set.
    */
   public String getFirstName( ) {
     return firstName;
   }
 
   /**
-   * Method sets the attribute "firstName".
-   * 
-   * 
-   * @param pFirstName Value to which the attribute "firstName" should be set.
+   * Method sets attribute {@link #firstName}.<br/>
+   *
+   * @param pFirstName Value to which {@link #firstName} should be set.
    */
   public void setFirstName( String pFirstName ) {
     // Assign value to attribute
@@ -255,20 +245,18 @@ public abstract class CustomerBase {
   }
 
   /**
-   * Method returns the attribute "email".
-   * 
-   * 
-   * @return String Value to which the attribute "email" is set.
+   * Method returns attribute {@link #email}.<br/>
+   *
+   * @return {@link String} Value to which {@link #email} is set.
    */
   public String getEmail( ) {
     return email;
   }
 
   /**
-   * Method sets the attribute "email".
-   * 
-   * 
-   * @param pEmail Value to which the attribute "email" should be set.
+   * Method sets attribute {@link #email}.<br/>
+   *
+   * @param pEmail Value to which {@link #email} should be set.
    */
   public void setEmail( String pEmail ) {
     // Assign value to attribute
@@ -276,11 +264,10 @@ public abstract class CustomerBase {
   }
 
   /**
-   * Method returns the association "accounts".
-   * 
+   * Method returns association {@link #accounts}.<br/>
    *
-   * @return Collection All Account objects that belong to the association "accounts". The method never returns null and
-   * the returned collection is unmodifiable.
+   * @return {@link Set<Account>} Value to which {@link #accounts} is set. The method never returns null and the
+   * returned collection is unmodifiable.
    */
   public Set<Account> getAccounts( ) {
     // Return all Account objects as unmodifiable collection.
@@ -288,27 +275,9 @@ public abstract class CustomerBase {
   }
 
   /**
-   * Method sets the association "accounts" to the passed collection. All objects that formerly were part of the
-   * association will be removed from it.
-   * 
-   * 
-   * @param pAccounts Collection with objects to which the association should be set. The parameter must not be null.
-   */
-  void setAccounts( Set<Account> pAccounts ) {
-    // Check of parameter is not required.
-    // Remove all objects from association "accounts".
-    this.clearAccounts();
-    // If the association is null, removing all entries is sufficient.
-    if (pAccounts != null) {
-      accounts = new HashSet<Account>(pAccounts);
-    }
-  }
-
-  /**
-   * Method adds the passed Account object to the association "accounts".
-   * 
-   * 
-   * @param pAccounts Object that should be added to the association "accounts". The parameter must not be null.
+   * Method adds the passed object to {@link #accounts}.
+   *
+   * @param pAccounts Object that should be added to {@link #accounts}. The parameter must not be null.
    */
   public void addToAccounts( Account pAccounts ) {
     // Check parameter "pAccounts" for invalid value null.
@@ -326,11 +295,10 @@ public abstract class CustomerBase {
   }
 
   /**
-   * Method adds all passed objects to the association "accounts".
-   * 
-   * 
-   * @param pAccounts Collection with all objects that should be added to the association "accounts". The parameter must
-   * not be null.
+   * Method adds all passed objects to {@link #accounts}.
+   *
+   * @param pAccounts Collection with all objects that should be added to {@link #accounts}. The parameter must not be
+   * null.
    */
   public void addToAccounts( Collection<Account> pAccounts ) {
     // Check parameter "pAccounts" for invalid value null.
@@ -342,10 +310,9 @@ public abstract class CustomerBase {
   }
 
   /**
-   * Method removes the passed Account object from the association "accounts".
-   * 
-   * 
-   * @param pAccounts Object that should be removed from the association "accounts". The parameter must not be null.
+   * Method removes the passed object from {@link #accounts}.<br/>
+   *
+   * @param pAccounts Object that should be removed from {@link #accounts}. The parameter must not be null.
    */
   public void removeFromAccounts( Account pAccounts ) {
     // Check parameter for invalid value null.
@@ -360,53 +327,64 @@ public abstract class CustomerBase {
   }
 
   /**
-   * Method removes all objects from the association "accounts".
-   * 
+   * Method removes all objects from {@link #accounts}.
    */
   public void clearAccounts( ) {
     // Remove all objects from association "accounts".
     Collection<Account> lAccounts = new HashSet<Account>(accounts);
     Iterator<Account> lIterator = lAccounts.iterator();
     while (lIterator.hasNext()) {
+      // As association is bidirectional we have to clear it in both directions.
       this.removeFromAccounts(lIterator.next());
     }
   }
 
   /**
-   * 
    * @return {@link String}
    */
   public abstract String getDisplayName( );
 
   /**
-   * Method returns a StringBuilder that can be used to create a String representation of this object. the returned
+   * Method returns a StringBuilder that can be used to create a String representation of this object. The returned
    * StringBuilder also takes care about attributes of super classes.
    *
    * @return {@link StringBuilder} StringBuilder representing this object. The method never returns null.
    */
-  protected StringBuilder toStringBuilder( ) {
-    StringBuilder lBuilder = new StringBuilder();
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_INFO, this.getClass().getName()));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTES_SECTION));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "name", "" + name));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "firstName", "" + firstName));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "email", "" + email));
-    lBuilder.append('\n');
+  @Override
+  public StringBuilder toStringBuilder( String pIndent ) {
+    StringBuilder lBuilder = super.toStringBuilder(pIndent);
+    lBuilder.append(pIndent);
+    lBuilder.append("name: ");
+    lBuilder.append(name);
+    lBuilder.append(System.lineSeparator());
+    lBuilder.append(pIndent);
+    lBuilder.append("firstName: ");
+    lBuilder.append(firstName);
+    lBuilder.append(System.lineSeparator());
+    lBuilder.append(pIndent);
+    lBuilder.append("email: ");
+    lBuilder.append(email);
+    lBuilder.append(System.lineSeparator());
     return lBuilder;
   }
 
   /**
    * Method creates a new String with the values of all attributes of this class. All references to other objects will
    * be ignored.
-   * 
+   *
    * @return {@link String} String representation of this object. The method never returns null.
    */
   @Override
   public String toString( ) {
-    return this.toStringBuilder().toString();
+    return this.toStringBuilder("").toString();
+  }
+
+  /**
+   * Method creates a new builder and initializes it with the data of this object.
+   *
+   * @return {@link Builder} New builder that can be used to create new Customer objects. The method never returns null.
+   */
+  public Customer.Builder toBuilder( ) {
+    return new Customer.Builder((Customer) this);
   }
 }

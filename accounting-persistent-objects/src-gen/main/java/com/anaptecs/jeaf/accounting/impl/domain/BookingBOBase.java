@@ -3,7 +3,6 @@ package com.anaptecs.jeaf.accounting.impl.domain;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -11,10 +10,6 @@ import com.anaptecs.jeaf.spi.persistence.ClassID;
 import com.anaptecs.jeaf.spi.persistence.PersistentObject;
 import com.anaptecs.jeaf.xfun.api.checks.Check;
 
-/**
- * @author JEAF Generator
- * @version JEAF Release 1.6.x
- */
 public abstract class BookingBOBase extends PersistentObject {
   /**
    * The class id is a unique id within the domain model of an application for every business object class.
@@ -56,24 +51,15 @@ public abstract class BookingBOBase extends PersistentObject {
    */
   public static final String REMITTERS_ROLE = "remitters";
 
-  /**
-   * 
-   */
   private Double amount;
 
-  /**
-   * 
-   */
   private AccountBO account;
 
   /**
    * Person who authorized the booking.
    */
-  private Set<MyPersonBO> remitters = new HashSet<MyPersonBO>();
+  private Set<MyPersonBO> remitters;
 
-  /**
-   * 
-   */
   private byte[] sessionKey;
 
   /**
@@ -81,12 +67,12 @@ public abstract class BookingBOBase extends PersistentObject {
    * objects not through JEAFs persistence service provider.
    */
   protected BookingBOBase( ) {
-    // Nothing to do.
+    remitters = new HashSet<MyPersonBO>();
   }
 
   /**
    * Method returns all instance of this class including potential subclasses.
-   * 
+   *
    * @return {@link List} List with all objects of this class. The method never returns null.
    */
   public static List<BookingBO> findAllBookingBOs( ) {
@@ -94,20 +80,18 @@ public abstract class BookingBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the attribute "amount".
-   * 
-   * 
-   * @return Double Value to which the attribute "amount" is set.
+   * Method returns attribute {@link #amount}.<br/>
+   *
+   * @return {@link Double} Value to which {@link #amount} is set.
    */
   public Double getAmount( ) {
     return amount;
   }
 
   /**
-   * Method sets the attribute "amount".
-   * 
-   * 
-   * @param pAmount Value to which the attribute "amount" should be set.
+   * Method sets attribute {@link #amount}.<br/>
+   *
+   * @param pAmount Value to which {@link #amount} should be set.
    */
   public void setAmount( Double pAmount ) {
     // Assign value to attribute
@@ -115,10 +99,9 @@ public abstract class BookingBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the association "account".
-   * 
+   * Method returns association {@link #account}.<br/>
    *
-   * @return AccountBO AccountBO to which the association "account" is set.
+   * @return {@link AccountBO} Value to which {@link #account} is set.
    */
   public AccountBO getAccount( ) {
     account = this.unproxy(account);
@@ -126,10 +109,9 @@ public abstract class BookingBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the association "account".
-   * 
-   * 
-   * @param pAccount AccountBO to which the association "account" should be set.
+   * Method sets association {@link #account}.<br/>
+   *
+   * @param pAccount Value to which {@link #account} should be set.
    */
   public void setAccount( AccountBO pAccount ) {
     // Release already referenced object before setting a new association.
@@ -145,8 +127,7 @@ public abstract class BookingBOBase extends PersistentObject {
   }
 
   /**
-   * Method unsets the association "account".
-   * 
+   * Method unsets {@link #account}.
    */
   public final void unsetAccount( ) {
     // The association is set in both directions because within the UML model it is defined to be bidirectional.
@@ -159,10 +140,11 @@ public abstract class BookingBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the association "remitters". Person who authorized the booking.
+   * Method returns association {@link #remitters}.<br/>
+   * Person who authorized the booking.
    *
-   * @return Collection All MyPersonBO objects that belong to the association "remitters". The method never returns null
-   * and the returned collection is unmodifiable.
+   * @return {@link Set<MyPersonBO>} Value to which {@link #remitters} is set. The method never returns null and the
+   * returned collection is unmodifiable.
    */
   public Set<MyPersonBO> getRemitters( ) {
     // Return all MyPersonBO objects as unmodifiable collection.
@@ -170,25 +152,9 @@ public abstract class BookingBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the association "remitters" to the passed collection. All objects that formerly were part of the
-   * association will be removed from it. Person who authorized the booking.
-   * 
-   * @param pRemitters Collection with objects to which the association should be set. The parameter must not be null.
-   */
-  void setRemitters( Set<MyPersonBO> pRemitters ) {
-    // Check of parameter is not required.
-    // Remove all objects from association "remitters".
-    this.clearRemitters();
-    // If the association is null, removing all entries is sufficient.
-    if (pRemitters != null) {
-      remitters = new HashSet<MyPersonBO>(pRemitters);
-    }
-  }
-
-  /**
-   * Method adds the passed MyPersonBO object to the association "remitters". Person who authorized the booking.
-   * 
-   * @param pRemitters Object that should be added to the association "remitters". The parameter must not be null.
+   * Method adds the passed object to {@link #remitters}.
+   *
+   * @param pRemitters Object that should be added to {@link #remitters}. The parameter must not be null.
    */
   public void addToRemitters( MyPersonBO pRemitters ) {
     // Check parameter "pRemitters" for invalid value null.
@@ -198,10 +164,10 @@ public abstract class BookingBOBase extends PersistentObject {
   }
 
   /**
-   * Method adds all passed objects to the association "remitters". Person who authorized the booking.
-   * 
-   * @param pRemitters Collection with all objects that should be added to the association "remitters". The parameter
-   * must not be null.
+   * Method adds all passed objects to {@link #remitters}.
+   *
+   * @param pRemitters Collection with all objects that should be added to {@link #remitters}. The parameter must not be
+   * null.
    */
   public void addToRemitters( Collection<MyPersonBO> pRemitters ) {
     // Check parameter "pRemitters" for invalid value null.
@@ -213,9 +179,9 @@ public abstract class BookingBOBase extends PersistentObject {
   }
 
   /**
-   * Method removes the passed MyPersonBO object from the association "remitters". Person who authorized the booking.
-   * 
-   * @param pRemitters Object that should be removed from the association "remitters". The parameter must not be null.
+   * Method removes the passed object from {@link #remitters}.<br/>
+   *
+   * @param pRemitters Object that should be removed from {@link #remitters}. The parameter must not be null.
    */
   public void removeFromRemitters( MyPersonBO pRemitters ) {
     // Check parameter for invalid value null.
@@ -225,22 +191,17 @@ public abstract class BookingBOBase extends PersistentObject {
   }
 
   /**
-   * Method removes all objects from the association "remitters". Person who authorized the booking.
+   * Method removes all objects from {@link #remitters}.
    */
   public void clearRemitters( ) {
     // Remove all objects from association "remitters".
-    Collection<MyPersonBO> lRemitters = new HashSet<MyPersonBO>(remitters);
-    Iterator<MyPersonBO> lIterator = lRemitters.iterator();
-    while (lIterator.hasNext()) {
-      this.removeFromRemitters(lIterator.next());
-    }
+    remitters.clear();
   }
 
   /**
-   * Method returns the attribute "sessionKey".
-   * 
-   * 
-   * @return byte Value to which the attribute "sessionKey" is set.
+   * Method returns attribute {@link #sessionKey}.<br/>
+   *
+   * @return byte Value to which {@link #sessionKey} is set.
    */
   public byte[] getSessionKey( ) {
     byte[] lReturnValue;
@@ -255,10 +216,9 @@ public abstract class BookingBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the attribute "sessionKey".
-   * 
-   * 
-   * @param pSessionKey Value to which the attribute "sessionKey" should be set.
+   * Method sets attribute {@link #sessionKey}.<br/>
+   *
+   * @param pSessionKey Value to which {@link #sessionKey} should be set.
    */
   public void setSessionKey( byte[] pSessionKey ) {
     // Assign value to attribute
@@ -273,7 +233,7 @@ public abstract class BookingBOBase extends PersistentObject {
 
   /**
    * Method returns the class id of this business object class.
-   * 
+   *
    * @return {@link ClassID} Class ID of this business object. The method never returns null.
    */
   public ClassID getClassID( ) {

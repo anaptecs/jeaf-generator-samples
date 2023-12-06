@@ -1,7 +1,7 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting.activities;
 
@@ -10,7 +10,7 @@ import com.anaptecs.jeaf.core.annotations.JEAFActivityImpl;
 
 /**
  * Implementation of activity CheckUNRestrictionsActivity.
- * 
+ *
  */
 @JEAFActivityImpl(activityInterface = CheckUNRestrictionsActivity.class)
 public class CheckUNRestrictionsActivityImpl implements CheckUNRestrictionsActivity {
@@ -21,8 +21,8 @@ public class CheckUNRestrictionsActivityImpl implements CheckUNRestrictionsActiv
   }
 
   /**
-   * 
-   * 
+   *
+   *
    * @param account
    * @return boolean
    */

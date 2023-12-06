@@ -1,17 +1,13 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting.impl.domainobjects;
 
 import com.anaptecs.jeaf.core.api.DomainObjectID;
 import com.anaptecs.jeaf.core.api.ServiceObjectID;
 
-/**
- * @author JEAF Generator
- * @version JEAF Release 1.6.x
- */
 public class AccountDO extends AccountDOBase {
   /**
    * Default serial version uid.
@@ -27,7 +23,7 @@ public class AccountDO extends AccountDOBase {
 
   /**
    * Initialize object. Therefore its domain object id has to be passed.
-   * 
+   *
    * @param pDomainObjectID Id of this domain object. The parameter must not be null.
    */
   public AccountDO( DomainObjectID pDomainObjectID ) {
@@ -35,7 +31,6 @@ public class AccountDO extends AccountDOBase {
   }
 
   /**
-   * 
    * @return {@link ServiceObjectID}
    */
   @Override

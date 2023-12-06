@@ -1,7 +1,7 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting.impl.schufa.impl;
 
@@ -24,7 +24,7 @@ final class SchufaServiceImpl extends SchufaServiceImplBase {
   /**
    * Method checks the current state of the service. Therefore JEAF defines three different check levels: internal
    * Checks, infrastructure checks and external checks. For further details about the check levels {@see CheckLevel}.
-   * 
+   *
    * @param pLevel Check level on which the check should be performed. The parameter is never null.
    * @return {@link HealthCheckResult} Object describing the result of the check. The method may return null. This means
    * that the service does not implement any checks. In order to use as less memory as possible the method should use
@@ -36,9 +36,8 @@ final class SchufaServiceImpl extends SchufaServiceImplBase {
   }
 
   /**
-   * 
    * @param pRequest
-   * @return {@link Boolean}
+   * @return boolean
    */
   @Override
   public boolean performSchufaCheck( SchufaRequest pRequest ) {

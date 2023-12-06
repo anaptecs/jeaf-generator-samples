@@ -12,7 +12,7 @@
 
 	<developers>
 		<developer>
-			<name>Tillmann Schall</name>
+			<name>JEAF Development Team</name>
 			<email>jeaf@anaptecs.de</email>
 			<organization>anaptecs GmbH</organization>
 			<organizationUrl>http://www.anaptecs.de</organizationUrl>
@@ -41,9 +41,17 @@
 	</licenses>
 
 	<properties>
+		<!-- Common settings for JEAF Generator -->
+		<umlFileName>JEAF_Test.uml</umlFileName>
+		
+		<company>anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany</company>
+		<author>JEAF Generator</author>
+		<copyright>Copyright 2024. All rights reserved.</copyright>
+		<versionInfo>JEAF Release 1.6.x</versionInfo>
+
 		<!-- Required versions -->
 		<maven.version>3.6.0</maven.version>
-		<jdk.version>1.8.0</jdk.version>
+		<jdk.version>11</jdk.version>
 
 		<jeaf.x-fun.api.version>1.6.17</jeaf.x-fun.api.version>
 		<jeaf.x-fun.impl.version>1.6.23</jeaf.x-fun.impl.version>
@@ -56,7 +64,7 @@
 
 		<javaee-api.version>8.0</javaee-api.version>
 		
-		<maven.jeaf-generator-plugin.version>1.6.55</maven.jeaf-generator-plugin.version>
+		<maven.jeaf-generator-plugin.version>1.15.0</maven.jeaf-generator-plugin.version>
 		
 		<maven.compiler.version>3.8.0</maven.compiler.version>
 		<maven.build.helper.version>3.0.0</maven.build.helper.version>

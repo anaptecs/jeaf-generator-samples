@@ -5,10 +5,6 @@ import java.util.List;
 import com.anaptecs.jeaf.spi.persistence.ClassID;
 import com.anaptecs.jeaf.spi.persistence.PersistentObject;
 
-/**
- * @author JEAF Generator
- * @version JEAF Release 1.6.x
- */
 public abstract class ResponsibilityTypeBOBase extends PersistentObject {
   /**
    * The class id is a unique id within the domain model of an application for every business object class.
@@ -50,19 +46,10 @@ public abstract class ResponsibilityTypeBOBase extends PersistentObject {
    */
   public static final String SORTORDER_ATTRIBUTE = "sortorder";
 
-  /**
-   * 
-   */
   private String type;
 
-  /**
-   * 
-   */
   private Character typeChar;
 
-  /**
-   * 
-   */
   private Byte sortorder;
 
   /**
@@ -70,12 +57,11 @@ public abstract class ResponsibilityTypeBOBase extends PersistentObject {
    * objects not through JEAFs persistence service provider.
    */
   protected ResponsibilityTypeBOBase( ) {
-    // Nothing to do.
   }
 
   /**
    * Method returns all instance of this class including potential subclasses.
-   * 
+   *
    * @return {@link List} List with all objects of this class. The method never returns null.
    */
   public static List<ResponsibilityTypeBO> findAllResponsibilityTypeBOs( ) {
@@ -83,20 +69,18 @@ public abstract class ResponsibilityTypeBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the attribute "type".
-   * 
-   * 
-   * @return String Value to which the attribute "type" is set.
+   * Method returns attribute {@link #type}.<br/>
+   *
+   * @return {@link String} Value to which {@link #type} is set.
    */
   public String getType( ) {
     return type;
   }
 
   /**
-   * Method sets the attribute "type".
-   * 
-   * 
-   * @param pType Value to which the attribute "type" should be set.
+   * Method sets attribute {@link #type}.<br/>
+   *
+   * @param pType Value to which {@link #type} should be set.
    */
   public void setType( String pType ) {
     // Assign value to attribute
@@ -104,20 +88,18 @@ public abstract class ResponsibilityTypeBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the attribute "typeChar".
-   * 
-   * 
-   * @return Character Value to which the attribute "typeChar" is set.
+   * Method returns attribute {@link #typeChar}.<br/>
+   *
+   * @return {@link Character} Value to which {@link #typeChar} is set.
    */
   public Character getTypeChar( ) {
     return typeChar;
   }
 
   /**
-   * Method sets the attribute "typeChar".
-   * 
-   * 
-   * @param pTypeChar Value to which the attribute "typeChar" should be set.
+   * Method sets attribute {@link #typeChar}.<br/>
+   *
+   * @param pTypeChar Value to which {@link #typeChar} should be set.
    */
   public void setTypeChar( Character pTypeChar ) {
     // Assign value to attribute
@@ -125,20 +107,18 @@ public abstract class ResponsibilityTypeBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the attribute "sortorder".
-   * 
-   * 
-   * @return Byte Value to which the attribute "sortorder" is set.
+   * Method returns attribute {@link #sortorder}.<br/>
+   *
+   * @return {@link Byte} Value to which {@link #sortorder} is set.
    */
   public Byte getSortorder( ) {
     return sortorder;
   }
 
   /**
-   * Method sets the attribute "sortorder".
-   * 
-   * 
-   * @param pSortorder Value to which the attribute "sortorder" should be set.
+   * Method sets attribute {@link #sortorder}.<br/>
+   *
+   * @param pSortorder Value to which {@link #sortorder} should be set.
    */
   public void setSortorder( Byte pSortorder ) {
     // Assign value to attribute
@@ -147,7 +127,7 @@ public abstract class ResponsibilityTypeBOBase extends PersistentObject {
 
   /**
    * Method returns the class id of this business object class.
-   * 
+   *
    * @return {@link ClassID} Class ID of this business object. The method never returns null.
    */
   public ClassID getClassID( ) {

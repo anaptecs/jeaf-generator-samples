@@ -1,7 +1,7 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting;
 
@@ -13,14 +13,8 @@ import javax.validation.constraints.Pattern;
 
 import com.anaptecs.jeaf.core.api.ServiceObjectID;
 import com.anaptecs.jeaf.tools.api.validation.ValidationTools;
-import com.anaptecs.jeaf.xfun.api.XFun;
-import com.anaptecs.jeaf.xfun.api.XFunMessages;
 import com.anaptecs.jeaf.xfun.api.common.ObjectIdentity;
 
-/**
- * @author JEAF Generator
- * @version JEAF Release 1.6.x
- */
 public class SwiftAccount extends Account {
   /**
    * Default serial version uid.
@@ -32,23 +26,19 @@ public class SwiftAccount extends Account {
    */
   public static final String BIC = "bic";
 
-  /**
-   * 
-   */
   @Pattern(regexp = "[A-Z]+", flags = { Pattern.Flag.CASE_INSENSITIVE, Pattern.Flag.MULTILINE })
   private String bic;
 
   /**
-   * Default constructor is only intended to be used for deserialization as many frameworks required that. For "normal"
+   * Default constructor is only intended to be used for deserialization by tools like Jackson for JSON. For "normal"
    * object creation builder should be used instead.
    */
   protected SwiftAccount( ) {
-    // Nothing to do.
   }
 
   /**
    * Initialize object using the passed builder.
-   * 
+   *
    * @param pBuilder Builder that should be used to initialize this object. The parameter must not be null.
    */
   protected SwiftAccount( Builder pBuilder ) {
@@ -59,52 +49,50 @@ public class SwiftAccount extends Account {
   }
 
   /**
-   * Class implements builder to create a new instance of class SwiftAccount. As the class has read only attributes or
-   * associations instances can not be created directly. Instead this builder class has to be used.
+   * Method returns a new builder.
+   *
+   * @return {@link Builder} New builder that can be used to create new SwiftAccount objects.
+   */
+  public static Builder builder( ) {
+    return new Builder();
+  }
+
+  /**
+   * Method creates a new builder and initializes it with the data from the passed object.
+   *
+   * @param pObject Object that should be used to initialize the builder. The parameter may be null.
+   * @return {@link Builder} New builder that can be used to create new SwiftAccount objects. The method never returns
+   * null.
+   * @deprecated Please use {@link #toBuilder()} instead.
+   */
+  @Deprecated
+  public static Builder builder( SwiftAccount pObject ) {
+    return new Builder(pObject);
+  }
+
+  /**
+   * Class implements builder to create a new instance of class <code>SwiftAccount</code>.
    */
   public static class Builder extends Account.Builder {
-    /**
-     * 
-     */
     @Pattern(regexp = "[A-Z]+", flags = { Pattern.Flag.CASE_INSENSITIVE, Pattern.Flag.MULTILINE })
     private String bic;
 
     /**
-     * Use {@link #newBuilder()} instead of private constructor to create new builder.
+     * Use {@link SwiftAccount#builder()} instead of private constructor to create new builder.
      */
     protected Builder( ) {
       super();
     }
 
     /**
-     * Use {@link #newBuilder(SwiftAccount)} instead of private constructor to create new builder.
+     * Use {@link SwiftAccount#builder(SwiftAccount)} instead of private constructor to create new builder.
      */
     protected Builder( SwiftAccount pObject ) {
       super(pObject);
       if (pObject != null) {
         // Read attribute values from passed object.
-        bic = pObject.bic;
+        this.setBic(pObject.bic);
       }
-    }
-
-    /**
-     * Method returns a new builder.
-     * 
-     * @return {@link Builder} New builder that can be used to create new ImmutablePOJOParent objects.
-     */
-    public static Builder newBuilder( ) {
-      return new Builder();
-    }
-
-    /**
-     * Method creates a new builder and initialize it with the data from the passed object.
-     * 
-     * @param pObject Object that should be used to initialize the builder. The parameter may be null.
-     * @return {@link Builder} New builder that can be used to create new SwiftAccount objects. The method never returns
-     * null.
-     */
-    public static Builder newBuilder( SwiftAccount pObject ) {
-      return new Builder(pObject);
     }
 
     /**
@@ -118,9 +106,10 @@ public class SwiftAccount extends Account {
     }
 
     /**
-     * Method sets the attribute "iban".
-     * 
-     * @param pIban Value to which the attribute "iban" should be set.
+     * Method sets attribute {@link #iban}.<br/>
+     *
+     * @param pIban Value to which {@link #iban} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     @Override
     public Builder setIban( Long pIban ) {
@@ -130,9 +119,10 @@ public class SwiftAccount extends Account {
     }
 
     /**
-     * Method sets the attribute "balance".
-     * 
-     * @param pBalance Value to which the attribute "balance" should be set.
+     * Method sets attribute {@link #balance}.<br/>
+     *
+     * @param pBalance Value to which {@link #balance} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     @Override
     public Builder setBalance( BigDecimal pBalance ) {
@@ -142,9 +132,10 @@ public class SwiftAccount extends Account {
     }
 
     /**
-     * Method sets the association "authorizedPersons".
-     * 
-     * @param pAuthorizedPersons Collection with objects to which the association should be set.
+     * Method sets association {@link #authorizedPersons}.<br/>
+     *
+     * @param pAuthorizedPersons Collection to which {@link #authorizedPersons} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     @Override
     public Builder setAuthorizedPersons( Set<Person> pAuthorizedPersons ) {
@@ -154,9 +145,23 @@ public class SwiftAccount extends Account {
     }
 
     /**
-     * Method sets the association "bookings".
-     * 
-     * @param pBookings Collection with objects to which the association should be set.
+     * Method adds the passed objects to association {@link #authorizedPersons}.<br/>
+     *
+     * @param pAuthorizedPersons Array of objects that should be added to {@link #authorizedPersons}. The parameter may
+     * be null.
+     * @return {@link Builder} Instance of this builder to support chaining. Method never returns null.
+     */
+    public Builder addToAuthorizedPersons( Person... pAuthorizedPersons ) {
+      // Call super class implementation.
+      super.addToAuthorizedPersons(pAuthorizedPersons);
+      return this;
+    }
+
+    /**
+     * Method sets association {@link #bookings}.<br/>
+     *
+     * @param pBookings Collection to which {@link #bookings} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     @Override
     public Builder setBookings( Set<Booking> pBookings ) {
@@ -166,9 +171,22 @@ public class SwiftAccount extends Account {
     }
 
     /**
-     * Method sets the attribute "bankID".
-     * 
-     * @param pBankID Value to which the attribute "bankID" should be set.
+     * Method adds the passed objects to association {@link #bookings}.<br/>
+     *
+     * @param pBookings Array of objects that should be added to {@link #bookings}. The parameter may be null.
+     * @return {@link Builder} Instance of this builder to support chaining. Method never returns null.
+     */
+    public Builder addToBookings( Booking... pBookings ) {
+      // Call super class implementation.
+      super.addToBookings(pBookings);
+      return this;
+    }
+
+    /**
+     * Method sets attribute {@link #bankID}.<br/>
+     *
+     * @param pBankID Value to which {@link #bankID} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     @Override
     public Builder setBankID( ServiceObjectID pBankID ) {
@@ -178,9 +196,10 @@ public class SwiftAccount extends Account {
     }
 
     /**
-     * Method sets the attribute "bic".
-     * 
-     * @param pBic Value to which the attribute "bic" should be set.
+     * Method sets attribute {@link #bic}.<br/>
+     *
+     * @param pBic Value to which {@link #bic} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     public Builder setBic( String pBic ) {
       // Assign value to attribute
@@ -191,7 +210,7 @@ public class SwiftAccount extends Account {
     /**
      * Method creates a new instance of class SwiftAccount. The object will be initialized with the values of the
      * builder.
-     * 
+     *
      * @return SwiftAccount Created object. The method never returns null.
      */
     public SwiftAccount build( ) {
@@ -201,32 +220,30 @@ public class SwiftAccount extends Account {
     /**
      * Method creates a new validated instance of class SwiftAccount. The object will be initialized with the values of
      * the builder and validated afterwards.
-     * 
+     *
      * @return SwiftAccount Created and validated object. The method never returns null.
      * @throws ConstraintViolationException in case that one or more validations for the created object failed.
      */
     public SwiftAccount buildValidated( ) throws ConstraintViolationException {
-      SwiftAccount lPOJO = this.build();
-      ValidationTools.getValidationTools().enforceObjectValidation(lPOJO);
-      return lPOJO;
+      SwiftAccount lObject = this.build();
+      ValidationTools.getValidationTools().enforceObjectValidation(lObject);
+      return lObject;
     }
   }
 
   /**
-   * Method returns the attribute "bic".
-   * 
-   * 
-   * @return String Value to which the attribute "bic" is set.
+   * Method returns attribute {@link #bic}.<br/>
+   *
+   * @return {@link String} Value to which {@link #bic} is set.
    */
   public String getBic( ) {
     return bic;
   }
 
   /**
-   * Method sets the attribute "bic".
-   * 
-   * 
-   * @param pBic Value to which the attribute "bic" should be set.
+   * Method sets attribute {@link #bic}.<br/>
+   *
+   * @param pBic Value to which {@link #bic} should be set.
    */
   public void setBic( String pBic ) {
     // Assign value to attribute
@@ -234,26 +251,39 @@ public class SwiftAccount extends Account {
   }
 
   /**
-   * Method returns a StringBuilder that can be used to create a String representation of this object. the returned
+   * Method returns a StringBuilder that can be used to create a String representation of this object. The returned
    * StringBuilder also takes care about attributes of super classes.
    *
    * @return {@link StringBuilder} StringBuilder representing this object. The method never returns null.
    */
-  protected StringBuilder toStringBuilder( ) {
-    StringBuilder lBuilder = super.toStringBuilder();
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "bic", "" + bic));
-    lBuilder.append('\n');
+  @Override
+  public StringBuilder toStringBuilder( String pIndent ) {
+    StringBuilder lBuilder = super.toStringBuilder(pIndent);
+    lBuilder.append(pIndent);
+    lBuilder.append("bic: ");
+    lBuilder.append(bic);
+    lBuilder.append(System.lineSeparator());
     return lBuilder;
   }
 
   /**
    * Method creates a new String with the values of all attributes of this class. All references to other objects will
    * be ignored.
-   * 
+   *
    * @return {@link String} String representation of this object. The method never returns null.
    */
   @Override
   public String toString( ) {
-    return this.toStringBuilder().toString();
+    return this.toStringBuilder("").toString();
+  }
+
+  /**
+   * Method creates a new builder and initializes it with the data of this object.
+   *
+   * @return {@link Builder} New builder that can be used to create new SwiftAccount objects. The method never returns
+   * null.
+   */
+  public Builder toBuilder( ) {
+    return new Builder(this);
   }
 }

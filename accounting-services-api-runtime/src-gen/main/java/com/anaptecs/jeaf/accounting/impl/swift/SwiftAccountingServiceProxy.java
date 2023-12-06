@@ -1,7 +1,7 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting.impl.swift;
 
@@ -38,13 +38,8 @@ public final class SwiftAccountingServiceProxy extends ServiceProxy implements S
   }
 
   /**
-   * Generated proxy implementation for method "performBooking".
-   * 
-   * Method performs a booking of the passed amount. Therefore besides the booking also the source and target account
-   * have to be passed.
-   * 
-   * @param pBooking Booking that should be performed. The parameter must not be null and both, the source and target
-   * account have to be set.
+   * Generated proxy implementation for method
+   * {@link com.anaptecs.jeaf.accounting.impl.swift.SwiftAccountingService#performBooking}
    */
   public void performBooking( Booking pBooking ) {
     try {
@@ -101,7 +96,7 @@ final class PerformBooking_Booking_SwiftAccountingService_Command extends Comman
   /**
    * Initialize object. All parameters from method "performBooking" have to be passed as parameters to this command
    * object.
-   * 
+   *
    * @param pBooking Booking
    */
   PerformBooking_Booking_SwiftAccountingService_Command( Booking pBooking ) {
@@ -112,7 +107,7 @@ final class PerformBooking_Booking_SwiftAccountingService_Command extends Comman
 
   /**
    * Method executes the service call represented by this command object via JEAFs service channel.
-   * 
+   *
    * @param pTargetService Reference to the service which should be called by this command. The parameter must not be
    * null.
    * @return Serializable Result object of the service call. Due to the fact that all returned objects of remote calls
@@ -139,7 +134,7 @@ final class PerformBooking_Booking_SwiftAccountingService_Command extends Comman
 
   /**
    * Method returns a method object describing the service method that will be called by this command object.
-   * 
+   *
    * @return {@link Method} Method object describing the called service method. The method never returns null.
    */
   @Override
@@ -149,7 +144,7 @@ final class PerformBooking_Booking_SwiftAccountingService_Command extends Comman
 
   /**
    * Method returns all parameters that will be passed to the service.
-   * 
+   *
    * @return {@link Object} Object array with all parameters that will be passed to the service. The method may return
    * an empty array in case that the method has no parameters.
    */

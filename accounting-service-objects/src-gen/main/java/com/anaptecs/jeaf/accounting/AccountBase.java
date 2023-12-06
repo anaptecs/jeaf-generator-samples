@@ -1,11 +1,12 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -24,16 +25,10 @@ import com.anaptecs.jeaf.core.api.ServiceObject;
 import com.anaptecs.jeaf.core.api.ServiceObjectID;
 import com.anaptecs.jeaf.tools.api.validation.Severity.Error;
 import com.anaptecs.jeaf.tools.api.validation.ValidationTools;
-import com.anaptecs.jeaf.xfun.api.XFun;
-import com.anaptecs.jeaf.xfun.api.XFunMessages;
 import com.anaptecs.jeaf.xfun.api.checks.Check;
 import com.anaptecs.jeaf.xfun.api.common.Identifiable;
 import com.anaptecs.jeaf.xfun.api.common.ObjectIdentity;
 
-/**
- * @author JEAF Generator
- * @version JEAF Release 1.6.x
- */
 @Valid
 public abstract class AccountBase implements ServiceObject, Identifiable<ServiceObjectID> {
   /**
@@ -71,61 +66,48 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
    */
   private final ServiceObjectID objectID;
 
-  /**
-   * 
-   */
   @Min(value = 123)
   private Long iban;
 
-  /**
-   * 
-   */
   @DecimalMax(value = "1.2345", inclusive = false, message = "12345", payload = Error.class)
   @Digits(integer = 9, fraction = 5, message = "12345", payload = Error.class)
   private BigDecimal balance;
 
-  /**
-   * 
-   */
-  private Set<Person> authorizedPersons = new HashSet<Person>();
+  private Set<Person> authorizedPersons;
 
   /**
    * Attribute is required for correct handling of bidirectional associations in case of deserialization.
    */
   private transient boolean authorizedPersonsBackReferenceInitialized;
 
-  /**
-   * 
-   */
   @Valid
   @Size(min = 0, max = 100)
-  private Set<Booking> bookings = new HashSet<Booking>();
+  private Set<Booking> bookings;
 
   /**
    * Attribute is required for correct handling of bidirectional associations in case of deserialization.
    */
   private transient boolean bookingsBackReferenceInitialized;
 
-  /**
-   * 
-   */
   private ServiceObjectID bankID;
 
   /**
-   * Default constructor is only intended to be used for deserialization as many frameworks required that. For "normal"
+   * Default constructor is only intended to be used for deserialization by tools like Jackson for JSON. For "normal"
    * object creation builder should be used instead.
    */
   protected AccountBase( ) {
     objectID = null;
+    authorizedPersons = new HashSet<Person>();
     // Bidirectional back reference is not yet set up correctly
     authorizedPersonsBackReferenceInitialized = false;
+    bookings = new HashSet<Booking>();
     // Bidirectional back reference is not yet set up correctly
     bookingsBackReferenceInitialized = false;
   }
 
   /**
    * Initialize object using the passed builder.
-   * 
+   *
    * @param pBuilder Builder that should be used to initialize this object. The parameter must not be null.
    */
   protected AccountBase( BuilderBase pBuilder ) {
@@ -143,12 +125,18 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
     iban = pBuilder.iban;
     balance = pBuilder.balance;
     if (pBuilder.authorizedPersons != null) {
-      authorizedPersons.addAll(pBuilder.authorizedPersons);
+      authorizedPersons = pBuilder.authorizedPersons;
+    }
+    else {
+      authorizedPersons = new HashSet<Person>();
     }
     // Bidirectional back reference is set up correctly as a builder is used.
     authorizedPersonsBackReferenceInitialized = true;
     if (pBuilder.bookings != null) {
-      bookings.addAll(pBuilder.bookings);
+      bookings = pBuilder.bookings;
+    }
+    else {
+      bookings = new HashSet<Booking>();
     }
     // Bidirectional back reference is set up correctly as a builder is used.
     bookingsBackReferenceInitialized = true;
@@ -165,42 +153,27 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
      */
     private ObjectIdentity<?> objectID;
 
-    /**
-     * 
-     */
     @Min(value = 123)
     private Long iban;
 
-    /**
-     * 
-     */
     @DecimalMax(value = "1.2345", inclusive = false, message = "12345", payload = Error.class)
     @Digits(integer = 9, fraction = 5, message = "12345", payload = Error.class)
     private BigDecimal balance;
 
-    /**
-     * 
-     */
     private Set<Person> authorizedPersons;
 
-    /**
-     * 
-     */
     private Set<Booking> bookings;
 
-    /**
-     * 
-     */
     private ServiceObjectID bankID;
 
     /**
-     * Use {@link Account.Builder#newBuilder()} instead of protected constructor to create new builder.
+     * Use {@link Account.builder()} instead of protected constructor to create new builder.
      */
     protected BuilderBase( ) {
     }
 
     /**
-     * Use {@link Account.Builder#newBuilder(Account)} instead of protected constructor to create new builder.
+     * Use {@link Account.builder(Account)} instead of protected constructor to create new builder.
      */
     protected BuilderBase( AccountBase pObject ) {
       if (pObject != null) {
@@ -224,9 +197,10 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
     }
 
     /**
-     * Method sets the attribute "iban".
-     * 
-     * @param pIban Value to which the attribute "iban" should be set.
+     * Method sets attribute {@link #iban}.<br/>
+     *
+     * @param pIban Value to which {@link #iban} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setIban( Long pIban ) {
       // Assign value to attribute
@@ -235,9 +209,10 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
     }
 
     /**
-     * Method sets the attribute "balance".
-     * 
-     * @param pBalance Value to which the attribute "balance" should be set.
+     * Method sets attribute {@link #balance}.<br/>
+     *
+     * @param pBalance Value to which {@link #balance} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setBalance( BigDecimal pBalance ) {
       // Assign value to attribute
@@ -246,9 +221,10 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
     }
 
     /**
-     * Method sets the association "authorizedPersons".
-     * 
-     * @param pAuthorizedPersons Collection with objects to which the association should be set.
+     * Method sets association {@link #authorizedPersons}.<br/>
+     *
+     * @param pAuthorizedPersons Collection to which {@link #authorizedPersons} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setAuthorizedPersons( Set<Person> pAuthorizedPersons ) {
       // To ensure immutability we have to copy the content of the passed collection.
@@ -262,9 +238,27 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
     }
 
     /**
-     * Method sets the association "bookings".
-     * 
-     * @param pBookings Collection with objects to which the association should be set.
+     * Method adds the passed objects to association {@link #authorizedPersons}.<br/>
+     *
+     * @param pAuthorizedPersons Array of objects that should be added to {@link #authorizedPersons}. The parameter may
+     * be null.
+     * @return {@link BuilderBase} Instance of this builder to support chaining. Method never returns null.
+     */
+    public BuilderBase addToAuthorizedPersons( Person... pAuthorizedPersons ) {
+      if (pAuthorizedPersons != null) {
+        if (authorizedPersons == null) {
+          authorizedPersons = new HashSet<Person>();
+        }
+        authorizedPersons.addAll(Arrays.asList(pAuthorizedPersons));
+      }
+      return this;
+    }
+
+    /**
+     * Method sets association {@link #bookings}.<br/>
+     *
+     * @param pBookings Collection to which {@link #bookings} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setBookings( Set<Booking> pBookings ) {
       // To ensure immutability we have to copy the content of the passed collection.
@@ -278,9 +272,26 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
     }
 
     /**
-     * Method sets the attribute "bankID".
-     * 
-     * @param pBankID Value to which the attribute "bankID" should be set.
+     * Method adds the passed objects to association {@link #bookings}.<br/>
+     *
+     * @param pBookings Array of objects that should be added to {@link #bookings}. The parameter may be null.
+     * @return {@link BuilderBase} Instance of this builder to support chaining. Method never returns null.
+     */
+    public BuilderBase addToBookings( Booking... pBookings ) {
+      if (pBookings != null) {
+        if (bookings == null) {
+          bookings = new HashSet<Booking>();
+        }
+        bookings.addAll(Arrays.asList(pBookings));
+      }
+      return this;
+    }
+
+    /**
+     * Method sets attribute {@link #bankID}.<br/>
+     *
+     * @param pBankID Value to which {@link #bankID} should be set.
+     * @return {@link BuilderBase} Instance of this builder to support chaining setters. Method never returns null.
      */
     public BuilderBase setBankID( ServiceObjectID pBankID ) {
       // Assign value to attribute
@@ -290,7 +301,7 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
 
     /**
      * Method creates a new instance of class Account. The object will be initialized with the values of the builder.
-     * 
+     *
      * @return Account Created object. The method never returns null.
      */
     public Account build( ) {
@@ -300,7 +311,7 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
     /**
      * Method creates a new validated instance of class Account. The object will be initialized with the values of the
      * builder and validated afterwards.
-     * 
+     *
      * @return Account Created and validated object. The method never returns null.
      * @throws ConstraintViolationException in case that one or more validations for the created object failed.
      */
@@ -313,7 +324,7 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
 
   /**
    * Method returns the id of this object.
-   * 
+   *
    * @return {@link ServiceObjectID} ID of this object. Since an object must not have an id the method may also return
    * null.
    */
@@ -324,7 +335,7 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
 
   /**
    * Method returns the unversioned object id of this object.
-   * 
+   *
    * @return {@link ServiceObjectID} ID of this object. Since an object must not have an id the method may also return
    * null.
    */
@@ -341,20 +352,18 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   }
 
   /**
-   * Method returns the attribute "iban".
-   * 
-   * 
-   * @return Long Value to which the attribute "iban" is set.
+   * Method returns attribute {@link #iban}.<br/>
+   *
+   * @return {@link Long} Value to which {@link #iban} is set.
    */
   public Long getIban( ) {
     return iban;
   }
 
   /**
-   * Method sets the attribute "iban".
-   * 
-   * 
-   * @param pIban Value to which the attribute "iban" should be set.
+   * Method sets attribute {@link #iban}.<br/>
+   *
+   * @param pIban Value to which {@link #iban} should be set.
    */
   public void setIban( Long pIban ) {
     // Assign value to attribute
@@ -362,20 +371,18 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   }
 
   /**
-   * Method returns the attribute "balance".
-   * 
-   * 
-   * @return BigDecimal Value to which the attribute "balance" is set.
+   * Method returns attribute {@link #balance}.<br/>
+   *
+   * @return {@link BigDecimal} Value to which {@link #balance} is set.
    */
   public BigDecimal getBalance( ) {
     return balance;
   }
 
   /**
-   * Method sets the attribute "balance".
-   * 
-   * 
-   * @param pBalance Value to which the attribute "balance" should be set.
+   * Method sets attribute {@link #balance}.<br/>
+   *
+   * @param pBalance Value to which {@link #balance} should be set.
    */
   public void setBalance( BigDecimal pBalance ) {
     // Assign value to attribute
@@ -383,11 +390,10 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   }
 
   /**
-   * Method returns the association "authorizedPersons".
-   * 
+   * Method returns association {@link #authorizedPersons}.<br/>
    *
-   * @return Collection All Person objects that belong to the association "authorizedPersons". The method never returns
-   * null and the returned collection is unmodifiable.
+   * @return {@link Set<Person>} Value to which {@link #authorizedPersons} is set. The method never returns null and the
+   * returned collection is unmodifiable.
    */
   public Set<Person> getAuthorizedPersons( ) {
     // Due to restrictions in JSON serialization / deserialization bi-directional associations need a special handling
@@ -403,29 +409,10 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   }
 
   /**
-   * Method sets the association "authorizedPersons" to the passed collection. All objects that formerly were part of
-   * the association will be removed from it.
-   * 
-   * 
-   * @param pAuthorizedPersons Collection with objects to which the association should be set. The parameter must not be
+   * Method adds the passed object to {@link #authorizedPersons}.
+   *
+   * @param pAuthorizedPersons Object that should be added to {@link #authorizedPersons}. The parameter must not be
    * null.
-   */
-  void setAuthorizedPersons( Set<Person> pAuthorizedPersons ) {
-    // Check of parameter is not required.
-    // Remove all objects from association "authorizedPersons".
-    this.clearAuthorizedPersons();
-    // If the association is null, removing all entries is sufficient.
-    if (pAuthorizedPersons != null) {
-      authorizedPersons = new HashSet<Person>(pAuthorizedPersons);
-    }
-  }
-
-  /**
-   * Method adds the passed Person object to the association "authorizedPersons".
-   * 
-   * 
-   * @param pAuthorizedPersons Object that should be added to the association "authorizedPersons". The parameter must
-   * not be null.
    */
   public void addToAuthorizedPersons( Person pAuthorizedPersons ) {
     // Check parameter "pAuthorizedPersons" for invalid value null.
@@ -440,11 +427,10 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   }
 
   /**
-   * Method adds all passed objects to the association "authorizedPersons".
-   * 
-   * 
-   * @param pAuthorizedPersons Collection with all objects that should be added to the association "authorizedPersons".
-   * The parameter must not be null.
+   * Method adds all passed objects to {@link #authorizedPersons}.
+   *
+   * @param pAuthorizedPersons Collection with all objects that should be added to {@link #authorizedPersons}. The
+   * parameter must not be null.
    */
   public void addToAuthorizedPersons( Collection<Person> pAuthorizedPersons ) {
     // Check parameter "pAuthorizedPersons" for invalid value null.
@@ -456,11 +442,10 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   }
 
   /**
-   * Method removes the passed Person object from the association "authorizedPersons".
-   * 
-   * 
-   * @param pAuthorizedPersons Object that should be removed from the association "authorizedPersons". The parameter
-   * must not be null.
+   * Method removes the passed object from {@link #authorizedPersons}.<br/>
+   *
+   * @param pAuthorizedPersons Object that should be removed from {@link #authorizedPersons}. The parameter must not be
+   * null.
    */
   public void removeFromAuthorizedPersons( Person pAuthorizedPersons ) {
     // Check parameter for invalid value null.
@@ -475,24 +460,23 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   }
 
   /**
-   * Method removes all objects from the association "authorizedPersons".
-   * 
+   * Method removes all objects from {@link #authorizedPersons}.
    */
   public void clearAuthorizedPersons( ) {
     // Remove all objects from association "authorizedPersons".
     Collection<Person> lAuthorizedPersons = new HashSet<Person>(authorizedPersons);
     Iterator<Person> lIterator = lAuthorizedPersons.iterator();
     while (lIterator.hasNext()) {
+      // As association is bidirectional we have to clear it in both directions.
       this.removeFromAuthorizedPersons(lIterator.next());
     }
   }
 
   /**
-   * Method returns the association "bookings".
-   * 
+   * Method returns association {@link #bookings}.<br/>
    *
-   * @return Collection All Booking objects that belong to the association "bookings". The method never returns null and
-   * the returned collection is unmodifiable.
+   * @return {@link Set<Booking>} Value to which {@link #bookings} is set. The method never returns null and the
+   * returned collection is unmodifiable.
    */
   public Set<Booking> getBookings( ) {
     // Due to restrictions in JSON serialization / deserialization bi-directional associations need a special handling
@@ -508,27 +492,9 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   }
 
   /**
-   * Method sets the association "bookings" to the passed collection. All objects that formerly were part of the
-   * association will be removed from it.
-   * 
-   * 
-   * @param pBookings Collection with objects to which the association should be set. The parameter must not be null.
-   */
-  void setBookings( Set<Booking> pBookings ) {
-    // Check of parameter is not required.
-    // Remove all objects from association "bookings".
-    this.clearBookings();
-    // If the association is null, removing all entries is sufficient.
-    if (pBookings != null) {
-      bookings = new HashSet<Booking>(pBookings);
-    }
-  }
-
-  /**
-   * Method adds the passed Booking object to the association "bookings".
-   * 
-   * 
-   * @param pBookings Object that should be added to the association "bookings". The parameter must not be null.
+   * Method adds the passed object to {@link #bookings}.
+   *
+   * @param pBookings Object that should be added to {@link #bookings}. The parameter must not be null.
    */
   public void addToBookings( Booking pBookings ) {
     // Check parameter "pBookings" for invalid value null.
@@ -546,11 +512,10 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   }
 
   /**
-   * Method adds all passed objects to the association "bookings".
-   * 
-   * 
-   * @param pBookings Collection with all objects that should be added to the association "bookings". The parameter must
-   * not be null.
+   * Method adds all passed objects to {@link #bookings}.
+   *
+   * @param pBookings Collection with all objects that should be added to {@link #bookings}. The parameter must not be
+   * null.
    */
   public void addToBookings( Collection<Booking> pBookings ) {
     // Check parameter "pBookings" for invalid value null.
@@ -562,10 +527,9 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   }
 
   /**
-   * Method removes the passed Booking object from the association "bookings".
-   * 
-   * 
-   * @param pBookings Object that should be removed from the association "bookings". The parameter must not be null.
+   * Method removes the passed object from {@link #bookings}.<br/>
+   *
+   * @param pBookings Object that should be removed from {@link #bookings}. The parameter must not be null.
    */
   public void removeFromBookings( Booking pBookings ) {
     // Check parameter for invalid value null.
@@ -580,33 +544,31 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   }
 
   /**
-   * Method removes all objects from the association "bookings".
-   * 
+   * Method removes all objects from {@link #bookings}.
    */
   public void clearBookings( ) {
     // Remove all objects from association "bookings".
     Collection<Booking> lBookings = new HashSet<Booking>(bookings);
     Iterator<Booking> lIterator = lBookings.iterator();
     while (lIterator.hasNext()) {
+      // As association is bidirectional we have to clear it in both directions.
       this.removeFromBookings(lIterator.next());
     }
   }
 
   /**
-   * Method returns the attribute "bankID".
-   * 
-   * 
-   * @return ServiceObjectID Value to which the attribute "bankID" is set.
+   * Method returns attribute {@link #bankID}.<br/>
+   *
+   * @return {@link ServiceObjectID} Value to which {@link #bankID} is set.
    */
   public ServiceObjectID getBankID( ) {
     return bankID;
   }
 
   /**
-   * Method sets the attribute "bankID".
-   * 
-   * 
-   * @param pBankID Value to which the attribute "bankID" should be set.
+   * Method sets attribute {@link #bankID}.<br/>
+   *
+   * @param pBankID Value to which {@link #bankID} should be set.
    */
   public void setBankID( ServiceObjectID pBankID ) {
     // Assign value to attribute
@@ -614,41 +576,54 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   }
 
   /**
-   * 
    * @return {@link Double}
    */
   @NotNull
   public abstract Double calclulateBalance( );
 
   /**
-   * Method returns a StringBuilder that can be used to create a String representation of this object. the returned
+   * Method returns a StringBuilder that can be used to create a String representation of this object. The returned
    * StringBuilder also takes care about attributes of super classes.
    *
    * @return {@link StringBuilder} StringBuilder representing this object. The method never returns null.
    */
-  protected StringBuilder toStringBuilder( ) {
+  public StringBuilder toStringBuilder( String pIndent ) {
     StringBuilder lBuilder = new StringBuilder();
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_INFO, this.getClass().getName()));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTES_SECTION));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "iban", "" + iban));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "balance", "" + balance));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "bankID", "" + bankID));
-    lBuilder.append('\n');
+    lBuilder.append(pIndent);
+    lBuilder.append(this.getClass().getName());
+    lBuilder.append(System.lineSeparator());
+    lBuilder.append(pIndent);
+    lBuilder.append("iban: ");
+    lBuilder.append(iban);
+    lBuilder.append(System.lineSeparator());
+    lBuilder.append(pIndent);
+    lBuilder.append("balance: ");
+    lBuilder.append(balance);
+    lBuilder.append(System.lineSeparator());
+    lBuilder.append(pIndent);
+    lBuilder.append("bankID: ");
+    lBuilder.append(bankID);
+    lBuilder.append(System.lineSeparator());
     return lBuilder;
   }
 
   /**
    * Method creates a new String with the values of all attributes of this class. All references to other objects will
    * be ignored.
-   * 
+   *
    * @return {@link String} String representation of this object. The method never returns null.
    */
   @Override
   public String toString( ) {
-    return this.toStringBuilder().toString();
+    return this.toStringBuilder("").toString();
+  }
+
+  /**
+   * Method creates a new builder and initializes it with the data of this object.
+   *
+   * @return {@link Builder} New builder that can be used to create new Account objects. The method never returns null.
+   */
+  public Account.Builder toBuilder( ) {
+    return new Account.Builder((Account) this);
   }
 }

@@ -1,16 +1,15 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting.impl.schufa.impl;
 
 import com.anaptecs.jeaf.xfun.api.common.ComponentID;
 
 /**
- * Class represents the SCHUFA component.
- *
- * 
+ * Class represents the configuration for component
+ * {@link com.anaptecs.jeaf.accounting.impl.schufa.impl.SCHUFAComponent}.
  */
 public final class SCHUFAComponentConfiguration {
   /**

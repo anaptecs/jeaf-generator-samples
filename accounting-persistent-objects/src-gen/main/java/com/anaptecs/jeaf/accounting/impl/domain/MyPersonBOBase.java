@@ -14,10 +14,6 @@ import com.anaptecs.jeaf.spi.persistence.ClassID;
 import com.anaptecs.jeaf.spi.persistence.PersistentObject;
 import com.anaptecs.jeaf.xfun.api.checks.Check;
 
-/**
- * @author JEAF Generator
- * @version JEAF Release 1.6.x
- */
 public abstract class MyPersonBOBase extends PersistentObject {
   /**
    * The class id is a unique id within the domain model of an application for every business object class.
@@ -74,34 +70,16 @@ public abstract class MyPersonBOBase extends PersistentObject {
    */
   public static final String CUSTOMER_ROLE = "customer";
 
-  /**
-   * 
-   */
   private String name;
 
-  /**
-   * 
-   */
   private String firstName;
 
-  /**
-   * 
-   */
   private Calendar dateOfBirth;
 
-  /**
-   * 
-   */
-  private Set<AccountBO> accounts = new HashSet<AccountBO>();
+  private Set<AccountBO> accounts;
 
-  /**
-   * 
-   */
   private EmployeeBO employee;
 
-  /**
-   * 
-   */
   private IndividualBO customer;
 
   /**
@@ -109,12 +87,12 @@ public abstract class MyPersonBOBase extends PersistentObject {
    * objects not through JEAFs persistence service provider.
    */
   protected MyPersonBOBase( ) {
-    // Nothing to do.
+    accounts = new HashSet<AccountBO>();
   }
 
   /**
    * Method returns all instance of this class including potential subclasses.
-   * 
+   *
    * @return {@link List} List with all objects of this class. The method never returns null.
    */
   public static List<MyPersonBO> findAllMyPersonBOs( ) {
@@ -122,20 +100,18 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the attribute "name".
-   * 
-   * 
-   * @return String Value to which the attribute "name" is set.
+   * Method returns attribute {@link #name}.<br/>
+   *
+   * @return {@link String} Value to which {@link #name} is set.
    */
   public String getName( ) {
     return name;
   }
 
   /**
-   * Method sets the attribute "name".
-   * 
-   * 
-   * @param pName Value to which the attribute "name" should be set.
+   * Method sets attribute {@link #name}.<br/>
+   *
+   * @param pName Value to which {@link #name} should be set.
    */
   public void setName( String pName ) {
     // Assign value to attribute
@@ -143,20 +119,18 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the attribute "firstName".
-   * 
-   * 
-   * @return String Value to which the attribute "firstName" is set.
+   * Method returns attribute {@link #firstName}.<br/>
+   *
+   * @return {@link String} Value to which {@link #firstName} is set.
    */
   public String getFirstName( ) {
     return firstName;
   }
 
   /**
-   * Method sets the attribute "firstName".
-   * 
-   * 
-   * @param pFirstName Value to which the attribute "firstName" should be set.
+   * Method sets attribute {@link #firstName}.<br/>
+   *
+   * @param pFirstName Value to which {@link #firstName} should be set.
    */
   public void setFirstName( String pFirstName ) {
     // Assign value to attribute
@@ -164,20 +138,18 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the attribute "dateOfBirth".
-   * 
-   * 
-   * @return Calendar Value to which the attribute "dateOfBirth" is set.
+   * Method returns attribute {@link #dateOfBirth}.<br/>
+   *
+   * @return {@link Calendar} Value to which {@link #dateOfBirth} is set.
    */
   public Calendar getDateOfBirth( ) {
     return dateOfBirth;
   }
 
   /**
-   * Method sets the attribute "dateOfBirth".
-   * 
-   * 
-   * @param pDateOfBirth Value to which the attribute "dateOfBirth" should be set.
+   * Method sets attribute {@link #dateOfBirth}.<br/>
+   *
+   * @param pDateOfBirth Value to which {@link #dateOfBirth} should be set.
    */
   public void setDateOfBirth( Calendar pDateOfBirth ) {
     // Assign value to attribute
@@ -185,11 +157,10 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the association "accounts".
-   * 
+   * Method returns association {@link #accounts}.<br/>
    *
-   * @return Collection All AccountBO objects that belong to the association "accounts". The method never returns null
-   * and the returned collection is unmodifiable.
+   * @return {@link Set<AccountBO>} Value to which {@link #accounts} is set. The method never returns null and the
+   * returned collection is unmodifiable.
    */
   public Set<AccountBO> getAccounts( ) {
     // Return all AccountBO objects as unmodifiable collection.
@@ -197,27 +168,9 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the association "accounts" to the passed collection. All objects that formerly were part of the
-   * association will be removed from it.
-   * 
-   * 
-   * @param pAccounts Collection with objects to which the association should be set. The parameter must not be null.
-   */
-  void setAccounts( Set<AccountBO> pAccounts ) {
-    // Check of parameter is not required.
-    // Remove all objects from association "accounts".
-    this.clearAccounts();
-    // If the association is null, removing all entries is sufficient.
-    if (pAccounts != null) {
-      accounts = new HashSet<AccountBO>(pAccounts);
-    }
-  }
-
-  /**
-   * Method adds the passed AccountBO object to the association "accounts".
-   * 
-   * 
-   * @param pAccounts Object that should be added to the association "accounts". The parameter must not be null.
+   * Method adds the passed object to {@link #accounts}.
+   *
+   * @param pAccounts Object that should be added to {@link #accounts}. The parameter must not be null.
    */
   public void addToAccounts( AccountBO pAccounts ) {
     // Check parameter "pAccounts" for invalid value null.
@@ -232,11 +185,10 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * Method adds all passed objects to the association "accounts".
-   * 
-   * 
-   * @param pAccounts Collection with all objects that should be added to the association "accounts". The parameter must
-   * not be null.
+   * Method adds all passed objects to {@link #accounts}.
+   *
+   * @param pAccounts Collection with all objects that should be added to {@link #accounts}. The parameter must not be
+   * null.
    */
   public void addToAccounts( Collection<AccountBO> pAccounts ) {
     // Check parameter "pAccounts" for invalid value null.
@@ -248,10 +200,9 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * Method removes the passed AccountBO object from the association "accounts".
-   * 
-   * 
-   * @param pAccounts Object that should be removed from the association "accounts". The parameter must not be null.
+   * Method removes the passed object from {@link #accounts}.<br/>
+   *
+   * @param pAccounts Object that should be removed from {@link #accounts}. The parameter must not be null.
    */
   public void removeFromAccounts( AccountBO pAccounts ) {
     // Check parameter for invalid value null.
@@ -266,23 +217,22 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * Method removes all objects from the association "accounts".
-   * 
+   * Method removes all objects from {@link #accounts}.
    */
   public void clearAccounts( ) {
     // Remove all objects from association "accounts".
     Collection<AccountBO> lAccounts = new HashSet<AccountBO>(accounts);
     Iterator<AccountBO> lIterator = lAccounts.iterator();
     while (lIterator.hasNext()) {
+      // As association is bidirectional we have to clear it in both directions.
       this.removeFromAccounts(lIterator.next());
     }
   }
 
   /**
-   * Method returns the association "employee".
-   * 
+   * Method returns association {@link #employee}.<br/>
    *
-   * @return EmployeeBO EmployeeBO to which the association "employee" is set.
+   * @return {@link EmployeeBO} Value to which {@link #employee} is set.
    */
   public EmployeeBO getEmployee( ) {
     employee = this.unproxy(employee);
@@ -290,10 +240,9 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the association "employee".
-   * 
-   * 
-   * @param pEmployee EmployeeBO to which the association "employee" should be set.
+   * Method sets association {@link #employee}.<br/>
+   *
+   * @param pEmployee Value to which {@link #employee} should be set.
    */
   public void setEmployee( EmployeeBO pEmployee ) {
     // Release already referenced object before setting a new association.
@@ -309,8 +258,7 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * Method unsets the association "employee".
-   * 
+   * Method unsets {@link #employee}.
    */
   public final void unsetEmployee( ) {
     // The association is set in both directions because within the UML model it is defined to be bidirectional.
@@ -323,10 +271,9 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * Method returns the association "customer".
-   * 
+   * Method returns association {@link #customer}.<br/>
    *
-   * @return IndividualBO IndividualBO to which the association "customer" is set.
+   * @return {@link IndividualBO} Value to which {@link #customer} is set.
    */
   public IndividualBO getCustomer( ) {
     customer = this.unproxy(customer);
@@ -334,10 +281,9 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * Method sets the association "customer".
-   * 
-   * 
-   * @param pCustomer IndividualBO to which the association "customer" should be set.
+   * Method sets association {@link #customer}.<br/>
+   *
+   * @param pCustomer Value to which {@link #customer} should be set.
    */
   public void setCustomer( IndividualBO pCustomer ) {
     // Release already referenced object before setting a new association.
@@ -353,8 +299,7 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * Method unsets the association "customer".
-   * 
+   * Method unsets {@link #customer}.
    */
   public final void unsetCustomer( ) {
     // The association is set in both directions because within the UML model it is defined to be bidirectional.
@@ -367,13 +312,11 @@ public abstract class MyPersonBOBase extends PersistentObject {
   }
 
   /**
-   * 
    * @return {@link Integer}
    */
   public abstract Integer calculateAge( );
 
   /**
-   * 
    * @return {@link String}
    */
   @NotNull
@@ -381,7 +324,7 @@ public abstract class MyPersonBOBase extends PersistentObject {
 
   /**
    * Method returns the class id of this business object class.
-   * 
+   *
    * @return {@link ClassID} Class ID of this business object. The method never returns null.
    */
   public ClassID getClassID( ) {

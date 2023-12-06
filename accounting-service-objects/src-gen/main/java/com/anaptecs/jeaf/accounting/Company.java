@@ -1,21 +1,15 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting;
 
 import javax.validation.ConstraintViolationException;
 
 import com.anaptecs.jeaf.tools.api.validation.ValidationTools;
-import com.anaptecs.jeaf.xfun.api.XFun;
-import com.anaptecs.jeaf.xfun.api.XFunMessages;
 import com.anaptecs.jeaf.xfun.api.common.ObjectIdentity;
 
-/**
- * @author JEAF Generator
- * @version JEAF Release 1.6.x
- */
 public class Company extends Customer {
   /**
    * Default serial version uid.
@@ -42,37 +36,24 @@ public class Company extends Customer {
    */
   public static final String ATTENDANT = "attendant";
 
-  /**
-   * 
-   */
   private String name;
 
-  /**
-   * 
-   */
   private Long registrationNumber;
 
-  /**
-   * 
-   */
   private Long taxNumber;
 
-  /**
-   * 
-   */
   private String attendant;
 
   /**
-   * Default constructor is only intended to be used for deserialization as many frameworks required that. For "normal"
+   * Default constructor is only intended to be used for deserialization by tools like Jackson for JSON. For "normal"
    * object creation builder should be used instead.
    */
   protected Company( ) {
-    // Nothing to do.
   }
 
   /**
    * Initialize object using the passed builder.
-   * 
+   *
    * @param pBuilder Builder that should be used to initialize this object. The parameter must not be null.
    */
   protected Company( Builder pBuilder ) {
@@ -86,69 +67,57 @@ public class Company extends Customer {
   }
 
   /**
-   * Class implements builder to create a new instance of class Company. As the class has read only attributes or
-   * associations instances can not be created directly. Instead this builder class has to be used.
+   * Method returns a new builder.
+   *
+   * @return {@link Builder} New builder that can be used to create new Company objects.
+   */
+  public static Builder builder( ) {
+    return new Builder();
+  }
+
+  /**
+   * Method creates a new builder and initializes it with the data from the passed object.
+   *
+   * @param pObject Object that should be used to initialize the builder. The parameter may be null.
+   * @return {@link Builder} New builder that can be used to create new Company objects. The method never returns null.
+   * @deprecated Please use {@link #toBuilder()} instead.
+   */
+  @Deprecated
+  public static Builder builder( Company pObject ) {
+    return new Builder(pObject);
+  }
+
+  /**
+   * Class implements builder to create a new instance of class <code>Company</code>.
    */
   public static class Builder extends Customer.Builder {
-    /**
-     * 
-     */
     private String name;
 
-    /**
-     * 
-     */
     private Long registrationNumber;
 
-    /**
-     * 
-     */
     private Long taxNumber;
 
-    /**
-     * 
-     */
     private String attendant;
 
     /**
-     * Use {@link #newBuilder()} instead of private constructor to create new builder.
+     * Use {@link Company#builder()} instead of private constructor to create new builder.
      */
     protected Builder( ) {
       super();
     }
 
     /**
-     * Use {@link #newBuilder(Company)} instead of private constructor to create new builder.
+     * Use {@link Company#builder(Company)} instead of private constructor to create new builder.
      */
     protected Builder( Company pObject ) {
       super(pObject);
       if (pObject != null) {
         // Read attribute values from passed object.
-        name = pObject.name;
-        registrationNumber = pObject.registrationNumber;
-        taxNumber = pObject.taxNumber;
-        attendant = pObject.attendant;
+        this.setName(pObject.name);
+        this.setRegistrationNumber(pObject.registrationNumber);
+        this.setTaxNumber(pObject.taxNumber);
+        this.setAttendant(pObject.attendant);
       }
-    }
-
-    /**
-     * Method returns a new builder.
-     * 
-     * @return {@link Builder} New builder that can be used to create new ImmutablePOJOParent objects.
-     */
-    public static Builder newBuilder( ) {
-      return new Builder();
-    }
-
-    /**
-     * Method creates a new builder and initialize it with the data from the passed object.
-     * 
-     * @param pObject Object that should be used to initialize the builder. The parameter may be null.
-     * @return {@link Builder} New builder that can be used to create new Company objects. The method never returns
-     * null.
-     */
-    public static Builder newBuilder( Company pObject ) {
-      return new Builder(pObject);
     }
 
     /**
@@ -162,9 +131,10 @@ public class Company extends Customer {
     }
 
     /**
-     * Method sets the attribute "active".
-     * 
-     * @param pActive Value to which the attribute "active" should be set.
+     * Method sets attribute {@link #active}.<br/>
+     *
+     * @param pActive Value to which {@link #active} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     @Override
     public Builder setActive( Boolean pActive ) {
@@ -174,9 +144,10 @@ public class Company extends Customer {
     }
 
     /**
-     * Method sets the attribute "street".
-     * 
-     * @param pStreet Value to which the attribute "street" should be set.
+     * Method sets attribute {@link #street}.<br/>
+     *
+     * @param pStreet Value to which {@link #street} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     @Override
     public Builder setStreet( String pStreet ) {
@@ -186,9 +157,10 @@ public class Company extends Customer {
     }
 
     /**
-     * Method sets the attribute "zipCode".
-     * 
-     * @param pZipCode Value to which the attribute "zipCode" should be set.
+     * Method sets attribute {@link #zipCode}.<br/>
+     *
+     * @param pZipCode Value to which {@link #zipCode} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     @Override
     public Builder setZipCode( Integer pZipCode ) {
@@ -198,9 +170,10 @@ public class Company extends Customer {
     }
 
     /**
-     * Method sets the attribute "city".
-     * 
-     * @param pCity Value to which the attribute "city" should be set.
+     * Method sets attribute {@link #city}.<br/>
+     *
+     * @param pCity Value to which {@link #city} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     @Override
     public Builder setCity( String pCity ) {
@@ -210,9 +183,10 @@ public class Company extends Customer {
     }
 
     /**
-     * Method sets the attribute "country".
-     * 
-     * @param pCountry Value to which the attribute "country" should be set.
+     * Method sets attribute {@link #country}.<br/>
+     *
+     * @param pCountry Value to which {@link #country} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     @Override
     public Builder setCountry( String pCountry ) {
@@ -222,9 +196,10 @@ public class Company extends Customer {
     }
 
     /**
-     * Method sets the attribute "name".
-     * 
-     * @param pName Value to which the attribute "name" should be set.
+     * Method sets attribute {@link #name}.<br/>
+     *
+     * @param pName Value to which {@link #name} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     public Builder setName( String pName ) {
       // Assign value to attribute
@@ -233,9 +208,10 @@ public class Company extends Customer {
     }
 
     /**
-     * Method sets the attribute "registrationNumber".
-     * 
-     * @param pRegistrationNumber Value to which the attribute "registrationNumber" should be set.
+     * Method sets attribute {@link #registrationNumber}.<br/>
+     *
+     * @param pRegistrationNumber Value to which {@link #registrationNumber} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     public Builder setRegistrationNumber( Long pRegistrationNumber ) {
       // Assign value to attribute
@@ -244,9 +220,10 @@ public class Company extends Customer {
     }
 
     /**
-     * Method sets the attribute "taxNumber".
-     * 
-     * @param pTaxNumber Value to which the attribute "taxNumber" should be set.
+     * Method sets attribute {@link #taxNumber}.<br/>
+     *
+     * @param pTaxNumber Value to which {@link #taxNumber} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     public Builder setTaxNumber( Long pTaxNumber ) {
       // Assign value to attribute
@@ -255,9 +232,10 @@ public class Company extends Customer {
     }
 
     /**
-     * Method sets the attribute "attendant".
-     * 
-     * @param pAttendant Value to which the attribute "attendant" should be set.
+     * Method sets attribute {@link #attendant}.<br/>
+     *
+     * @param pAttendant Value to which {@link #attendant} should be set.
+     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
      */
     public Builder setAttendant( String pAttendant ) {
       // Assign value to attribute
@@ -267,7 +245,7 @@ public class Company extends Customer {
 
     /**
      * Method creates a new instance of class Company. The object will be initialized with the values of the builder.
-     * 
+     *
      * @return Company Created object. The method never returns null.
      */
     public Company build( ) {
@@ -277,32 +255,30 @@ public class Company extends Customer {
     /**
      * Method creates a new validated instance of class Company. The object will be initialized with the values of the
      * builder and validated afterwards.
-     * 
+     *
      * @return Company Created and validated object. The method never returns null.
      * @throws ConstraintViolationException in case that one or more validations for the created object failed.
      */
     public Company buildValidated( ) throws ConstraintViolationException {
-      Company lPOJO = this.build();
-      ValidationTools.getValidationTools().enforceObjectValidation(lPOJO);
-      return lPOJO;
+      Company lObject = this.build();
+      ValidationTools.getValidationTools().enforceObjectValidation(lObject);
+      return lObject;
     }
   }
 
   /**
-   * Method returns the attribute "name".
-   * 
-   * 
-   * @return String Value to which the attribute "name" is set.
+   * Method returns attribute {@link #name}.<br/>
+   *
+   * @return {@link String} Value to which {@link #name} is set.
    */
   public String getName( ) {
     return name;
   }
 
   /**
-   * Method sets the attribute "name".
-   * 
-   * 
-   * @param pName Value to which the attribute "name" should be set.
+   * Method sets attribute {@link #name}.<br/>
+   *
+   * @param pName Value to which {@link #name} should be set.
    */
   public void setName( String pName ) {
     // Assign value to attribute
@@ -310,20 +286,18 @@ public class Company extends Customer {
   }
 
   /**
-   * Method returns the attribute "registrationNumber".
-   * 
-   * 
-   * @return Long Value to which the attribute "registrationNumber" is set.
+   * Method returns attribute {@link #registrationNumber}.<br/>
+   *
+   * @return {@link Long} Value to which {@link #registrationNumber} is set.
    */
   public Long getRegistrationNumber( ) {
     return registrationNumber;
   }
 
   /**
-   * Method sets the attribute "registrationNumber".
-   * 
-   * 
-   * @param pRegistrationNumber Value to which the attribute "registrationNumber" should be set.
+   * Method sets attribute {@link #registrationNumber}.<br/>
+   *
+   * @param pRegistrationNumber Value to which {@link #registrationNumber} should be set.
    */
   public void setRegistrationNumber( Long pRegistrationNumber ) {
     // Assign value to attribute
@@ -331,20 +305,18 @@ public class Company extends Customer {
   }
 
   /**
-   * Method returns the attribute "taxNumber".
-   * 
-   * 
-   * @return Long Value to which the attribute "taxNumber" is set.
+   * Method returns attribute {@link #taxNumber}.<br/>
+   *
+   * @return {@link Long} Value to which {@link #taxNumber} is set.
    */
   public Long getTaxNumber( ) {
     return taxNumber;
   }
 
   /**
-   * Method sets the attribute "taxNumber".
-   * 
-   * 
-   * @param pTaxNumber Value to which the attribute "taxNumber" should be set.
+   * Method sets attribute {@link #taxNumber}.<br/>
+   *
+   * @param pTaxNumber Value to which {@link #taxNumber} should be set.
    */
   public void setTaxNumber( Long pTaxNumber ) {
     // Assign value to attribute
@@ -352,20 +324,18 @@ public class Company extends Customer {
   }
 
   /**
-   * Method returns the attribute "attendant".
-   * 
-   * 
-   * @return String Value to which the attribute "attendant" is set.
+   * Method returns attribute {@link #attendant}.<br/>
+   *
+   * @return {@link String} Value to which {@link #attendant} is set.
    */
   public String getAttendant( ) {
     return attendant;
   }
 
   /**
-   * Method sets the attribute "attendant".
-   * 
-   * 
-   * @param pAttendant Value to which the attribute "attendant" should be set.
+   * Method sets attribute {@link #attendant}.<br/>
+   *
+   * @param pAttendant Value to which {@link #attendant} should be set.
    */
   public void setAttendant( String pAttendant ) {
     // Assign value to attribute
@@ -373,33 +343,50 @@ public class Company extends Customer {
   }
 
   /**
-   * Method returns a StringBuilder that can be used to create a String representation of this object. the returned
+   * Method returns a StringBuilder that can be used to create a String representation of this object. The returned
    * StringBuilder also takes care about attributes of super classes.
    *
    * @return {@link StringBuilder} StringBuilder representing this object. The method never returns null.
    */
-  protected StringBuilder toStringBuilder( ) {
-    StringBuilder lBuilder = super.toStringBuilder();
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "name", "" + name));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "registrationNumber",
-        "" + registrationNumber));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "taxNumber", "" + taxNumber));
-    lBuilder.append('\n');
-    lBuilder.append(XFun.getMessageRepository().getMessage(XFunMessages.OBJECT_ATTRIBUTE, "attendant", "" + attendant));
-    lBuilder.append('\n');
+  @Override
+  public StringBuilder toStringBuilder( String pIndent ) {
+    StringBuilder lBuilder = super.toStringBuilder(pIndent);
+    lBuilder.append(pIndent);
+    lBuilder.append("name: ");
+    lBuilder.append(name);
+    lBuilder.append(System.lineSeparator());
+    lBuilder.append(pIndent);
+    lBuilder.append("registrationNumber: ");
+    lBuilder.append(registrationNumber);
+    lBuilder.append(System.lineSeparator());
+    lBuilder.append(pIndent);
+    lBuilder.append("taxNumber: ");
+    lBuilder.append(taxNumber);
+    lBuilder.append(System.lineSeparator());
+    lBuilder.append(pIndent);
+    lBuilder.append("attendant: ");
+    lBuilder.append(attendant);
+    lBuilder.append(System.lineSeparator());
     return lBuilder;
   }
 
   /**
    * Method creates a new String with the values of all attributes of this class. All references to other objects will
    * be ignored.
-   * 
+   *
    * @return {@link String} String representation of this object. The method never returns null.
    */
   @Override
   public String toString( ) {
-    return this.toStringBuilder().toString();
+    return this.toStringBuilder("").toString();
+  }
+
+  /**
+   * Method creates a new builder and initializes it with the data of this object.
+   *
+   * @return {@link Builder} New builder that can be used to create new Company objects. The method never returns null.
+   */
+  public Builder toBuilder( ) {
+    return new Builder(this);
   }
 }

@@ -1,7 +1,7 @@
 /*
  * anaptecs GmbH, Ricarda-Huch-Str. 71, 72760 Reutlingen, Germany
- * 
- * Copyright 2021. All rights reserved.
+ *
+ * Copyright 2024. All rights reserved.
  */
 package com.anaptecs.jeaf.accounting;
 
@@ -41,9 +41,8 @@ public final class AccountingBasicDataServiceProxy extends ServiceProxy implemen
   }
 
   /**
-   * Generated proxy implementation for method "createResponsibilityType".
-   * 
-   * 
+   * Generated proxy implementation for method
+   * {@link com.anaptecs.jeaf.accounting.AccountingBasicDataService#createResponsibilityType}
    */
   public ResponsibilityType createResponsibilityType( ResponsibilityType pType ) {
     try {
@@ -56,14 +55,8 @@ public final class AccountingBasicDataServiceProxy extends ServiceProxy implemen
   }
 
   /**
-   * Generated proxy implementation for method "createBank".
-   * 
-   * Method creates a new persistent Bank object in the database.
-   * 
-   * @param pBank Service object containing all the attributes to create a new persistent Bank object. The parameter
-   * must not be null
-   * @return Bank Service object describing the created bank object. The returned object contains besides the attributes
-   * also the object id of the created persistent bank object. The method never returns null.
+   * Generated proxy implementation for method
+   * {@link com.anaptecs.jeaf.accounting.AccountingBasicDataService#createBank}
    */
   public Bank createBank( @Valid @NotNull Bank pBank ) {
     try {
@@ -76,9 +69,8 @@ public final class AccountingBasicDataServiceProxy extends ServiceProxy implemen
   }
 
   /**
-   * Generated proxy implementation for method "createEmployee".
-   * 
-   * 
+   * Generated proxy implementation for method
+   * {@link com.anaptecs.jeaf.accounting.AccountingBasicDataService#createEmployee}
    */
   public ServiceObjectID createEmployee( Person pPerson, ResponsibilityType pResponsibilityType, Bank pBank ) {
     try {
@@ -136,7 +128,7 @@ final class CreateResponsibilityType_ResponsibilityType_AccountingBasicDataServi
   /**
    * Initialize object. All parameters from method "createResponsibilityType" have to be passed as parameters to this
    * command object.
-   * 
+   *
    * @param pType ResponsibilityType
    */
   CreateResponsibilityType_ResponsibilityType_AccountingBasicDataService_Command( ResponsibilityType pType ) {
@@ -147,7 +139,7 @@ final class CreateResponsibilityType_ResponsibilityType_AccountingBasicDataServi
 
   /**
    * Method executes the service call represented by this command object via JEAFs service channel.
-   * 
+   *
    * @param pTargetService Reference to the service which should be called by this command. The parameter must not be
    * null.
    * @return Serializable Result object of the service call. Due to the fact that all returned objects of remote calls
@@ -173,7 +165,7 @@ final class CreateResponsibilityType_ResponsibilityType_AccountingBasicDataServi
 
   /**
    * Method returns a method object describing the service method that will be called by this command object.
-   * 
+   *
    * @return {@link Method} Method object describing the called service method. The method never returns null.
    */
   @Override
@@ -183,7 +175,7 @@ final class CreateResponsibilityType_ResponsibilityType_AccountingBasicDataServi
 
   /**
    * Method returns all parameters that will be passed to the service.
-   * 
+   *
    * @return {@link Object} Object array with all parameters that will be passed to the service. The method may return
    * an empty array in case that the method has no parameters.
    */
@@ -236,10 +228,10 @@ final class CreateBank_Bank_AccountingBasicDataService_Command extends Command {
 
   /**
    * Initialize object. All parameters from method "createBank" have to be passed as parameters to this command object.
-   * 
+   *
    * @param pBank Bank
    */
-  CreateBank_Bank_AccountingBasicDataService_Command( @Valid @NotNull Bank pBank ) {
+  CreateBank_Bank_AccountingBasicDataService_Command( Bank pBank ) {
     super(AccountingBasicDataService.class);
     bank = pBank;
     parameters = new Object[] { bank };
@@ -247,7 +239,7 @@ final class CreateBank_Bank_AccountingBasicDataService_Command extends Command {
 
   /**
    * Method executes the service call represented by this command object via JEAFs service channel.
-   * 
+   *
    * @param pTargetService Reference to the service which should be called by this command. The parameter must not be
    * null.
    * @return Serializable Result object of the service call. Due to the fact that all returned objects of remote calls
@@ -273,7 +265,7 @@ final class CreateBank_Bank_AccountingBasicDataService_Command extends Command {
 
   /**
    * Method returns a method object describing the service method that will be called by this command object.
-   * 
+   *
    * @return {@link Method} Method object describing the called service method. The method never returns null.
    */
   @Override
@@ -283,7 +275,7 @@ final class CreateBank_Bank_AccountingBasicDataService_Command extends Command {
 
   /**
    * Method returns all parameters that will be passed to the service.
-   * 
+   *
    * @return {@link Object} Object array with all parameters that will be passed to the service. The method may return
    * an empty array in case that the method has no parameters.
    */
@@ -350,7 +342,7 @@ final class CreateEmployee_Person_ResponsibilityType_Bank_AccountingBasicDataSer
   /**
    * Initialize object. All parameters from method "createEmployee" have to be passed as parameters to this command
    * object.
-   * 
+   *
    * @param pPerson Person
    * @param pResponsibilityType ResponsibilityType
    * @param pBank Bank
@@ -366,7 +358,7 @@ final class CreateEmployee_Person_ResponsibilityType_Bank_AccountingBasicDataSer
 
   /**
    * Method executes the service call represented by this command object via JEAFs service channel.
-   * 
+   *
    * @param pTargetService Reference to the service which should be called by this command. The parameter must not be
    * null.
    * @return Serializable Result object of the service call. Due to the fact that all returned objects of remote calls
@@ -392,7 +384,7 @@ final class CreateEmployee_Person_ResponsibilityType_Bank_AccountingBasicDataSer
 
   /**
    * Method returns a method object describing the service method that will be called by this command object.
-   * 
+   *
    * @return {@link Method} Method object describing the called service method. The method never returns null.
    */
   @Override
@@ -402,7 +394,7 @@ final class CreateEmployee_Person_ResponsibilityType_Bank_AccountingBasicDataSer
 
   /**
    * Method returns all parameters that will be passed to the service.
-   * 
+   *
    * @return {@link Object} Object array with all parameters that will be passed to the service. The method may return
    * an empty array in case that the method has no parameters.
    */
