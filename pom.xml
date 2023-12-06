@@ -51,7 +51,7 @@
 
 		<!-- Required versions -->
 		<maven.version>3.6.0</maven.version>
-		<jdk.version>11</jdk.version>
+		<jdk.version>17</jdk.version>
 
 		<jeaf.x-fun.api.version>1.6.17</jeaf.x-fun.api.version>
 		<jeaf.x-fun.impl.version>1.6.23</jeaf.x-fun.impl.version>
