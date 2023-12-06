@@ -12,7 +12,7 @@ on:
   push:
     branches:
       - master
-      - 'feature/upgrade'
+      - 'feature/**'
   pull_request:
     branches: [ "master" ]
 
