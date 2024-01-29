@@ -1,4 +1,7 @@
-# JEAF Generator Samples Readme #
+![Latest Version](https://maven-badges.herokuapp.com/maven-central/com.anaptecs.jeaf.generator.sample/jeaf-generator-sample-project/badge.svg)
+
+
+# JEAF Generator Samples #
 
 This repository contains sample projects for JEAF Generator. The projects show the artifacts that are produced by JEAF Generator. Starting point for all of that is the UML model that is used as input for the generator.
 
@@ -6,8 +9,10 @@ This repository contains sample projects for JEAF Generator. The projects show t
 ## Links ##
 For further information please refer to our documentation
 
-* [JEAF Generator](https://anaptecs.atlassian.net/l/c/N7r5x11X)
-* [JEAF Modelling Guide](https://anaptecs.atlassian.net/l/c/1B2ci31g)
+* [JEAF Generator](https://www.jeaf-generator.io/)
+* [UML Modeling Guide](https://www.jeaf-generator.io/uml-modeling-guide/)
+* [Developer Guide](https://www.jeaf-generator.io/developer-guide/)
+* [Quickstart Guide](https://www.jeaf-generator.io/developer-guide/quickstart/)
 
 ## How do I get set up? ##
 
