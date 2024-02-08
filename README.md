@@ -13,6 +13,6 @@ For further information please refer to our documentation
 
 * To run JEAF Generator please create a clone of this repository on your local machine.
 * You will find a top level Maven project and lot's of sub projects. Each of them shows the specific output for one topic as it will be created by JEAF Generator 
-* Build the project simply execute Maven on the top level project `maven clean install`
+* To build the project simply execute Maven on the top level project `maven clean install`
 * To only run JEAF Generator use `mvn clean generate-sources`
 
