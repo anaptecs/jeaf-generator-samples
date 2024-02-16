@@ -8,21 +8,12 @@
 	<packaging>pom</packaging>
 	<name>JEAF Generator Sample Project</name>
 	<description>JEAF Generator can be used to generate different kinds of classes from UML Models and thus speed up and professionalize software development. This sample project shows how to use it.</description>
-	<url>https://www.anaptecs.de/jeaf</url>
-
-	<developers>
-		<developer>
-			<name>JEAF Development Team</name>
-			<email>jeaf@anaptecs.de</email>
-			<organization>anaptecs GmbH</organization>
-			<organizationUrl>http://www.anaptecs.de</organizationUrl>
-		</developer>
-	</developers>
+	<url>https://www.jeaf-generator.io</url>
 
 	<scm>
-		<connection>scm:git:https://bitbucket.org/anaptecs/jeaf-generator-samples.git</connection>
-		<developerConnection>scm:git:https://bitbucket.org/anaptecs/jeaf-generator-samples.git</developerConnection>
-		<url>https://bitbucket.org/anaptecs/jeaf-generator-samples</url>
+		<connection>scm:git:https://github.com/anaptecs/jeaf-generator-samples.git</connection>
+		<developerConnection>scm:git:https://github.com/anaptecs/jeaf-generator-samples.git</developerConnection>
+		<url>https://github.com/anaptecs/jeaf-generator-samples.git</url>
 		<tag>HEAD</tag>
 	</scm>
 	
@@ -51,7 +42,7 @@
 
 		<!-- Required versions -->
 		<maven.version>3.6.0</maven.version>
-		<jdk.version>17</jdk.version>
+		<jdk.version>11</jdk.version>
 
 		<jeaf.x-fun.api.version>1.6.17</jeaf.x-fun.api.version>
 		<jeaf.x-fun.impl.version>1.6.23</jeaf.x-fun.impl.version>
