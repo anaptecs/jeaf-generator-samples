@@ -51,7 +51,7 @@
 		<jeaf.core.impl.version>1.6.20</jeaf.core.impl.version>
 		<jeaf.persistence.api.version>1.6.13</jeaf.persistence.api.version>
 		<jeaf.junit.extensions.version>1.6.13</jeaf.junit.extensions.version>
-		<jeaf.workload.api.version>1.6.17</jeaf.workload.api.version>
+		<jeaf.workload.api.version>1.8.0</jeaf.workload.api.version>
 
 		<javaee-api.version>8.0</javaee-api.version>
 		
