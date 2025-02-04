@@ -23,7 +23,7 @@ import javax.validation.constraints.Size;
 
 import com.anaptecs.jeaf.core.api.ServiceObject;
 import com.anaptecs.jeaf.core.api.ServiceObjectID;
-import com.anaptecs.jeaf.tools.api.validation.Severity.Error;
+import com.anaptecs.jeaf.tools.api.validation.Severity;
 import com.anaptecs.jeaf.tools.api.validation.ValidationTools;
 import com.anaptecs.jeaf.xfun.api.checks.Check;
 import com.anaptecs.jeaf.xfun.api.common.Identifiable;
@@ -69,8 +69,8 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   @Min(value = 123)
   private Long iban;
 
-  @DecimalMax(value = "1.2345", inclusive = false, message = "12345", payload = Error.class)
-  @Digits(integer = 9, fraction = 5, message = "12345", payload = Error.class)
+  @DecimalMax(value = "1.2345", inclusive = false, message = "12345", payload = Severity.Error.class)
+  @Digits(integer = 9, fraction = 5, message = "12345", payload = Severity.Error.class)
   private BigDecimal balance;
 
   private Set<Person> authorizedPersons;
@@ -126,6 +126,10 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
     balance = pBuilder.balance;
     if (pBuilder.authorizedPersons != null) {
       authorizedPersons = pBuilder.authorizedPersons;
+      // As association is bidirectional we also have to set it in the other direction.
+      for (Person lNext : authorizedPersons) {
+        lNext.addToAccounts((Account) this);
+      }
     }
     else {
       authorizedPersons = new HashSet<Person>();
@@ -134,6 +138,10 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
     authorizedPersonsBackReferenceInitialized = true;
     if (pBuilder.bookings != null) {
       bookings = pBuilder.bookings;
+      // As association is bidirectional we also have to set it in the other direction.
+      for (Booking lNext : bookings) {
+        lNext.setAccount((Account) this);
+      }
     }
     else {
       bookings = new HashSet<Booking>();
@@ -156,8 +164,8 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
     @Min(value = 123)
     private Long iban;
 
-    @DecimalMax(value = "1.2345", inclusive = false, message = "12345", payload = Error.class)
-    @Digits(integer = 9, fraction = 5, message = "12345", payload = Error.class)
+    @DecimalMax(value = "1.2345", inclusive = false, message = "12345", payload = Severity.Error.class)
+    @Digits(integer = 9, fraction = 5, message = "12345", payload = Severity.Error.class)
     private BigDecimal balance;
 
     private Set<Person> authorizedPersons;
@@ -179,11 +187,11 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
       if (pObject != null) {
         // Read attribute values from passed object.
         objectID = pObject.objectID;
-        iban = pObject.iban;
-        balance = pObject.balance;
-        authorizedPersons = pObject.authorizedPersons;
-        bookings = pObject.bookings;
-        bankID = pObject.bankID;
+        this.setIban(pObject.iban);
+        this.setBalance(pObject.balance);
+        this.setAuthorizedPersons(pObject.authorizedPersons);
+        this.setBookings(pObject.bookings);
+        this.setBankID(pObject.bankID);
       }
     }
 
@@ -499,8 +507,8 @@ public abstract class AccountBase implements ServiceObject, Identifiable<Service
   public void addToBookings( Booking pBookings ) {
     // Check parameter "pBookings" for invalid value null.
     Check.checkInvalidParameterNull(pBookings, "pBookings");
-    // Since this is not a many-to-many association the association to which the passed object belongs, has to
-    // be released.
+    // Since this is not a many-to-many association the association to which the passed object belongs, has to be
+    // released.
     pBookings.unsetAccount();
     // Add passed object to collection of associated Booking objects.
     bookings.add(pBookings);

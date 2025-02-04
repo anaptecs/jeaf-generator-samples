@@ -11,13 +11,13 @@ import com.anaptecs.jeaf.accounting.validation.MyEnum;
 import com.anaptecs.jeaf.accounting.validation.MyGeneratedCustomConstraint;
 import com.anaptecs.jeaf.core.api.ServiceObject;
 import com.anaptecs.jeaf.core.api.ServiceObjectID;
-import com.anaptecs.jeaf.tools.api.validation.Severity.Warning;
+import com.anaptecs.jeaf.tools.api.validation.Severity;
 import com.anaptecs.jeaf.tools.api.validation.ValidationTools;
 import com.anaptecs.jeaf.xfun.api.checks.Check;
 import com.anaptecs.jeaf.xfun.api.common.Identifiable;
 import com.anaptecs.jeaf.xfun.api.common.ObjectIdentity;
 
-@MyGeneratedCustomConstraint(myEnum = MyEnum.WORLD, message = "4711", payload = Warning.class)
+@MyGeneratedCustomConstraint(myEnum = MyEnum.WORLD, message = "4711", payload = Severity.Warning.class)
 public class Bank implements ServiceObject, Identifiable<ServiceObjectID> {
   /**
    * Default serial version uid.
@@ -99,18 +99,6 @@ public class Bank implements ServiceObject, Identifiable<ServiceObjectID> {
    */
   public static Builder builder( ) {
     return new Builder();
-  }
-
-  /**
-   * Method creates a new builder and initializes it with the data from the passed object.
-   *
-   * @param pObject Object that should be used to initialize the builder. The parameter may be null.
-   * @return {@link Builder} New builder that can be used to create new Bank objects. The method never returns null.
-   * @deprecated Please use {@link #toBuilder()} instead.
-   */
-  @Deprecated
-  public static Builder builder( Bank pObject ) {
-    return new Builder(pObject);
   }
 
   /**
@@ -311,14 +299,6 @@ public class Bank implements ServiceObject, Identifiable<ServiceObjectID> {
     StringBuilder lBuilder = new StringBuilder();
     lBuilder.append(pIndent);
     lBuilder.append(this.getClass().getName());
-    lBuilder.append(System.lineSeparator());
-    lBuilder.append(pIndent);
-    lBuilder.append("MUTUAL_SAVINGS: ");
-    lBuilder.append(MUTUAL_SAVINGS);
-    lBuilder.append(System.lineSeparator());
-    lBuilder.append(pIndent);
-    lBuilder.append("PRIVATE_BANK: ");
-    lBuilder.append(PRIVATE_BANK);
     lBuilder.append(System.lineSeparator());
     lBuilder.append(pIndent);
     lBuilder.append("name: ");

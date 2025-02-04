@@ -5,7 +5,6 @@
  */
 package com.anaptecs.jeaf.accounting;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
@@ -121,13 +120,12 @@ public class Person implements ServiceObject, Identifiable<ServiceObjectID> {
     name = pBuilder.name;
     firstName = pBuilder.firstName;
     dateOfBirth = pBuilder.dateOfBirth;
-    if (pBuilder.accounts != null) {
-      accounts = pBuilder.accounts;
-    }
-    else {
-      accounts = new HashSet<Account>();
-    }
+    accounts = new HashSet<Account>();
     customer = pBuilder.customer;
+    if (customer != null) {
+      // As association is bidirectional we also have to set it in the other direction.
+      customer.setPerson((Person) this);
+    }
     age = pBuilder.age;
     displayName = pBuilder.displayName;
   }
@@ -139,18 +137,6 @@ public class Person implements ServiceObject, Identifiable<ServiceObjectID> {
    */
   public static Builder builder( ) {
     return new Builder();
-  }
-
-  /**
-   * Method creates a new builder and initializes it with the data from the passed object.
-   *
-   * @param pObject Object that should be used to initialize the builder. The parameter may be null.
-   * @return {@link Builder} New builder that can be used to create new Person objects. The method never returns null.
-   * @deprecated Please use {@link #toBuilder()} instead.
-   */
-  @Deprecated
-  public static Builder builder( Person pObject ) {
-    return new Builder(pObject);
   }
 
   /**
@@ -170,8 +156,6 @@ public class Person implements ServiceObject, Identifiable<ServiceObjectID> {
 
     @PastOrPresent
     private Calendar dateOfBirth;
-
-    private Set<Account> accounts;
 
     private Individual customer;
 
@@ -197,7 +181,6 @@ public class Person implements ServiceObject, Identifiable<ServiceObjectID> {
         this.setName(pObject.name);
         this.setFirstName(pObject.firstName);
         this.setDateOfBirth(pObject.dateOfBirth);
-        this.setAccounts(pObject.accounts);
         this.setCustomer(pObject.customer);
         this.setAge(pObject.age);
         this.setDisplayName(pObject.displayName);
@@ -246,39 +229,6 @@ public class Person implements ServiceObject, Identifiable<ServiceObjectID> {
     public Builder setDateOfBirth( Calendar pDateOfBirth ) {
       // Assign value to attribute
       dateOfBirth = pDateOfBirth;
-      return this;
-    }
-
-    /**
-     * Method sets association {@link #accounts}.<br/>
-     *
-     * @param pAccounts Collection to which {@link #accounts} should be set.
-     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
-     */
-    public Builder setAccounts( Set<Account> pAccounts ) {
-      // To ensure immutability we have to copy the content of the passed collection.
-      if (pAccounts != null) {
-        accounts = new HashSet<Account>(pAccounts);
-      }
-      else {
-        accounts = null;
-      }
-      return this;
-    }
-
-    /**
-     * Method adds the passed objects to association {@link #accounts}.<br/>
-     *
-     * @param pAccounts Array of objects that should be added to {@link #accounts}. The parameter may be null.
-     * @return {@link Builder} Instance of this builder to support chaining. Method never returns null.
-     */
-    public Builder addToAccounts( Account... pAccounts ) {
-      if (pAccounts != null) {
-        if (accounts == null) {
-          accounts = new HashSet<Account>();
-        }
-        accounts.addAll(Arrays.asList(pAccounts));
-      }
       return this;
     }
 
@@ -442,16 +392,11 @@ public class Person implements ServiceObject, Identifiable<ServiceObjectID> {
    *
    * @param pAccounts Object that should be added to {@link #accounts}. The parameter must not be null.
    */
-  public void addToAccounts( Account pAccounts ) {
+  void addToAccounts( Account pAccounts ) {
     // Check parameter "pAccounts" for invalid value null.
     Check.checkInvalidParameterNull(pAccounts, "pAccounts");
     // Add passed object to collection of associated Account objects.
     accounts.add(pAccounts);
-    // The association is set in both directions because within the UML model it is defined to be bidirectional.
-    // In case that one side will be removed from the association the other side will also be removed.
-    if (pAccounts != null && pAccounts.getAuthorizedPersons().contains(this) == false) {
-      pAccounts.addToAuthorizedPersons((Person) this);
-    }
   }
 
   /**
@@ -460,7 +405,7 @@ public class Person implements ServiceObject, Identifiable<ServiceObjectID> {
    * @param pAccounts Collection with all objects that should be added to {@link #accounts}. The parameter must not be
    * null.
    */
-  public void addToAccounts( Collection<Account> pAccounts ) {
+  void addToAccounts( Collection<Account> pAccounts ) {
     // Check parameter "pAccounts" for invalid value null.
     Check.checkInvalidParameterNull(pAccounts, "pAccounts");
     // Add all passed objects.
@@ -474,22 +419,17 @@ public class Person implements ServiceObject, Identifiable<ServiceObjectID> {
    *
    * @param pAccounts Object that should be removed from {@link #accounts}. The parameter must not be null.
    */
-  public void removeFromAccounts( Account pAccounts ) {
+  void removeFromAccounts( Account pAccounts ) {
     // Check parameter for invalid value null.
     Check.checkInvalidParameterNull(pAccounts, "pAccounts");
     // Remove passed object from collection of associated Account objects.
     accounts.remove(pAccounts);
-    // The association is set in both directions because within the UML model it is defined to be bidirectional.
-    // In case that one side will be removed from the association the other side will also be removed.
-    if (pAccounts.getAuthorizedPersons().contains(this) == true) {
-      pAccounts.removeFromAuthorizedPersons((Person) this);
-    }
   }
 
   /**
    * Method removes all objects from {@link #accounts}.
    */
-  public void clearAccounts( ) {
+  void clearAccounts( ) {
     // Remove all objects from association "accounts".
     Collection<Account> lAccounts = new HashSet<Account>(accounts);
     Iterator<Account> lIterator = lAccounts.iterator();

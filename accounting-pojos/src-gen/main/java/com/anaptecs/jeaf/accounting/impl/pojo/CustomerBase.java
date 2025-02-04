@@ -73,6 +73,10 @@ public abstract class CustomerBase extends Partner {
     email = pBuilder.email;
     if (pBuilder.accounts != null) {
       accounts = pBuilder.accounts;
+      // As association is bidirectional we also have to set it in the other direction.
+      for (Account lNext : accounts) {
+        lNext.setOwner((Customer) this);
+      }
     }
     else {
       accounts = new HashSet<Account>();
@@ -107,10 +111,10 @@ public abstract class CustomerBase extends Partner {
     protected BuilderBase( CustomerBase pObject ) {
       if (pObject != null) {
         // Read attribute values from passed object.
-        name = pObject.name;
-        firstName = pObject.firstName;
-        email = pObject.email;
-        accounts = pObject.accounts;
+        this.setName(pObject.name);
+        this.setFirstName(pObject.firstName);
+        this.setEmail(pObject.email);
+        this.setAccounts(pObject.accounts);
       }
     }
 
@@ -282,8 +286,8 @@ public abstract class CustomerBase extends Partner {
   public void addToAccounts( Account pAccounts ) {
     // Check parameter "pAccounts" for invalid value null.
     Check.checkInvalidParameterNull(pAccounts, "pAccounts");
-    // Since this is not a many-to-many association the association to which the passed object belongs, has to
-    // be released.
+    // Since this is not a many-to-many association the association to which the passed object belongs, has to be
+    // released.
     pAccounts.unsetOwner();
     // Add passed object to collection of associated Account objects.
     accounts.add(pAccounts);

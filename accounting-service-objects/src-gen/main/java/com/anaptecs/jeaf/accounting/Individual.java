@@ -40,6 +40,10 @@ public class Individual extends Customer {
     super(pBuilder);
     // Read attribute values from builder.
     person = pBuilder.person;
+    if (person != null) {
+      // As association is bidirectional we also have to set it in the other direction.
+      person.setCustomer((Individual) this);
+    }
   }
 
   /**
@@ -49,19 +53,6 @@ public class Individual extends Customer {
    */
   public static Builder builder( ) {
     return new Builder();
-  }
-
-  /**
-   * Method creates a new builder and initializes it with the data from the passed object.
-   *
-   * @param pObject Object that should be used to initialize the builder. The parameter may be null.
-   * @return {@link Builder} New builder that can be used to create new Individual objects. The method never returns
-   * null.
-   * @deprecated Please use {@link #toBuilder()} instead.
-   */
-  @Deprecated
-  public static Builder builder( Individual pObject ) {
-    return new Builder(pObject);
   }
 
   /**

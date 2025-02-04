@@ -66,6 +66,10 @@ public abstract class AccountBase {
     // Read attribute values from builder.
     iban = pBuilder.iban;
     owner = pBuilder.owner;
+    if (owner != null) {
+      // As association is bidirectional we also have to set it in the other direction.
+      owner.addToAccounts((Account) this);
+    }
     currency = pBuilder.currency;
     if (pBuilder.allBookings != null) {
       allBookings = pBuilder.allBookings;
@@ -100,10 +104,10 @@ public abstract class AccountBase {
     protected BuilderBase( AccountBase pObject ) {
       if (pObject != null) {
         // Read attribute values from passed object.
-        iban = pObject.iban;
-        owner = pObject.owner;
-        currency = pObject.currency;
-        allBookings = pObject.allBookings;
+        this.setIban(pObject.iban);
+        this.setOwner(pObject.owner);
+        this.setCurrency(pObject.currency);
+        this.setAllBookings(pObject.allBookings);
       }
     }
 

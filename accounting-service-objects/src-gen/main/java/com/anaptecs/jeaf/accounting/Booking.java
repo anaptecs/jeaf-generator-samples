@@ -93,13 +93,16 @@ public class Booking implements ServiceObject {
     source = pBuilder.source;
     target = pBuilder.target;
     token = pBuilder.token;
+    if (token != null) {
+      // As association is bidirectional we also have to set it in the other direction.
+      token.setBooking((Booking) this);
+    }
     if (pBuilder.remitters != null) {
       remitters = pBuilder.remitters;
     }
     else {
       remitters = new HashSet<Person>();
     }
-    account = pBuilder.account;
   }
 
   /**
@@ -109,18 +112,6 @@ public class Booking implements ServiceObject {
    */
   public static Builder builder( ) {
     return new Builder();
-  }
-
-  /**
-   * Method creates a new builder and initializes it with the data from the passed object.
-   *
-   * @param pObject Object that should be used to initialize the builder. The parameter may be null.
-   * @return {@link Builder} New builder that can be used to create new Booking objects. The method never returns null.
-   * @deprecated Please use {@link #toBuilder()} instead.
-   */
-  @Deprecated
-  public static Builder builder( Booking pObject ) {
-    return new Builder(pObject);
   }
 
   /**
@@ -141,8 +132,6 @@ public class Booking implements ServiceObject {
 
     private Set<Person> remitters;
 
-    private Account account;
-
     /**
      * Use {@link Booking#builder()} instead of private constructor to create new builder.
      */
@@ -160,7 +149,6 @@ public class Booking implements ServiceObject {
         this.setTarget(pObject.target);
         this.setToken(pObject.token);
         this.setRemitters(pObject.remitters);
-        this.setAccount(pObject.account);
       }
     }
 
@@ -239,17 +227,6 @@ public class Booking implements ServiceObject {
         }
         remitters.addAll(Arrays.asList(pRemitters));
       }
-      return this;
-    }
-
-    /**
-     * Method sets association {@link #account}.<br/>
-     *
-     * @param pAccount Value to which {@link #account} should be set.
-     * @return {@link Builder} Instance of this builder to support chaining setters. Method never returns null.
-     */
-    public Builder setAccount( Account pAccount ) {
-      account = pAccount;
       return this;
     }
 
@@ -459,30 +436,19 @@ public class Booking implements ServiceObject {
    *
    * @param pAccount Value to which {@link #account} should be set.
    */
-  public void setAccount( Account pAccount ) {
+  void setAccount( Account pAccount ) {
     // Release already referenced object before setting a new association.
     if (account != null) {
       account.removeFromBookings((Booking) this);
     }
     account = pAccount;
-    // The association is set in both directions because within the UML model it is defined to be bidirectional.
-    // In case that one side will be removed from the association the other side will also be removed.
-    if (pAccount != null && pAccount.getBookings().contains(this) == false) {
-      pAccount.addToBookings((Booking) this);
-    }
   }
 
   /**
    * Method unsets {@link #account}.
    */
-  public final void unsetAccount( ) {
-    // The association is set in both directions because within the UML model it is defined to be bidirectional.
-    // In case that one side will be removed from the association the other side will also be removed.
-    Account lAccount = account;
+  final void unsetAccount( ) {
     account = null;
-    if (lAccount != null && lAccount.getBookings().contains(this) == true) {
-      lAccount.removeFromBookings((Booking) this);
-    }
   }
 
   /**

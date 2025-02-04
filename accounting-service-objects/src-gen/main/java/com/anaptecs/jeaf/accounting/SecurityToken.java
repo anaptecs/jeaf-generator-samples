@@ -60,6 +60,10 @@ public class SecurityToken implements ServiceObject {
     // Read attribute values from builder.
     sessionKey = pBuilder.sessionKey;
     booking = pBuilder.booking;
+    if (booking != null) {
+      // As association is bidirectional we also have to set it in the other direction.
+      booking.setToken((SecurityToken) this);
+    }
     value = pBuilder.value;
   }
 
@@ -70,19 +74,6 @@ public class SecurityToken implements ServiceObject {
    */
   public static Builder builder( ) {
     return new Builder();
-  }
-
-  /**
-   * Method creates a new builder and initializes it with the data from the passed object.
-   *
-   * @param pObject Object that should be used to initialize the builder. The parameter may be null.
-   * @return {@link Builder} New builder that can be used to create new SecurityToken objects. The method never returns
-   * null.
-   * @deprecated Please use {@link #toBuilder()} instead.
-   */
-  @Deprecated
-  public static Builder builder( SecurityToken pObject ) {
-    return new Builder(pObject);
   }
 
   /**
@@ -185,7 +176,7 @@ public class SecurityToken implements ServiceObject {
    * Method returns attribute {@link #sessionKey}.<br/>
    * The attribute contains the session key of the security token that was used when the booking was executed.
    *
-   * @return byte Value to which {@link #sessionKey} is set.
+   * @return byte[] Value to which {@link #sessionKey} is set.
    */
   public byte[] getSessionKey( ) {
     byte[] lReturnValue;
