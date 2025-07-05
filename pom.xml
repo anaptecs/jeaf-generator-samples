@@ -60,7 +60,7 @@
 		<maven.compiler.version>3.8.0</maven.compiler.version>
 		<maven.build.helper.version>3.6.0</maven.build.helper.version>
 		<maven.surefire.version>3.0.0-M3</maven.surefire.version>
-		<maven.gpg.version>1.6</maven.gpg.version>
+		<maven.gpg.version>3.2.7</maven.gpg.version>
 		<maven.javadoc.version>3.7.0</maven.javadoc.version>
 		<maven.source.version>3.3.1</maven.source.version>
 		<maven.nexus-staging.version>1.6.8</maven.nexus-staging.version>
