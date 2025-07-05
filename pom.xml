@@ -64,7 +64,7 @@
 		<maven.javadoc.version>3.7.0</maven.javadoc.version>
 		<maven.source.version>3.3.1</maven.source.version>
 		<maven.nexus-staging.version>1.6.8</maven.nexus-staging.version>
-		<maven.release.version>2.5.3</maven.release.version>
+		<maven.release.version>3.1.1</maven.release.version>
 		<maven.enforcer.version>3.0.0-M2</maven.enforcer.version>
 		<maven.jacoco.version>0.8.6</maven.jacoco.version>
 
